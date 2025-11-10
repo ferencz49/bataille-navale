@@ -3,7 +3,7 @@ A31 - Projet "Bataille navale"
 
 ![](img/batailleNavale1.jpg) ![](img/batailleNavale2.jpg)
 
-À vous de développer une application mono-joueur d'u jeu de société "Bataille navale" !
+À vous de développer une application mono-joueur du jeu de société "Bataille navale" !
 
 A - Consignes générales
 -----------------------
@@ -17,6 +17,7 @@ A - Consignes générales
 ### Pour toute la durée du projet
 
 - Ce projet est à réaliser **en binôme**.
+- Les deux membres du binôme doivent apprtenir au **même groupe TP**.
 - Vous devez concevoir avec UML et implémenter en Java le jeu de société "Bataille navale", en respectant une **architecture MVC** et en proposant une **interface graphique en Swing**.
 - Vous devez respecter les **principes de conception** et mettre en œuvre les **patrons de conception** vus en cours, **lorsque cela est pertinent**. Attention, il ne s'agit pas d'essayer d'utiliser tous les patrons de conception vus en cours !
 - Il est possible que vous soyez amenés à **renoncer à une partie du développement par manque de temps**. Dans ce cas, il faudra le signaler dans le rapport final (Exemple : "il aurait fallu faire *ceci* mais nous n’avions pas assez de temps et avons préféré nous concentrer sur *cela* parce que ...").
