@@ -1,0 +1,38 @@
+@startuml
+
+package bataille_navale{
+
+    package Bateau{
+
+        abstract class bateau{}
+
+        class Porte-avion extends bateau{}
+
+        class Croiseur extends bateau{}
+
+        class Contre-torpilleur extends bateau{}
+
+        class Sous-marin extends bateau{}
+
+        class Torpilleur extends bateau{}
+        }
+
+    class grille{}
+
+    abstract class arme{}
+
+    class bombe extends arme{}
+
+    class sonar extends arme{}
+
+    abstract class piege{}
+
+    class trou-noir extends piege{}
+
+    class tornade extends piege{}
+
+
+
+}
+
+@enduml
