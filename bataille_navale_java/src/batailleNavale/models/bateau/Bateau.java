@@ -1,4 +1,4 @@
 package batailleNavale.models.bateau;
 
-public abstract class Bateau {
+public class Bateau {
 }
