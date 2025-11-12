@@ -48,14 +48,13 @@ package bataille_navale{
         class Ile{}
 
         abstract class arme{
-            - x : integer
-            - y : integer
+
         }
 
         class bombe extends arme{
             - peutLancerBomber : boolean
             + <<create>> bombe() : void
-            + lancerBombe(x : int, y : int) : boolean
+            + lancerBombe(x : integer, y : integer) : boolean
         }
 
         class sonar extends arme{
@@ -65,7 +64,10 @@ package bataille_navale{
             + utiliserSonar() : void
         }
 
-        abstract class piege{}
+        abstract class piege{
+            - x : integer
+            - y : integer
+        }
 
         class trou-noir extends piege{
             + <<create>> trouNoir() : void
@@ -87,13 +89,16 @@ package bataille_navale{
             + placerBateauxFixe() : void
             + placerBateauxAleatoire() : void
             + tir() : void
-            + placerTornade() : boolean
+            + placerTornade(x : integer, y : integer) : boolean
+            + placerTrouNoir(x : integer, y : integer) : boolean
         }
 
         class Ordinateur{
             + placerBateauxFixe() : void
             + placerBateauxAleatoire() : void
             + tirAleatoire() : void
+            + placerTornade() : boolean
+            + placerTrouNoir() : boolean
         }
 
     }
