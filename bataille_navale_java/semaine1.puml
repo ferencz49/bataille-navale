@@ -21,39 +21,42 @@ package bataille_navale{
     }
     package models{
 
-        package Bateau{
+        package bateau{
 
-            abstract class bateau{
-              + name : String
-              + size : int
+            class Bateau extends bataille_navale.models.Object {
+              - size : int
               - positions : List<Coord>
               - hits : int
+              + <<create>> Bateau(x : Integer, y : Integer) : void
               + isSunk() : boolean
             }
 
-            class Porte-avion extends bateau{}
-
-            class Croiseur extends bateau{}
-
-            class Contre-torpilleur extends bateau{}
-
-            class Sous-marin extends bateau{}
-
-            class Torpilleur extends bateau{}
+            enum types{
+                porte-avion
+                croiseur
+                contre-torpilleur
+                sous-marin
+                torpilleur
             }
-
-        package grille{
-
-            class Grille{
-                + <<create>> Grille() : void
-                + <<create>> Grille(hauteur : Integer, longueur : Integer ) : void
-            }
-
         }
+
+                package grille{
+
+                    class Grille{
+                        + <<create>> Grille() : void
+                        + <<create>> Grille(hauteur : Integer, longueur : Integer ) : void
+                    }
+
+                }
 
         class Ile{}
 
-        abstract class arme{
+        abstract class Object{
+            - x : integer
+            - y : integer
+        }
+
+        abstract class arme extends Object{
 
         }
 
@@ -70,9 +73,7 @@ package bataille_navale{
             + utiliserSonar() : void
         }
 
-        abstract class piege{
-            - x : integer
-            - y : integer
+        abstract class piege extends Object{
         }
 
         class trou-noir extends piege{
@@ -115,7 +116,8 @@ package bataille_navale{
 }
     class main{}
 
-main --> partie
+main -->"uses" partie
+Bateau *-- "type bateau" types
 
 
 @enduml
