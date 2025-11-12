@@ -47,17 +47,33 @@ package bataille_navale{
 
         class Ile{}
 
-        abstract class arme{}
+        abstract class arme{
+            - x : integer
+            - y : integer
+        }
 
-        class bombe extends arme{}
+        class bombe extends arme{
+            - peutLancerBomber : boolean
+            + <<create>> bombe() : void
+            + lancerBombe(x : int, y : int) : boolean
+        }
 
-        class sonar extends arme{}
+        class sonar extends arme{
+            - peutUtiliser sonar : boolean
+            - sousMarinEnVie : boolean
+            + <<create>> sonar() : void
+            + utiliserSonar() : void
+        }
 
         abstract class piege{}
 
-        class trou-noir extends piege{}
+        class trou-noir extends piege{
+            + <<create>> trouNoir() : void
+        }
 
-        class tornade extends piege{}
+        class tornade extends piege{
+            + <<create>> tornade() : void
+        }
 
         class partie{
             + creerPartie() : void
@@ -68,8 +84,10 @@ package bataille_navale{
         }
 
         class Joueur{
-            + placerBateauxFixe()
-            + placerBateauxAleatoire()
+            + placerBateauxFixe() : void
+            + placerBateauxAleatoire() : void
+            + tir() : void
+            + placerTornade() : boolean
         }
 
         class Ordinateur{
