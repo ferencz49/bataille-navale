@@ -23,7 +23,13 @@ package bataille_navale{
 
         package Bateau{
 
-            abstract class bateau{}
+            abstract class bateau{
+              + name : String
+              + size : int
+              - positions : List<Coord>
+              - hits : int
+              + isSunk() : boolean
+            }
 
             class Porte-avion extends bateau{}
 
