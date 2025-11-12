@@ -7,25 +7,6 @@ hide enum methods
 package bataille_navale{
 
 
-
-    abstract class arme{}
-
-    class bombe extends arme{}
-
-    class sonar extends arme{}
-
-    abstract class piege{}
-
-    class trou-noir extends piege{}
-
-    class tornade extends piege{}
-
-    class partie{
-        creerPartie() : void
-        jouerPartie() : void
-        detecterFin() : void
-    }
-
     package view{
         class EcranDeConfiguration{}
 
@@ -55,12 +36,46 @@ package bataille_navale{
             class Torpilleur extends bateau{}
             }
 
-        package Grille{
+        package grille{
 
-            class grille{
-                creerGrille() : void
+            class Grille{
+                + <<create>> Grille() : void
+                + <<create>> Grille(hauteur : Integer, longueur : Integer ) : void
             }
 
+        }
+
+        class Ile{}
+
+        abstract class arme{}
+
+        class bombe extends arme{}
+
+        class sonar extends arme{}
+
+        abstract class piege{}
+
+        class trou-noir extends piege{}
+
+        class tornade extends piege{}
+
+        class partie{
+            + creerPartie() : void
+            + jouerPartie() : void
+            + detecterFin() : void
+            + recommencerPartie() : void
+            + modeIle(): boolean
+        }
+
+        class Joueur{
+            + placerBateauxFixe()
+            + placerBateauxAleatoire()
+        }
+
+        class Ordinateur{
+            + placerBateauxFixe() : void
+            + placerBateauxAleatoire() : void
+            + tirAleatoire() : void
         }
 
     }
