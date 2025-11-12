@@ -1,23 +1,12 @@
 @startuml
+skinparam classAttributeIconSize 0
+skinparam classFontStyle Bold
+hide enum methods
+
 
 package bataille_navale{
 
-    package Bateau{
 
-        abstract class bateau{}
-
-        class Porte-avion extends bateau{}
-
-        class Croiseur extends bateau{}
-
-        class Contre-torpilleur extends bateau{}
-
-        class Sous-marin extends bateau{}
-
-        class Torpilleur extends bateau{}
-        }
-
-    class grille{}
 
     abstract class arme{}
 
@@ -31,6 +20,50 @@ package bataille_navale{
 
     class tornade extends piege{}
 
+    class partie{
+        creerPartie() : void
+        jouerPartie() : void
+        detecterFin() : void
+    }
+
+    package view{
+        class EcranDeConfiguration{}
+
+        class EcranDePlacement{}
+
+        class EcranPrincipal{}
+
+        class EcranDeFin{}
+    }
+    package controller{
+
+    }
+    package models{
+
+        package Bateau{
+
+            abstract class bateau{}
+
+            class Porte-avion extends bateau{}
+
+            class Croiseur extends bateau{}
+
+            class Contre-torpilleur extends bateau{}
+
+            class Sous-marin extends bateau{}
+
+            class Torpilleur extends bateau{}
+            }
+
+        package Grille{
+
+            class grille{
+                creerGrille() : void
+            }
+
+        }
+
+    }
 
 
 }
