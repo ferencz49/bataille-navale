@@ -91,25 +91,31 @@ package bataille_navale{
             + modeIle(): boolean
         }
 
-        class Joueur{
-            + placerBateauxFixe() : void
-            + placerBateauxAleatoire() : void
-            + tir() : void
-            + placerTornade(x : integer, y : integer) : boolean
-            + placerTrouNoir(x : integer, y : integer) : boolean
-        }
+        package players{
+            abstract class Player{ /' C'EST UNE CLASSE ABSTRAITE, CAR ON VA IMPLEMENTER LES METHODES DE LA MEME MANIERE '/
+                + placerBateauxFixe() : void
+                + placerBateauxAleatoire() : void
+            }
 
-        class Ordinateur{
-            + placerBateauxFixe() : void
-            + placerBateauxAleatoire() : void
-            + tirAleatoire() : void
-            + placerTornade() : boolean
-            + placerTrouNoir() : boolean
+            class JoueurHumain extends Player{
+                + tir() : void
+                + placerTornade(x : integer, y : integer) : boolean
+                + placerTrouNoir(x : integer, y : integer) : boolean
+            }
+
+            class Ordinateur extends Player{
+                + tirAleatoire() : void
+                + placerTornade() : boolean
+                + placerTrouNoir() : boolean
+            }
         }
 
     }
 
-
 }
+    class main{}
+
+main --> partie
+
 
 @enduml
