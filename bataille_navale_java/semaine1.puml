@@ -18,6 +18,25 @@ package bataille_navale{
     }
     package controller{
 
+            package players{
+                abstract class Player{ /' C'EST UNE CLASSE ABSTRAITE, CAR ON VA IMPLEMENTER LES METHODES DE LA MEME MANIERE '/
+                    + placerBateauxFixe() : void
+                    + placerBateauxAleatoire() : void
+                }
+
+                class HumanController extends Player{
+                    + tir() : void
+                    + placerTornade(x : integer, y : integer) : boolean
+                    + placerTrouNoir(x : integer, y : integer) : boolean
+                }
+
+                class ComputerController extends Player{
+                    + tirAleatoire() : void
+                    + placerTornade() : boolean
+                    + placerTrouNoir() : boolean
+                }
+            }
+
     }
     package models{
 
@@ -43,15 +62,19 @@ package bataille_navale{
                 package grille{
 
                     class Grille{
+                        - height : Integer
+                        - width : Integer
+
                         + <<create>> Grille() : void
                         + <<create>> Grille(hauteur : Integer, longueur : Integer ) : void
                     }
 
                 }
 
-        class Ile{}
+        class Ile extends Object{}
 
         abstract class Object{
+            - size : Integer
             - x : integer
             - y : integer
         }
@@ -92,25 +115,6 @@ package bataille_navale{
             + modeIle(): boolean
         }
 
-        package players{
-            abstract class Player{ /' C'EST UNE CLASSE ABSTRAITE, CAR ON VA IMPLEMENTER LES METHODES DE LA MEME MANIERE '/
-                + placerBateauxFixe() : void
-                + placerBateauxAleatoire() : void
-            }
-
-            class JoueurHumain extends Player{
-                + tir() : void
-                + placerTornade(x : integer, y : integer) : boolean
-                + placerTrouNoir(x : integer, y : integer) : boolean
-            }
-
-            class Ordinateur extends Player{
-                + tirAleatoire() : void
-                + placerTornade() : boolean
-                + placerTrouNoir() : boolean
-            }
-        }
-
     }
 
 }
@@ -118,6 +122,7 @@ package bataille_navale{
 
 main -->"uses" partie
 Bateau *-- "type bateau" types
+Object "1 *"--* "grille" Grille
 
 
 @enduml
