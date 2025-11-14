@@ -74,37 +74,45 @@ package bataille_navale{
         class Ile extends Object{}
 
         abstract class Object{
+            - squaresOccupied : 2D array
             - size : Integer
             - x : integer
             - y : integer
         }
 
-        abstract class arme extends Object{
 
+        package weapons{
+            abstract class arme extends bataille_navale.models.Object{
+
+            }
+
+            class bombe extends arme{
+                - peutLancerBomber : boolean
+                + <<create>> bombe() : void
+                + lancerBombe(x : integer, y : integer) : boolean
+            }
+
+            class sonar extends arme{
+                - peutUtiliser sonar : boolean
+                - sousMarinEnVie : boolean
+                + <<create>> sonar() : void
+                + utiliserSonar() : void
+            }
         }
 
-        class bombe extends arme{
-            - peutLancerBomber : boolean
-            + <<create>> bombe() : void
-            + lancerBombe(x : integer, y : integer) : boolean
-        }
+        package traps {
 
-        class sonar extends arme{
-            - peutUtiliser sonar : boolean
-            - sousMarinEnVie : boolean
-            + <<create>> sonar() : void
-            + utiliserSonar() : void
-        }
+            abstract class Trap extends bataille_navale.models.Object{
+            }
 
-        abstract class piege extends Object{
-        }
+            class BlackHole extends Trap{
+                + <<create>> trouNoir() : void
+            }
 
-        class trou-noir extends piege{
-            + <<create>> trouNoir() : void
-        }
+            class Tornado extends Trap{
+                + <<create>> tornade() : void
+            }
 
-        class tornade extends piege{
-            + <<create>> tornade() : void
         }
 
         class partie{
@@ -118,7 +126,7 @@ package bataille_navale{
     }
 
 }
-    class main{}
+class main{}
 
 main -->"uses" partie
 Bateau *-- "type bateau" types
