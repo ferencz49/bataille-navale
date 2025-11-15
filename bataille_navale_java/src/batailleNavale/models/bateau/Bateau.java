@@ -9,8 +9,8 @@ public class Bateau extends Object {
     private int hits;
     private Types type;
 
-    public Bateau(int x, int y, int size, Types type){
-        super(x, y, size);
+    public Bateau( int size, Types type){
+        super(size);
         this.type = type;
     }
 

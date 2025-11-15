@@ -3,7 +3,7 @@ skinparam classAttributeIconSize 0
 skinparam classFontStyle Bold
 hide enum methods
 
-
+/' REFLECHIR A IMPLEMENTER OBSERVER POUR LAFFICHAGE DES TOURS DANS LE TERMINAL '/
 package bataille_navale{
 
 
