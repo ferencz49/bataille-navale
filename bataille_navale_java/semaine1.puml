@@ -45,6 +45,7 @@ package bataille_navale{
             class Bateau extends bataille_navale.models.Object {
               - size : int
               - positions : List<Coord>
+              - orientation : boolean
               - hits : int
               + <<create>> Bateau(x : Integer, y : Integer) : void
               + isSunk() : boolean
