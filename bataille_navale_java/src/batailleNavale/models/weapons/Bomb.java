@@ -7,7 +7,7 @@ public class Bomb extends Weapon{
         super(size);
     }
 
-    public boolean setCanBeThrown() {
+    public boolean getCanBeThrown() {
         return canBeThrown;
     }
 

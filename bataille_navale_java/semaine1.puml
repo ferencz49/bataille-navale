@@ -77,27 +77,30 @@ package bataille_navale{
         abstract class Object{
             - squaresOccupied : 2D array
             - size : Integer
-            - x : integer
-            - y : integer
         }
 
 
         package weapons{
-            abstract class arme extends bataille_navale.models.Object{
+            abstract class Weapon extends bataille_navale.models.Object{
 
             }
 
-            class bombe extends arme{
-                - peutLancerBomber : boolean
-                + <<create>> bombe() : void
-                + lancerBombe(x : integer, y : integer) : boolean
+            class Bomb extends Weapon{
+                - canBeThrown : boolean
+                + <<create>> bombe(size : Integer) : void
+                + setCanBeThrown( canBeThrown : boolean) : void
+                + getCanBeThrown() : boolean
             }
 
-            class sonar extends arme{
-                - peutUtiliser sonar : boolean
-                - sousMarinEnVie : boolean
-                + <<create>> sonar() : void
-                + utiliserSonar() : void
+            class Sonar extends Weapon{
+                - canBeUsed : boolean
+                - submarineIsAlive() : boolean
+                + <<create>> sonar(size : Integer) : void
+                + getCanBeUsed() : boolean
+                + getSubmarineIsAlive() : boolean
+                + setCanBeUsed( canBeUsed : boolean) : void
+                + setSubmarineIsAlive( submarineIsAlive : boolean) : void
+
             }
         }
 
@@ -107,11 +110,18 @@ package bataille_navale{
             }
 
             class BlackHole extends Trap{
-                + <<create>> trouNoir() : void
+                - canBePlaced : boolean
+                + <<create>> trouNoir(size : Integer) : void
+                + getCanBePlaced() : boolean
+                + setCanBePlaced( canBePlaced : boolean) : void
+
             }
 
             class Tornado extends Trap{
-                + <<create>> tornade() : void
+                - canBePlaced : boolean
+                + <<create>> Tornado(size : Integer) : void
+                + getCanBePlaced() : boolean
+                + setCanBePlaced( canBePlaced : boolean) : void
             }
 
         }
