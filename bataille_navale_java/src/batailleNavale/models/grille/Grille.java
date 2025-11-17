@@ -19,4 +19,17 @@ public class Grille {
         grille = new Object[10][10];
     }
 
+    public Object[][] getGrille(){
+        return this.grille;
+    }
+    public boolean setObject(int x, int y, Object o ){
+        if(x > grille[0].length){
+            return false;
+        }
+        if(y > grille[1].length) {
+            return false;
+        }
+        this.grille[x][y] = o;
+        return true;
+    }
 }
