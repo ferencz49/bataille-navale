@@ -40,6 +40,12 @@ package bataille_navale{
     }
     package models{
 
+        class Coordonnees{
+            -x : Integer
+            -y : Integer
+            + <<create>> Coordonnees(x : Integer, y : Integer)
+        }
+
         package bateau{
 
             class Bateau extends bataille_navale.models.Object {

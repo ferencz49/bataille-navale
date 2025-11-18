@@ -22,7 +22,10 @@ class GrilleTest {
 
         assertTrue(result);           // Vérifie que l'ajout réussit
 
-        //boolean result2 = g.setObject(11,15,b);
-        //assertFalse(result);
+        boolean result2 = g.setObject(11,15,b);
+        assertFalse(result2);         // vérifie que l'ajout rate
+
+        boolean result3  = g.setObject(-1,15,b);
+        assertFalse(result3);         // vérifie que l'ajout rate aussi
     }
 }
