@@ -50,7 +50,6 @@ package bataille_navale{
 
             class Bateau extends bataille_navale.models.Object {
               - size : int
-              - positions : List<Coord>
               - orientation : boolean
               - hits : int
               + <<create>> Bateau(x : Integer, y : Integer) : void
@@ -66,22 +65,22 @@ package bataille_navale{
             }
         }
 
-                package grille{
+        package grille{
 
-                    class Grille{
-                        - height : Integer
-                        - width : Integer
+            class Grille{
+                - height : Integer
+                - width : Integer
 
-                        + <<create>> Grille() : void
-                        + <<create>> Grille(hauteur : Integer, longueur : Integer ) : void
-                    }
+                + <<create>> Grille() : void
+                + <<create>> Grille(hauteur : Integer, longueur : Integer ) : void
+                + setObject(x : Integer, y : Integer) : boolean
+            }
 
-                }
+        }
 
         class Ile extends Object{}
 
         abstract class Object{
-            - squaresOccupied : 2D array
             - size : Integer
         }
 
@@ -147,7 +146,9 @@ class main{}
 
 main -->"uses" partie
 Bateau *-- "type bateau" types
-Object "1 *"--* "grille" Grille
+Object "1 *" o--> Coordonnees
+Object "1 *"<--* "grille" Grille
+Grille "<<uses>>" --> Object
 
 
 @enduml
