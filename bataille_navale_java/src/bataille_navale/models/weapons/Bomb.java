@@ -1,4 +1,4 @@
-package batailleNavale.models.weapons;
+package bataille_navale.models.weapons;
 
 public class Bomb extends Weapon{
     private boolean canBeThrown = true;

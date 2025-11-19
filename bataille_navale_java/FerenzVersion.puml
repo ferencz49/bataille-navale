@@ -1,0 +1,154 @@
+@startuml
+skinparam classAttributeIconSize 0
+skinparam classFontStyle Bold
+hide enum methods
+
+/' REFLECHIR A IMPLEMENTER OBSERVER POUR LAFFICHAGE DES TOURS DANS LE TERMINAL '/
+package bataille_navale{
+
+
+    package view{
+        class EcranDeConfiguration{}
+
+        class EcranDePlacement{}
+
+        class EcranPrincipal{}
+
+        class EcranDeFin{}
+    }
+    package controller{
+
+            package players{
+                abstract class Player{ /' C'EST UNE CLASSE ABSTRAITE, CAR ON VA IMPLEMENTER LES METHODES DE LA MEME MANIERE '/
+                    + placerBateauxFixe() : void
+                    + placerBateauxAleatoire() : void
+                }
+
+                class HumanController extends Player{
+                    + tir() : void
+                    + placerTornade(x : integer, y : integer) : boolean
+                    + placerTrouNoir(x : integer, y : integer) : boolean
+                }
+
+                class ComputerController extends Player{
+                    + tirAleatoire() : void
+                    + placerTornade() : boolean
+                    + placerTrouNoir() : boolean
+                }
+            }
+
+    }
+    package models{
+
+        class Coordonnees{
+            -x : Integer
+            -y : Integer
+            + <<create>> Coordonnees(x : Integer, y : Integer)
+        }
+
+        package bateau{
+
+            class Bateau extends bataille_navale.models.Object {
+              - size : int
+              - orientation : boolean
+              - hits : int
+              + <<create>> Bateau(x : Integer, y : Integer) : void
+              + isSunk() : boolean
+            }
+
+            enum types{
+                porte-avion
+                croiseur
+                contre-torpilleur
+                sous-marin
+                torpilleur
+            }
+        }
+
+        package grille{
+
+            class Grille{
+                - height : Integer
+                - width : Integer
+
+                + <<create>> Grille() : void
+                + <<create>> Grille(hauteur : Integer, longueur : Integer ) : void
+                + setObject(x : Integer, y : Integer) : boolean
+            }
+
+        }
+
+        class Ile extends Object{}
+
+        abstract class Object{
+            - size : Integer
+        }
+
+
+        package weapons{
+            abstract class Weapon extends bataille_navale.models.Object{
+
+            }
+
+            class Bomb extends Weapon{
+                - canBeThrown : boolean
+                + <<create>> bombe(size : Integer) : void
+                + setCanBeThrown( canBeThrown : boolean) : void
+                + getCanBeThrown() : boolean
+            }
+
+            class Sonar extends Weapon{
+                - canBeUsed : boolean
+                - submarineIsAlive() : boolean
+                + <<create>> sonar(size : Integer) : void
+                + getCanBeUsed() : boolean
+                + getSubmarineIsAlive() : boolean
+                + setCanBeUsed( canBeUsed : boolean) : void
+                + setSubmarineIsAlive( submarineIsAlive : boolean) : void
+
+            }
+        }
+
+        package traps {
+
+            abstract class Trap extends bataille_navale.models.Object{
+            }
+
+            class BlackHole extends Trap{
+                - canBePlaced : boolean
+                + <<create>> trouNoir(size : Integer) : void
+                + getCanBePlaced() : boolean
+                + setCanBePlaced( canBePlaced : boolean) : void
+
+            }
+
+            class Tornado extends Trap{
+                - canBePlaced : boolean
+                + <<create>> Tornado(size : Integer) : void
+                + getCanBePlaced() : boolean
+                + setCanBePlaced( canBePlaced : boolean) : void
+            }
+
+        }
+
+        class partie{
+            + creerPartie() : void
+            + jouerPartie() : void
+            + detecterFin() : void
+            + recommencerPartie() : void
+            + modeIle(): boolean
+        }
+
+    }
+
+}
+class main{}
+
+main -->"uses" partie
+Bateau *-- "type bateau" types
+Object "1 *" o--> Coordonnees
+Object "1 *"<--* "grille" Grille
+Grille "<<uses>>" --> Object
+
+
+@enduml

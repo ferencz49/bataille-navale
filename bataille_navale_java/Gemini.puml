@@ -1,0 +1,207 @@
+@startuml
+skinparam classAttributeIconSize 0
+skinparam classFontStyle Bold
+hide enum methods
+
+package bataille_navale {
+
+    package models {
+
+        ' ===============================
+        ' 1. Noyau du jeu : Map, Coordonnées, Jeu
+        ' ===============================
+
+        class Coordinates {
+            - x : Integer
+            - y : Integer
+            + <<create>> Coordinates(x : Integer, y : Integer)
+            + getX(): Integer
+            + getY(): Integer
+            + equals(Object other) : boolean
+        }
+
+        class Game {
+            - playerHuman : Player
+            - playerComputer : Player
+            - turnNumber : Integer
+            + <<create>> Game()
+            + startPartie(config : Config)
+            + jouerTour(coordonnee : Coordinates, arme : Weapon)
+            + handleTir(cible : Coordinates, attaquant : Player, defenseur : Player) : ResultatTir
+            + detecterFin() : boolean
+            + recommencerPartie()
+        }
+
+        class Map {
+            - width : Integer
+            - height : Integer
+            - elements : Map<Coordinates, PlacedElement>
+            - islandZone : List<Coordinates>
+            + <<create>> Map(w : Integer, h : Integer)
+            + getElement(c : Coordinates) : PlacedElement
+            + placerElement(e : PlacedElement, c : List<Coordinates>)
+            + recevoirTir(c : Coordinates) : ResultatTir
+            + estSurIle(c : Coordinates) : boolean
+        }
+
+        enum ResultatTir <<enumerate>> {
+            RATE
+            TOUCHE
+            COULe
+            TROU_NOIR_ACTIVE
+            TORNADE_ACTIVE
+            ILE_VIDE
+            ILE_ARME
+        }
+
+        ' ===============================
+        ' 2. Patrons de Conception
+        ' ===============================
+
+        ' --- A. Pattern Strategy pour la Tornade ---
+        interface StrategieCoordonnee {
+            + getCoordonneeReelle(coordonneeVisée : Coordinates) : Coordinates
+        }
+
+        class StrategieNormale implements StrategieCoordonnee {
+            + getCoordonneeReelle(coordonneeVisée : Coordinates) : Coordinates
+        }
+
+        class StrategieTornade implements StrategieCoordonnee {
+            - tirsRestants : Integer
+            + getCoordonneeReelle(coordonneeVisée : Coordinates) : Coordinates
+            + decrementTirs()
+        }
+
+        ' --- B. Pattern Strategy pour l'IA ---
+        interface StrategieTirIA {
+            + choisirCible(mapAdverse : Map) : Coordinates
+        }
+
+        class StrategieTirAleatoire implements StrategieTirIA {
+            + choisirCible(mapAdverse : Map) : Coordinates
+        }
+
+        class StrategieTirRecherche implements StrategieTirIA {
+            - dernierCoupReussi : Coordinates
+            - sensDeRecherche : Direction
+            + choisirCible(mapAdverse : Map) : Coordinates
+        }
+
+        ' ===============================
+        ' 3. Éléments Plaçables (Bateaux et Pièges)
+        ' ===============================
+
+        abstract class PlacedElement { /' Anciennement Object '/
+            #size: Integer
+            #coordinates : List<Coordinates>
+            + getSize() : Integer
+            + isSunk() : boolean
+            + getTaille() : Integer
+            + {abstract} recevoirImpact() : ResultatTir
+        }
+
+        package boat {
+            class Boat extends PlacedElement {
+                - type : BoatType
+                - direction : BoatDirection
+                - casesTouchees : Set<Coordinates>
+                + <<create>> Boat(type : BoatType, size : Integer, direction : BoatDirection)
+                + recevoirImpact() : ResultatTir
+            }
+            enum BoatType <<enumerate>> {
+             PORTE_AVION, CROISEUR, CONTRE_TORPILLEUR, SOUS_MARIN, TORPILLEUR }
+
+            enum BoatDirection <<enumerate>> { HORIZONTAL, VERTICAL }
+        }
+
+        package traps {
+            class BlackHole extends PlacedElement {
+                + recevoirImpact() : ResultatTir /' Renvoie TROU_NOIR_ACTIVE '/
+            }
+            class Tornado extends PlacedElement {
+                + recevoirImpact() : ResultatTir /' Renvoie TORNADE_ACTIVE '/
+            }
+        }
+
+        ' ===============================
+        ' 4. Armes (Capacités du Joueur)
+        ' ===============================
+
+        abstract class Weapon { /' N'est pas placé sur la grille '/
+            #capacity : Integer
+            + {abstract} use(target : Coordinates, defenseur : Player) : ResultatTir
+        }
+
+        class Missile extends Weapon {
+            + use(target : Coordinates, defenseur : Player) : ResultatTir
+        }
+
+        class Bomb extends Weapon {
+            + use(target : Coordinates, defenseur : Player) : ResultatTir /' Impact 5 cases '/
+        }
+
+        class Sonar extends Weapon {
+            + use(target : Coordinates, defenseur : Player) : ResultatTir /' Retourne le nombre de bateaux '/
+        }
+
+        ' ===============================
+        ' 5. Le Joueur
+        ' ===============================
+
+        class Player {
+            - name : String
+            - grille : Map
+            - grilleAdverse : Map
+            - missiles : Missile
+            - bombe : Bomb
+            - sonar : Sonar
+            - tirStrategie : StrategieTirIA /' Pour l'IA '/
+            - coordStrategie : StrategieCoordonnee /' Pour la Tornade '/
+            + getGrille() : Map
+            + getArme(type) : Weapon
+            + setCoordonneeStrategie(strat : StrategieCoordonnee)
+        }
+
+        class Config {
+            - grilleSize : Integer
+            - islandMode : boolean
+            - nbArmes : Integer
+            - ...
+        }
+
+    }
+}
+
+' ===============================
+' RELATIONS
+' ===============================
+
+Game "1" *--> "1..2" Player : contrôle
+Game "1" *--> "1" Config : utilise la
+Player "1" *--> "1" Map : possède sa grille
+Player "1" *--> "1" Map : observe la grille adverse
+Player "1" *--> "1" StrategieCoordonnee : subit l'effet de la
+Player "1" *--> "1" StrategieTirIA : utilise la
+Player "1" *--> "3" Weapon : possède des
+
+Map "1" *--> "*" Coordinates : est faite de
+Map "1" *--> "*" PlacedElement : contient
+PlacedElement <|-- Boat
+PlacedElement <|-- traps.BlackHole
+PlacedElement <|-- traps.Tornado
+
+Boat "1" *--> "1" boat.BoatType
+Boat "1" *--> "1" boat.BoatDirection
+
+Weapon <|-- Missile
+Weapon <|-- Bomb
+Weapon <|-- Sonar
+
+StrategieCoordonnee <|.. StrategieNormale
+StrategieCoordonnee <|.. StrategieTornade
+
+StrategieTirIA <|.. StrategieTirAleatoire
+StrategieTirIA <|.. StrategieTirRecherche
+
+@enduml

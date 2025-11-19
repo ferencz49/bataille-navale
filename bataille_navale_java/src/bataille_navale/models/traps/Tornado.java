@@ -1,4 +1,4 @@
-package batailleNavale.models.traps;
+package bataille_navale.models.traps;
 
 public class Tornado extends Trap {
     private boolean canBePlaced = true;

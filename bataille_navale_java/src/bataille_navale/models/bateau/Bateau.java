@@ -1,8 +1,6 @@
-package batailleNavale.models.bateau;
+package bataille_navale.models.bateau;
 
-import batailleNavale.models.Object;
-
-import java.lang.reflect.Type;
+import bataille_navale.models.Object;
 
 public class Bateau extends Object {
     private int size;

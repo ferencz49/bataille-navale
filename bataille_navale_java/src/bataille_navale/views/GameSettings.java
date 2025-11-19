@@ -1,4 +1,4 @@
-package batailleNavale.views;
+package bataille_navale.views;
 
 import javax.swing.*;
 

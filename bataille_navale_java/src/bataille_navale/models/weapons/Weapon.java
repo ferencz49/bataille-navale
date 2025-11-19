@@ -1,6 +1,6 @@
-package batailleNavale.models.weapons;
+package bataille_navale.models.weapons;
 
-import batailleNavale.models.Object;
+import bataille_navale.models.Object;
 
 public abstract class Weapon extends Object {
 

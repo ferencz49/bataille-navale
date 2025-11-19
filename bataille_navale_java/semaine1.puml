@@ -16,22 +16,23 @@ package bataille_navale{
 
         class EcranDeFin{}
     }
+
     package controller{
 
             package players{
                 abstract class Player{ /' C'EST UNE CLASSE ABSTRAITE, CAR ON VA IMPLEMENTER LES METHODES DE LA MEME MANIERE '/
-                    + placerBateauxFixe() : void
-                    + placerBateauxAleatoire() : void
+                    + placerBateauxFixe()
+                    + placerBateauxAleatoire()
                 }
 
                 class HumanController extends Player{
-                    + tir() : void
-                    + placerTornade(x : integer, y : integer) : boolean
-                    + placerTrouNoir(x : integer, y : integer) : boolean
+                    + tir()
+                    + placerTornade(x : integer, y : integer)
+                    + placerTrouNoir(x : integer, y : integer)
                 }
 
                 class ComputerController extends Player{
-                    + tirAleatoire() : void
+                    + tirAleatoire()
                     + placerTornade() : boolean
                     + placerTrouNoir() : boolean
                 }
@@ -40,108 +41,125 @@ package bataille_navale{
     }
     package models{
 
-        package bateau{
+        class Coordinates{
+            - x : Integer
+            - y : Integer
+            + <<create>> Coordinates(x : Integer, y : Integer)
+            - notifyTrapObservers()
+            + getX(): Integer
+            + getY(): Integer
+        }
 
-            class Bateau extends bataille_navale.models.Object {
-              - size : int
-              - positions : List<Coord>
-              - orientation : boolean
-              - hits : int
-              + <<create>> Bateau(x : Integer, y : Integer) : void
+        package boat{
+
+            class Boat extends bataille_navale.models.Object {
+              + <<create>> Boat(type : BoatType, direction : BoatDirection, size : Integer)
               + isSunk() : boolean
             }
 
-            enum types{
-                porte-avion
-                croiseur
-                contre-torpilleur
-                sous-marin
-                torpilleur
+            enum BoatType <<enumerate>> {
+                PORTE_AVION
+                CROISEUR
+                CONTRE_TORPILLEUR
+                SOUS_MARIN
+                TORPILLEUR
+            }
+
+            enum BoatDirection <<enumerate>> {
+                HORIZONTAL
+                VERTICAL
             }
         }
 
-                package grille{
+        package map{
 
-                    class Grille{
-                        - height : Integer
-                        - width : Integer
+            class Map{
+                - height : Integer
+                - width : Integer
+                - nbObject : Integer
+                + <<create>> Map()
+                + <<create>> Map(hauteur : Integer, longueur : Integer )
+            }
+        }
 
-                        + <<create>> Grille() : void
-                        + <<create>> Grille(hauteur : Integer, longueur : Integer ) : void
-                    }
+        abstract class Object <<abstract>>{
+            #size: Integer
+            +getSize() : Integer
+            + <<create>> Object(size : Integer)
+            + <<create>> Object(size : Integer, listCoordiantes : Coordinates [*])
+        }
+
+        package items{
+
+            abstract class Item <<abstract>> extends bataille_navale.models.Object{
+                + <<create>> Item()
+                - capacity : Integer
+                + canBeUsed() : boolean
+                + addCapacity()
+            }
+
+            package weapons{
+                abstract class Weapon <<abstract>> extends bataille_navale.models.items.Item{
+                    + {abstract} useWeapon (target: Coordinates)
+                }
+
+                class Bomb extends Weapon{
+                    + <<create>> bombe()
+                    + useWeapon (target: Coordinates)
+                }
+
+                class Sonar extends Weapon{
+                    + <<create>> sonar(size : Integer)
+                    + useWeapon (target: Coordinates)
+                    - submarineIsAlive() : boolean
+                    + getSubmarineIsAlive() : boolean
+                    + setSubmarineIsAlive( submarineIsAlive : boolean)
+
+                }
+            }
+
+            package traps {
+
+                abstract class Trap <<abstract>> extends bataille_navale.models.items.Item{
+                    + {abstract} trapEffect()
+                }
+
+                class BlackHole extends Trap{
+                    + <<create>> BlackHole(size : Integer)
+                    + trapEffect()
 
                 }
 
-        class Ile extends Object{}
-
-        abstract class Object{
-            - squaresOccupied : 2D array
-            - size : Integer
-        }
-
-
-        package weapons{
-            abstract class Weapon extends bataille_navale.models.Object{
-
-            }
-
-            class Bomb extends Weapon{
-                - canBeThrown : boolean
-                + <<create>> bombe(size : Integer) : void
-                + setCanBeThrown( canBeThrown : boolean) : void
-                + getCanBeThrown() : boolean
-            }
-
-            class Sonar extends Weapon{
-                - canBeUsed : boolean
-                - submarineIsAlive() : boolean
-                + <<create>> sonar(size : Integer) : void
-                + getCanBeUsed() : boolean
-                + getSubmarineIsAlive() : boolean
-                + setCanBeUsed( canBeUsed : boolean) : void
-                + setSubmarineIsAlive( submarineIsAlive : boolean) : void
+                class Tornado extends Trap{
+                    + <<create>> Tornado(size : Integer)
+                    + trapEffect()
+                }
 
             }
         }
 
-        package traps {
 
-            abstract class Trap extends bataille_navale.models.Object{
-            }
-
-            class BlackHole extends Trap{
-                - canBePlaced : boolean
-                + <<create>> trouNoir(size : Integer) : void
-                + getCanBePlaced() : boolean
-                + setCanBePlaced( canBePlaced : boolean) : void
-
-            }
-
-            class Tornado extends Trap{
-                - canBePlaced : boolean
-                + <<create>> Tornado(size : Integer) : void
-                + getCanBePlaced() : boolean
-                + setCanBePlaced( canBePlaced : boolean) : void
-            }
-
-        }
-
-        class partie{
-            + creerPartie() : void
-            + jouerPartie() : void
-            + detecterFin() : void
-            + recommencerPartie() : void
+        class Game{
+            + creerPartie()
+            + jouerPartie()
+            + detecterFin()
+            + recommencerPartie()
             + modeIle(): boolean
         }
 
     }
-
 }
-class main{}
 
-main -->"uses" partie
-Bateau *-- "type bateau" types
-Object "1 *"--* "grille" Grille
+class Main{
+}
 
+Main .> Game : <<uses>>
+
+Boat "1" *--> "1\n-typeBateau" BoatType: est \n >
+Boat "1" *--> "1\n-orientation" BoatDirection: s'oriente \n >
+Object "1..*" *--> "1..*\n #listCoordinates" Coordinates: est placé selon \n >
+
+
+Map "1..*" *--> "1..*\n-listObject" Object: contient \n >
 
 @enduml

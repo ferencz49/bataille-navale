@@ -1,4 +1,4 @@
-package batailleNavale.models;
+package bataille_navale.models;
 
 public abstract class Object {
     private int x;

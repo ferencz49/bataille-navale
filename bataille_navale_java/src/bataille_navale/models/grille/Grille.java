@@ -1,6 +1,6 @@
-package batailleNavale.models.grille;
+package bataille_navale.models.grille;
 
-import batailleNavale.models.Object;
+import bataille_navale.models.Object;
 
 public class Grille {
     private int height;

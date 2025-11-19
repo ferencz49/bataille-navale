@@ -1,4 +1,4 @@
-package batailleNavale.models.traps;
+package bataille_navale.models.traps;
 
 public class BlackHole extends Trap{
     private boolean canBePlaced = true;

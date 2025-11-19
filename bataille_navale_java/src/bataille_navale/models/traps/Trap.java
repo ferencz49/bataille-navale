@@ -1,6 +1,6 @@
-package batailleNavale.models.traps;
+package bataille_navale.models.traps;
 
-import batailleNavale.models.Object;
+import bataille_navale.models.Object;
 
 public abstract class Trap extends Object {
 
