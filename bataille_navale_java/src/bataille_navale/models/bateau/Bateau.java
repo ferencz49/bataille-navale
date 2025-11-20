@@ -6,12 +6,12 @@ public class Bateau extends Object {
     private int size;
     private int hits;
     private Types type;
-    private boolean orientation; //TRUE = VERTICAL ; FALSE = HORIZONTAL
+    private BoatDirection orientation; //TRUE = VERTICAL ; FALSE = HORIZONTAL
 
-    public Bateau( int size, Types type, boolean orientation){
+    public Bateau( int size, Types type, BoatDirection direction){
         super(size);
         this.type = type;
-        this.orientation = orientation;
+        this.orientation = direction;
     }
 
     public boolean isSunk(){

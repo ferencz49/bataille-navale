@@ -1,6 +1,7 @@
 package bataille_navale.models.grille;
 
 import bataille_navale.models.Object;
+import bataille_navale.models.bateau.BoatDirection;
 
 public class Grille {
     private int height;
@@ -22,7 +23,7 @@ public class Grille {
     public Object[][] getGrille(){
         return this.grille;
     }
-    public boolean setObject(int x, int y, boolean orientation, int size ,Object o ){
+    public boolean setObject(int x, int y, BoatDirection orientation, int size , Object o ){
         if(x > grille[0].length - size){
             return false;
         }
@@ -31,7 +32,7 @@ public class Grille {
         }
         //this.grille[x][y] = o;
         for(int i = 0; i < size; i++){
-            if(orientation){
+            if(orientation == BoatDirection.Vertical){
                 this.grille[x-i][y] = o; // si true alors le bateau est placé verticalement, on place de haut en bas
             }
             else{
