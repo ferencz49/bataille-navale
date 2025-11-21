@@ -17,4 +17,8 @@ public class Bateau extends Object {
     public boolean isSunk(){
         return this.size == this.hits;
     }
+
+    public void increaseHits(){
+        this.hits++;
+    }
 }

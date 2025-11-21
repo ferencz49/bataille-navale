@@ -7,4 +7,6 @@ public abstract class Weapon extends Item {
     public Weapon(int size, int capacity) {
         super(size, capacity);
     }
+
+    public void useWeapon(int x, int y){}
 }

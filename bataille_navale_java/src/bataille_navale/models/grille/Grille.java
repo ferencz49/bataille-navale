@@ -23,6 +23,9 @@ public class Grille {
     public Object[][] getGrille(){
         return this.grille;
     }
+
+    public Object getCase(int x, int y){return this.grille[x][y];}
+
     public boolean setObject(int x, int y, BoatDirection orientation, int size , Object o ){
         if(x > grille[0].length - size){
             return false;
