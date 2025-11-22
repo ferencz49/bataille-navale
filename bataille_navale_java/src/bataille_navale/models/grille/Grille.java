@@ -44,4 +44,15 @@ public class Grille {
         }
         return true;
     }
+
+    public void removeObject(int x, int y, BoatDirection orientation, int size, Object o){
+        for(int i = 0; i < size; i++){
+            if(orientation == BoatDirection.Vertical){
+                this.grille[x-i][y] = null;
+            }
+            else{
+                this.grille[x][y+i] = null;
+            }
+        }
+    }
 }

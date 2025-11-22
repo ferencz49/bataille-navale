@@ -4,19 +4,16 @@ import bataille_navale.models.bateau.Bateau;
 import bataille_navale.models.grille.Grille;
 
 public class Bomb extends Weapon{
-    private boolean canBeThrown = true;
 
     public Bomb(int size, int capacity){
         super(size, capacity);
     }
 
     public boolean getCanBeThrown() {
-        return canBeThrown;
+        return this.canBeUsed();
     }
 
-    public void setCanBeThrown(boolean canBeThrown) {
-        this.canBeThrown = canBeThrown;
-    }
+
 
     public void useBomb(int x, int y, Grille g){
         if(g.getCase(x,y) != null){
