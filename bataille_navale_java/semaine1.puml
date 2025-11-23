@@ -83,6 +83,10 @@ package bataille_navale{
                 - nbObject : Integer
                 + <<create>> Map()
                 + <<create>> Map(hauteur : Integer, longueur : Integer )
+                + getGrille() : Object[][]
+                + getCase() : Object
+                + setObject(x : Integer, y : Integer, BoatDirection orientation, size : Integer, o : Object) : boolean
+                + removeObject(x : Integer, y : Integer, BoatDirection orientation, size : Integer, o : Object)
             }
         }
 
