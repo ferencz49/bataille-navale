@@ -3,7 +3,8 @@ skinparam classAttributeIconSize 0
 skinparam classFontStyle Bold
 hide enum methods
 
-/' REFLECHIR A IMPLEMENTER OBSERVER POUR LAFFICHAGE DES TOURS DANS LE TERMINAL '/
+/' nous avons  une classe coordonnées dans l'uml, mais pas encore eu le temsp de l'implémenter, pareil pour la classe game, le package controller et les vues '/
+/' les classes de test ne sont pas représentées sur l'uml'/
 package bataille_navale{
 
 
@@ -53,8 +54,11 @@ package bataille_navale{
         package boat{
 
             class Boat extends bataille_navale.models.Object {
+              - hits : Integer
               + <<create>> Boat(type : BoatType, direction : BoatDirection, size : Integer)
               + isSunk() : boolean
+              + increaseHits()
+              + getHits()
             }
 
             enum BoatType <<enumerate>> {
@@ -83,10 +87,11 @@ package bataille_navale{
         }
 
         abstract class Object <<abstract>>{
-            #size: Integer
+            - x : Integer
+            - y : Integer
+            -size: Integer
             +getSize() : Integer
             + <<create>> Object(size : Integer)
-            + <<create>> Object(size : Integer, listCoordiantes : Coordinates [*])
         }
 
         package items{
@@ -100,18 +105,19 @@ package bataille_navale{
 
             package weapons{
                 abstract class Weapon <<abstract>> extends bataille_navale.models.items.Item{
-                    + {abstract} useWeapon (target: Coordinates)
+                    + <<create>> Weapon(size : Integer, capacity : Integer)
                 }
 
                 class Bomb extends Weapon{
                     + <<create>> bombe()
-                    + useWeapon (target: Coordinates)
+                    + useBomb (x : Integer, y : Integer, g : Grille)
                 }
 
                 class Sonar extends Weapon{
                     + <<create>> sonar(size : Integer)
                     + useWeapon (target: Coordinates)
-                    - submarineIsAlive() : boolean
+                    - submarineIsAlive : boolean
+                    - canBeUsed : boolean
                     + getSubmarineIsAlive() : boolean
                     + setSubmarineIsAlive( submarineIsAlive : boolean)
 
@@ -121,18 +127,20 @@ package bataille_navale{
             package traps {
 
                 abstract class Trap <<abstract>> extends bataille_navale.models.items.Item{
-                    + {abstract} trapEffect()
+                    + <<create>> Trap(size : Integer, capacity : Integer)
                 }
 
                 class BlackHole extends Trap{
                     + <<create>> BlackHole(size : Integer)
-                    + trapEffect()
+                    + getCanBePlaced() : boolean
+                    + setCanBePlaced( setCanBePlaced : boolean)
 
                 }
 
                 class Tornado extends Trap{
                     + <<create>> Tornado(size : Integer)
-                    + trapEffect()
+                    + getCanBePlaced() : boolean
+                    + setCanBePlaced( setCanBePlaced : boolean)
                 }
 
             }
@@ -154,6 +162,8 @@ class Main{
 }
 
 Main .> Game : <<uses>>
+Bomb .> Map : <<uses>>
+
 
 Boat "1" *--> "1\n-typeBateau" BoatType: est \n >
 Boat "1" *--> "1\n-orientation" BoatDirection: s'oriente \n >
