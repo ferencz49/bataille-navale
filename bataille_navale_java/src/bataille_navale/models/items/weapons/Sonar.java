@@ -1,11 +1,11 @@
-package bataille_navale.models.weapons;
+package bataille_navale.models.items.weapons;
 
 public class Sonar extends Weapon{
     private boolean canBeUsed = true;
     private boolean submarineIsAlive = true;
 
-    public Sonar(int size){
-        super(size);
+    public Sonar(int size, int capacity){
+        super(size, capacity);
     }
 
     public boolean getCanBeUsed() {

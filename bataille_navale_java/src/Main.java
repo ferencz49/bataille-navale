@@ -3,8 +3,10 @@
 
 
 import bataille_navale.models.bateau.Bateau;
+import bataille_navale.models.bateau.BoatDirection;
 import bataille_navale.models.bateau.Types;
 import bataille_navale.models.grille.Grille;
+import bataille_navale.models.items.weapons.Bomb;
 import bataille_navale.views.GameSettings;
 
 public class Main {
@@ -13,9 +15,9 @@ public class Main {
 
         Grille g = new Grille();
 
-        Bateau b = new Bateau(4, Types.Croiseur, true);
+        Bateau b = new Bateau(2, Types.Croiseur, BoatDirection.Vertical);
 
-        g.setObject(3, 4, true, 3, b);
+        g.setObject(5, 5, BoatDirection.Vertical, 2, b);
 
         for (int i = 0; i < g.getGrille()[0].length; i++) {
             for (int j = 0; j < g.getGrille()[1].length; j++) {
@@ -28,6 +30,23 @@ public class Main {
             System.out.println();
         }
 
+        Bomb bomb = new Bomb(1, 1);
+        bomb.useBomb(5,5, g);
+        System.out.println(b.getHits());
 
+        System.out.println(b.isSunk());
+
+        g.removeObject(5,5, BoatDirection.Vertical, 2, b);
+
+        for (int i = 0; i < g.getGrille()[0].length; i++) {
+            for (int j = 0; j < g.getGrille()[1].length; j++) {
+                if (g.getGrille()[i][j] != null) {
+                    System.out.print("x\t");
+                } else {
+                    System.out.print(g.getGrille()[i][j] + "  ");
+                }
+            }
+            System.out.println();
+        }
     }
 }

@@ -8,4 +8,8 @@ public abstract class Object {
     public Object(int size){
         this.size = size;
     }
+
+    public int getSize(){
+        return this.size;
+    }
 }
