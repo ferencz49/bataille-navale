@@ -1,9 +1,9 @@
 package bataille_navale.models.items;
 
-import bataille_navale.models.Object;
 
+import bataille_navale.Object;
 
-public class Item extends Object  {
+public class Item extends Object {
     private int capacity;
     public Item(int size, int capacity){
         super(size);

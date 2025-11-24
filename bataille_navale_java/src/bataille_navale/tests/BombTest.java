@@ -1,9 +1,9 @@
 package bataille_navale.tests;
 
-import bataille_navale.models.bateau.Bateau;
-import bataille_navale.models.bateau.BoatDirection;
-import bataille_navale.models.bateau.Types;
-import bataille_navale.models.grille.Grille;
+import bataille_navale.models.boat.Boat;
+import bataille_navale.models.boat.BoatDirection;
+import bataille_navale.models.boat.Types;
+import bataille_navale.models.map.Grid;
 import bataille_navale.models.items.weapons.Bomb;
 import org.junit.jupiter.api.Test;
 
@@ -28,9 +28,9 @@ class BombTest {
 
     @Test
     void useBomb() {
-        Grille g = new Grille();
+        Grid g = new Grid();
 
-        Bateau bateau = new Bateau(2, Types.PorteAvion, BoatDirection.Horizontal);
+        Boat bateau = new Boat(2, Types.PorteAvion, BoatDirection.Horizontal);
 
         Bomb bomb = new Bomb(1, 1);
 

@@ -1,7 +1,7 @@
 package bataille_navale.models.items.weapons;
 
-import bataille_navale.models.bateau.Bateau;
-import bataille_navale.models.grille.Grille;
+import bataille_navale.models.boat.Boat;
+import bataille_navale.models.map.Grid;
 
 public class Bomb extends Weapon{
 
@@ -15,25 +15,25 @@ public class Bomb extends Weapon{
 
 
 
-    public void useBomb(int x, int y, Grille g){
+    public void useBomb(int x, int y, Grid g){
         if(g.getCase(x,y) != null){
-            Bateau b = (Bateau) g.getCase(x,y);
+            Boat b = (Boat) g.getCase(x,y);
             b.increaseHits();
         }
         if(g.getCase(x,y+1) != null){
-            Bateau b = (Bateau) g.getCase(x,y);
+            Boat b = (Boat) g.getCase(x,y);
             b.increaseHits();
         }
         if(g.getCase(x+1,y) != null){
-            Bateau b = (Bateau) g.getCase(x,y);
+            Boat b = (Boat) g.getCase(x,y);
             b.increaseHits();
         }
         if(g.getCase(x,y-1) != null){
-            Bateau b = (Bateau) g.getCase(x,y);
+            Boat b = (Boat) g.getCase(x,y);
             b.increaseHits();
         }
         if(g.getCase(x-1,y) != null){
-            Bateau b = (Bateau) g.getCase(x,y);
+            Boat b = (Boat) g.getCase(x,y);
             b.increaseHits();
         }
 

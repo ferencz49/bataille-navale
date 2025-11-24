@@ -1,15 +1,172 @@
 @startuml
-'https://plantuml.com/sequence-diagram
+skinparam classAttributeIconSize 0
+skinparam classFontStyle Bold
+hide enum methods
 
-autonumber
+package models
+{
+    package map
+    {
+        class Map {
+            - m_width : Integer
+            - m_height : Integer
 
-== Initialization ==
+            + <<create>> Map(width : Integer, height : Integer)
+            ' -- Gestion du Jeu --
+            + receiveShoot(target : Coordinates) : ShootResult
+            + countObjectSonar(target : Coordinates) : Integer  /' Pour le Sonar '/
+            ' -- Gestion du Placement --
+            + placeObject(object : PlacedObject, coordinates : Coordinates, direction : Direction) : boolean
+            + isEmptyCell(coordinates : Coordinates) : boolean
+            + isOnIsland(coordinates : Coordinates) : boolean
+        }
 
-Alice -> Bob: Authentication Request
-Bob --> Alice: Authentication Response
+        class Case {
+            - m_indexSegment : Integer
+            + <<create>> Case(object : PlacedObject, index : Integer)
+            + receiveShoot(target : Coordinates) : ShootResult
+        }
 
-== Repetition ==
+        /'
+        class Coordinates{
+            - x : Integer
+            - y : Integer
+            + <<create>> Coordinates(x : Integer, y : Integer)
+            + getX(): Integer
+            + getY(): Integer
+            + equals(Object other) : boolean
+            + hashCode(): Integer
+        }
+        '/
 
-Alice -> Bob: Another authentication Request
-Alice <-- Bob: another authentication Response
+        enum BoatDirection <<enumerate>> {
+            HORIZONTAL
+            VERTICAL
+        }
+    }
+
+    package objects
+    {
+        abstract class PlacedObject <<abstract>>{
+            -m_size : Integer
+            + {abstract} receiveShoot(index : Integer) : ShootResult
+        }
+
+        class Boat extends PlacedObject
+        {
+            -m_hit : Boolean[*]
+            + <<create>> Boat(size: Integer, hit : Boolean[*], type : BoatType)
+            + receiveShoot(index : Integer) : ShootResult
+            + isSunk() : boolean
+            + {static} createPorteAvion() : Boat
+            + {static} createCroiseur() : Boat
+            + {static} createContreTorpilleur() : Boat
+            + {static} createSousMarin() : Boat
+            + {static} createTorpilleur() : Boat
+
+        }
+
+        class Island extends PlacedObject
+        {
+            + <<create>> Island()
+            +receiveShoot(index : Integer) : ShootResult
+            +getReward() : Reward
+        }
+
+        class BlackHole extends PlacedObject
+        {
+            + <<create>> BlackHole()
+            +receiveShoot(index : Integer) : ShootResult
+        }
+
+        class Tornado extends PlacedObject
+        {
+            + <<create>> Tornado()
+            +receiveShoot(index : Integer) : ShootResult
+        }
+
+        enum ShootResult <<enumerate>> {
+            HIT
+            SUNK
+            MISSED
+            BLACK_HOLE_ACTIVATE
+            TORNADO_ACTIVATE
+            ISLAND
+            }
+
+        enum BoatType <<enumerate>> {
+            PORTE_AVION
+            CROISEUR
+            CONTRE_TORPILLEUR
+            SOUS_MARIN
+            TORPILLEUR
+        }
+
+        enum Reward <<enumerate>> {
+        SONAR
+        BOMB
+        }
+    }
+
+    package weapons
+    {
+        abstract class Weapon <<abstract>>
+        {
+            -m_capacity : Integer
+            + {abstract} getImpactZone(target : Coordinates, map Map) : Coordinates[*]
+            + increaseCapacity()
+            + decraseCapacity()
+            + getCapacity() : Integer
+        }
+
+        class Missile extends Weapon
+        {
+            + <<create>> Tornado(capacity : Integer)
+            getImpactZone(target : Coordinates, map Map) : Coordinates[*]
+        }
+
+        class Bomb extends Weapon
+        {
+            + <<create>> Bomb(capacity : Integer)
+            getImpactZone(target : Coordinates, map Map) : Coordinates[*]
+        }
+
+        class Sonar extends Weapon
+        {
+            + <<create>> Sonar(capacity : Integer)
+            getImpactZone(target : Coordinates, map Map) : Coordinates[*]
+        }
+    }
+
+    package players
+    {
+        abstract class Player <<abstract>>{
+            - m_pseudo : String
+            + placeFix()
+            + placeRandom()
+            + selectWeapon(nom : String)
+            + getSelectedWeapon() : Weapon
+            + hasAliveSubmarine() : boolean
+         }
+    }
+}
+
+package view {
+    class EcranDeConfiguration {}
+    class EcranDePlacement {}
+    class EcranPrincipal {
+        + update()
+        + initListeners() /' Envoie les événements au Controller '/
+    }
+    class EcranDeFin {}
+}
+
+Case "1" *--> "1\n-m_object" PlacedObject: contains \n >
+Boat "1" *--> "1\n-m_type" BoatType: is \n >
+PlacedObject .> ShootResult : <<use>>
+Weapon .> Map : <<use>>
+Map .> BoatDirection : <<use>>
+Player "1" *--> "1\n-m_grid" Map: has \n >
+Player "1..*" *--> "1..*\n-m_listWeapons" Weapon: has \n >
+Island "1" *--> "1\n-m_reward" Reward : contains \n >
 @enduml

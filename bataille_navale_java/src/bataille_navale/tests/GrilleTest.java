@@ -1,9 +1,9 @@
 package bataille_navale.tests;
 
-import bataille_navale.models.bateau.Bateau;
-import bataille_navale.models.bateau.BoatDirection;
-import bataille_navale.models.bateau.Types;
-import bataille_navale.models.grille.Grille;
+import bataille_navale.models.boat.Boat;
+import bataille_navale.models.boat.BoatDirection;
+import bataille_navale.models.boat.Types;
+import bataille_navale.models.map.Grid;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -16,8 +16,8 @@ class GrilleTest {
 
     @Test
     void setObject() {
-        Bateau b = new Bateau(5, Types.Croiseur, BoatDirection.Vertical);
-        Grille g = new Grille();
+        Boat b = new Boat(5, Types.Croiseur, BoatDirection.Vertical);
+        Grid g = new Grid();
 
         boolean result = g.setObject(5, 6,BoatDirection.Vertical,1, b);
 

@@ -1,13 +1,13 @@
-package bataille_navale.models.bateau;
+package bataille_navale.models.boat;
 
-import bataille_navale.models.Object;
+import bataille_navale.Object;
 
-public class Bateau extends Object {
+public class Boat extends Object {
     private int hits;
     private Types type;
     private BoatDirection orientation; //TRUE = VERTICAL ; FALSE = HORIZONTAL
 
-    public Bateau( int size, Types type, BoatDirection direction){
+    public Boat(int size, Types type, BoatDirection direction){
         super(size);
         this.type = type;
         this.orientation = direction;

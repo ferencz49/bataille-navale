@@ -1,20 +1,20 @@
-package bataille_navale.models.grille;
+package bataille_navale.models.map;
 
-import bataille_navale.models.Object;
-import bataille_navale.models.bateau.BoatDirection;
+import bataille_navale.Object;
+import bataille_navale.models.boat.BoatDirection;
 
-public class Grille {
+public class Grid {
     private int height;
     private int width;
     private Object[][] grille;
 
-    public Grille(){
+    public Grid(){
         this.height = 10;
         this.width = 10;
         grille = new Object[10][10];
     }
 
-    public Grille(int heigth, int width){
+    public Grid(int heigth, int width){
         this.height = heigth;
         this.width = width;
         grille = new Object[10][10];

@@ -2,20 +2,19 @@
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 
 
-import bataille_navale.models.bateau.Bateau;
-import bataille_navale.models.bateau.BoatDirection;
-import bataille_navale.models.bateau.Types;
-import bataille_navale.models.grille.Grille;
+import bataille_navale.models.boat.Boat;
+import bataille_navale.models.boat.BoatDirection;
+import bataille_navale.models.boat.Types;
+import bataille_navale.models.map.Grid;
 import bataille_navale.models.items.weapons.Bomb;
-import bataille_navale.views.GameSettings;
 
 public class Main {
     public static void main(String[] args) {
         //GameSettings a = new GameSettings();
 
-        Grille g = new Grille();
+        Grid g = new Grid();
 
-        Bateau b = new Bateau(2, Types.Croiseur, BoatDirection.Vertical);
+        Boat b = new Boat(2, Types.Croiseur, BoatDirection.Vertical);
 
         g.setObject(5, 5, BoatDirection.Vertical, 2, b);
 
