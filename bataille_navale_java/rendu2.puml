@@ -1,0 +1,179 @@
+@startuml
+skinparam classAttributeIconSize 0
+skinparam classFontStyle Bold
+hide enum methods
+
+/' nous avons  une classe coordonnées dans l'uml, mais pas encore eu le temsp de l'implémenter, pareil pour la classe game, le package controller et les vues '/
+/' les classes de test ne sont pas représentées sur l'uml'/
+package bataille_navale{
+
+
+    package view{
+        class EcranDeConfiguration{}
+
+        class EcranDePlacement{}
+
+        class EcranPrincipal{}
+
+        class EcranDeFin{}
+    }
+
+    package controller{
+
+            package players{
+                abstract class Player{ /' C'EST UNE CLASSE ABSTRAITE, CAR ON VA IMPLEMENTER LES METHODES DE LA MEME MANIERE '/
+                    + placerBateauxFixe()
+                    + placerBateauxAleatoire()
+                }
+
+                class HumanController extends Player{
+                    + tir()
+                    + placerTornade(x : integer, y : integer)
+                    + placerTrouNoir(x : integer, y : integer)
+                }
+
+                class ComputerController extends Player{
+                    + tirAleatoire()
+                    + placerTornade() : boolean
+                    + placerTrouNoir() : boolean
+                }
+            }
+
+    }
+    package models{
+
+        /'class Coordinates{
+            - x : Integer
+            - y : Integer
+            + <<create>> Coordinates(x : Integer, y : Integer)
+            - notifyTrapObservers()
+            + getX(): Integer
+            + getY(): Integer
+        }'/
+
+        package boat{
+
+            class Boat extends bataille_navale.models.Object {
+              - hits : Integer
+              + <<create>> Boat(type : BoatType, direction : BoatDirection, size : Integer)
+              + isSunk() : boolean
+              + increaseHits()
+              + getHits()
+            }
+
+            enum BoatType <<enumerate>> {
+                PORTE_AVION
+                CROISEUR
+                CONTRE_TORPILLEUR
+                SOUS_MARIN
+                TORPILLEUR
+            }
+
+            enum BoatDirection <<enumerate>> {
+                HORIZONTAL
+                VERTICAL
+            }
+        }
+
+        package map{
+
+            class Map{
+                - height : Integer
+                - width : Integer
+                - nbObject : Integer
+                + <<create>> Map()
+                + <<create>> Map(hauteur : Integer, longueur : Integer )
+                + getGrille() : Object[][]
+                + getCase() : Object
+                + setObject(x : Integer, y : Integer, BoatDirection orientation, size : Integer, o : Object) : boolean
+                + removeObject(x : Integer, y : Integer, BoatDirection orientation, size : Integer, o : Object)
+            }
+        }
+
+        abstract class Object <<abstract>>{
+            - x : Integer
+            - y : Integer
+            -size: Integer
+            +getSize() : Integer
+            + <<create>> Object(size : Integer)
+        }
+
+        package items{
+
+            abstract class Item <<abstract>> extends bataille_navale.models.Object{
+                + <<create>> Item()
+                - capacity : Integer
+                + canBeUsed() : boolean
+                + addCapacity()
+            }
+
+            package weapons{
+                abstract class Weapon <<abstract>> extends bataille_navale.models.items.Item{
+                    + <<create>> Weapon(size : Integer, capacity : Integer)
+                }
+
+                class Bomb extends Weapon{
+                    + <<create>> bombe()
+                    + useBomb (x : Integer, y : Integer, g : Grille)
+                }
+
+                class Sonar extends Weapon{
+                    + <<create>> sonar(size : Integer)
+                    + useWeapon (target: Coordinates)
+                    - submarineIsAlive : boolean
+                    - canBeUsed : boolean
+                    + getSubmarineIsAlive() : boolean
+                    + setSubmarineIsAlive( submarineIsAlive : boolean)
+
+                }
+            }
+
+            package traps {
+
+                abstract class Trap <<abstract>> extends bataille_navale.models.items.Item{
+                    + <<create>> Trap(size : Integer, capacity : Integer)
+                }
+
+                class BlackHole extends Trap{
+                    + <<create>> BlackHole(size : Integer)
+                    + getCanBePlaced() : boolean
+                    + setCanBePlaced( setCanBePlaced : boolean)
+
+                }
+
+                class Tornado extends Trap{
+                    + <<create>> Tornado(size : Integer)
+                    + getCanBePlaced() : boolean
+                    + setCanBePlaced( setCanBePlaced : boolean)
+                }
+
+            }
+        }
+
+
+        class Game{
+            + creerPartie()
+            + jouerPartie()
+            + detecterFin()
+            + recommencerPartie()
+            + modeIle(): boolean
+        }
+
+    }
+}
+
+class Main{
+}
+
+Main .> Game : <<uses>>
+Bomb .> Map : <<uses>>
+
+
+Boat "1" *--> "1\n-typeBateau" BoatType: est \n >
+Boat "1" *--> "1\n-orientation" BoatDirection: s'oriente \n >
+Object "1..*" *--> "1..*\n #listCoordinates" Coordinates: est placé selon \n >
+
+
+Map "1..*" *--> "1..*\n-listObject" Object: contient \n >
+
+@enduml
