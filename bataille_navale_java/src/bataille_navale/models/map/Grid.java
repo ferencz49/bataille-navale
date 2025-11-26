@@ -1,7 +1,9 @@
 package bataille_navale.models.map;
 
 import bataille_navale.Object;
+import bataille_navale.models.boat.Boat;
 import bataille_navale.models.boat.BoatDirection;
+import bataille_navale.models.boat.Types;
 
 public class Grid {
     private int height;
@@ -54,5 +56,20 @@ public class Grid {
                 this.grille[x][y+i] = null;
             }
         }
+    }
+
+    public void setBoats1(Grid g){
+        Boat porte_avion = new Boat(5, Types.PorteAvion, BoatDirection.Horizontal);
+        Boat croiseur = new Boat(4,Types.PorteAvion, BoatDirection.Vertical);
+        Boat contre_torpilleur = new Boat(3,Types.PorteAvion, BoatDirection.Horizontal);
+        Boat sous_marin = new Boat(3,Types.PorteAvion, BoatDirection.Vertical);
+        Boat torpilleur = new Boat(2,Types.PorteAvion, BoatDirection.Horizontal);
+
+
+        g.setObject(0,0, BoatDirection.Horizontal, 5,porte_avion);
+        g.setObject(2,2, BoatDirection.Vertical, 4,croiseur);
+        g.setObject(5,6, BoatDirection.Horizontal, 3,contre_torpilleur);
+        g.setObject(8,1, BoatDirection.Vertical, 3,sous_marin);
+        g.setObject(1,9, BoatDirection.Horizontal, 2,torpilleur);
     }
 }
