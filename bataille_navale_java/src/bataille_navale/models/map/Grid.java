@@ -36,10 +36,10 @@ public class Grid {
         //this.grille[x][y] = o;
         for(int i = 0; i < size; i++){
             if(orientation == BoatDirection.Vertical){
-                this.grille[x-i][y] = o; // si true alors le bateau est placé verticalement, on place de haut en bas
+                this.grille[x][y+i] = o; // si true alors le bateau est placé verticalement, on place de haut en bas
             }
             else{
-                this.grille[x][y+i] = o; // si false, on place de gauche à droite
+                this.grille[x+i][y] = o; // si false, on place de gauche à droite
             }
         }
         return true;
