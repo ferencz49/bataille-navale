@@ -14,8 +14,8 @@ class SonarTest {
     @Test
     void useSonar() {
         Grid g = new Grid();
-        Boat b  = new Boat(3, Types.Croiseur, BoatDirection.Horizontal);
-        g.setObject(5,5, BoatDirection.Horizontal, 3, b );
+        Boat b  = new Boat(3, Types.Croiseur);
+        g.setObject(5,5, BoatDirection.Horizontal, b );
 
         Sonar s = new Sonar(1, 1);
         int result = s.useSonar(7,5, g);

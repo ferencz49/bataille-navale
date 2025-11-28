@@ -31,7 +31,7 @@ public class Boat extends Object {
         return new Boat(2, Types.Torpilleur);
     }
 
-    public int getSize()
+    public int getBoatSize()
     {
         return this.getSize();
     }

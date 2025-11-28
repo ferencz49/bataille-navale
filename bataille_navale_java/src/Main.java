@@ -14,9 +14,9 @@ public class Main {
 
         Grid g = new Grid();
 
-        Boat b = new Boat(2, Types.Croiseur, BoatDirection.Vertical);
+        Boat b = new Boat(2, Types.Croiseur);
 
-        g.setObject(5, 5, BoatDirection.Vertical, 2, b);
+        g.setObject(5, 5, BoatDirection.Vertical, b);
 
         for (int i = 0; i < g.getGrille()[0].length; i++) {
             for (int j = 0; j < g.getGrille()[1].length; j++) {

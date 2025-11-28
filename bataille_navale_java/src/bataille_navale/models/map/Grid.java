@@ -28,15 +28,14 @@ public class Grid {
 
     public Object getCase(int x, int y){return this.grille[x][y];}
 
-    public boolean setObject(int x, int y, BoatDirection orientation, int size , Object o ){
-        if(x > grille[0].length - size){
+    public boolean setObject(int x, int y, BoatDirection orientation, Object o ){
+        if(x > grille.length - o.getSize()){
             return false;
         }
-        if(y > grille[1].length - size) {
+        if(y > grille[0].length - o.getSize()) {
             return false;
         }
-        //this.grille[x][y] = o;
-        for(int i = 0; i < size; i++){
+        for(int i = 0; i < o.getSize(); i++){
             if(orientation == BoatDirection.Vertical){
                 this.grille[x][y+i] = o; // si true alors le bateau est placé verticalement, on place de haut en bas
             }
@@ -59,17 +58,17 @@ public class Grid {
     }
 
     public void setBoats1(Grid g){
-        Boat porte_avion = new Boat(5, Types.PorteAvion, BoatDirection.Horizontal);
-        Boat croiseur = new Boat(4,Types.PorteAvion, BoatDirection.Vertical);
-        Boat contre_torpilleur = new Boat(3,Types.PorteAvion, BoatDirection.Horizontal);
-        Boat sous_marin = new Boat(3,Types.PorteAvion, BoatDirection.Vertical);
-        Boat torpilleur = new Boat(2,Types.PorteAvion, BoatDirection.Horizontal);
+        Boat porte_avion = new Boat(5, Types.PorteAvion);
+        Boat croiseur = new Boat(4,Types.PorteAvion);
+        Boat contre_torpilleur = new Boat(3,Types.PorteAvion);
+        Boat sous_marin = new Boat(3,Types.PorteAvion);
+        Boat torpilleur = new Boat(2,Types.PorteAvion);
 
 
-        g.setObject(0,0, BoatDirection.Horizontal, 5,porte_avion);
+        /*g.setObject(0,0, BoatDirection.Horizontal, 5,porte_avion);
         g.setObject(2,2, BoatDirection.Vertical, 4,croiseur);
         g.setObject(5,6, BoatDirection.Horizontal, 3,contre_torpilleur);
         g.setObject(8,1, BoatDirection.Vertical, 3,sous_marin);
-        g.setObject(1,9, BoatDirection.Horizontal, 2,torpilleur);
+        g.setObject(1,9, BoatDirection.Horizontal, 2,torpilleur);*/
     }
 }
