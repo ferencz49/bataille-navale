@@ -4,6 +4,7 @@ import bataille_navale.Object;
 import bataille_navale.models.boat.Boat;
 import bataille_navale.models.boat.BoatDirection;
 import bataille_navale.models.boat.Types;
+import bataille_navale.models.items.traps.Trap;
 
 public class Grid {
     private int height;
@@ -45,6 +46,20 @@ public class Grid {
         }
         return true;
     }
+
+        public boolean setTrap(int x, int y, Trap trap ){
+            if(x >= grille.length || y >= grille[0].length){
+                return false;
+            }
+            if(x < 0 || y < 0){
+                return false;
+            }
+            if(this.grille[x][y] != null){
+                return false;
+            }
+            this.grille[x][y] = trap;
+            return true;
+        }
 
     public void removeObject(int x, int y, BoatDirection orientation, int size, Object o){
         for(int i = 0; i < size; i++){
