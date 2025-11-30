@@ -15,21 +15,21 @@ class GrilleTest {
     }
 
     @Test
-    void setObject() {
-        Boat b = Boat.createCroiseur();
+    void setBoat() {
+        Boat b = Boat.createCroiseur(BoatDirection.Vertical);
         Grid g = new Grid();
 
-        boolean result = g.setObject(5, 6,BoatDirection.Vertical, b);
+        boolean result = g.setBoat(5, 6, b);
 
         assertTrue(result);           // Vérifie que l'ajout réussit
 
-        boolean result2 = g.setObject(11,15,BoatDirection.Vertical,b);
+        boolean result2 = g.setBoat(11,15,b);
         assertFalse(result2);         // vérifie que l'ajout rate
 
-        boolean result3  = g.setObject(-1,15,BoatDirection.Vertical,b);
+        boolean result3  = g.setBoat(-1,15,b);
         assertFalse(result3);         // vérifie que l'ajout rate aussi
 
-        boolean result4 = g.setObject(3,3, BoatDirection.Vertical,b);
+        boolean result4 = g.setBoat(3,3,b);
         assertTrue(result4);          // vérifie que l'ajoute réussit
     }
 }

@@ -32,11 +32,11 @@ class BombTest {
         //Dans ce test le bateau est touché 2 fois par la bombe, sa taille est 3 donc il n'est pas coulé
         Grid g = new Grid();
 
-        Boat bateau = Boat.createContreTorpilleur();
+        Boat bateau = Boat.createContreTorpilleur(BoatDirection.Horizontal);
 
         Bomb bomb = new Bomb(1, 1);
 
-        g.setObject(5,5, BoatDirection.Horizontal, bateau);
+        g.setBoat(5,5, bateau);
 
         bomb.useBomb(5,5, g);
 

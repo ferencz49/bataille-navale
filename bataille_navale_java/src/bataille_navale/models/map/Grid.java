@@ -29,19 +29,19 @@ public class Grid {
 
     public Object getCase(int x, int y){return this.grille[x][y];}
 
-    public boolean setObject(int x, int y, BoatDirection orientation, Object o ){
-        if(x > grille.length - o.getSize()){
+    public boolean setBoat(int x, int y, Boat boat){
+        if(x > grille.length - boat.getSize()){
             return false;
         }
-        if(y > grille[0].length - o.getSize()) {
+        if(y > grille[0].length - boat.getSize()) {
             return false;
         }
-        for(int i = 0; i < o.getSize(); i++){
-            if(orientation == BoatDirection.Vertical){
-                this.grille[x][y+i] = o; // si true alors le bateau est placé verticalement, on place de haut en bas
+        for(int i = 0; i < boat.getSize(); i++){
+            if(boat.getBoatDirection() == BoatDirection.Vertical){
+                this.grille[x][y+i] = boat; // si true alors le bateau est placé verticalement, on place de haut en bas
             }
             else{
-                this.grille[x+i][y] = o; // si false, on place de gauche à droite
+                this.grille[x+i][y] = boat; // si false, on place de gauche à droite
             }
         }
         return true;
@@ -73,11 +73,11 @@ public class Grid {
     }
 
     public void setBoats1(Grid g){
-        Boat porte_avion = new Boat(5, Types.PorteAvion);
-        Boat croiseur = new Boat(4,Types.PorteAvion);
-        Boat contre_torpilleur = new Boat(3,Types.PorteAvion);
-        Boat sous_marin = new Boat(3,Types.PorteAvion);
-        Boat torpilleur = new Boat(2,Types.PorteAvion);
+        Boat porte_avion = new Boat(5, Types.PorteAvion, BoatDirection.Horizontal);
+        Boat croiseur = new Boat(4,Types.PorteAvion, BoatDirection.Vertical);
+        Boat contre_torpilleur = new Boat(3,Types.PorteAvion, BoatDirection.Horizontal);
+        Boat sous_marin = new Boat(3,Types.PorteAvion,BoatDirection.Vertical);
+        Boat torpilleur = new Boat(2,Types.PorteAvion, BoatDirection.Horizontal);
 
 
         /*g.setObject(0,0, BoatDirection.Horizontal, 5,porte_avion);

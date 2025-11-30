@@ -18,23 +18,23 @@ public class Bomb extends Weapon{
     public void useBomb(int x, int y, Grid g){
         if(g.getCase(x,y) != null){
             Boat b = (Boat) g.getCase(x,y);
-            b.increaseHits();
+            b.onHit(g, x, y);
         }
         if(g.getCase(x,y+1) != null){
             Boat b = (Boat) g.getCase(x,y);
-            b.increaseHits();
+            b.onHit(g, x, y+1);
         }
         if(g.getCase(x+1,y) != null){
             Boat b = (Boat) g.getCase(x,y);
-            b.increaseHits();
+            b.onHit(g, x+1, y);
         }
         if(g.getCase(x,y-1) != null){
             Boat b = (Boat) g.getCase(x,y);
-            b.increaseHits();
+            b.onHit(g, x, y-1);
         }
         if(g.getCase(x-1,y) != null){
             Boat b = (Boat) g.getCase(x,y);
-            b.increaseHits();
+            b.onHit(g, x-1, y);
         }
 
 
