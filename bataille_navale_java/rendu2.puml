@@ -56,9 +56,16 @@ package bataille_navale{
             class Boat extends bataille_navale.models.Object {
               - hits : Integer
               + <<create>> Boat(type : BoatType, direction : BoatDirection, size : Integer)
+              + createCroiseur(direction : BoatDirection) : Boat
+              + createContreTorpilleur(direction : BoatDirection) : Boat
+              + createSousMarin(direction : BoatDirection) : Boat
+              + createTorpilleur(direction : BoatDirection) : Boat
+              + getBoatSize() : Integer
               + isSunk() : boolean
               + increaseHits()
-              + getHits()
+              + onHit(grid : Grid, x : Integer, y : Integer)
+              + getHits() : Integer
+              + getBoatDirection() : BoatDirection
             }
 
             enum BoatType <<enumerate>> {
@@ -80,13 +87,13 @@ package bataille_navale{
             class Map{
                 - height : Integer
                 - width : Integer
-                - nbObject : Integer
                 + <<create>> Map()
                 + <<create>> Map(hauteur : Integer, longueur : Integer )
                 + getGrille() : Object[][]
                 + getCase() : Object
-                + setObject(x : Integer, y : Integer, BoatDirection orientation, size : Integer, o : Object) : boolean
-                + removeObject(x : Integer, y : Integer, BoatDirection orientation, size : Integer, o : Object)
+                + setBoat(x : Integer, y : Integer, Boat boat) : boolean
+                + removeObject(x : Integer, y : Integer,  Boat boat)
+                + setBoats1(g : Grid)
             }
         }
 
@@ -94,8 +101,9 @@ package bataille_navale{
             - x : Integer
             - y : Integer
             -size: Integer
-            +getSize() : Integer
             + <<create>> Object(size : Integer)
+            + getSize() : Integer
+            + onHit(grid : Grid, x : Integer, y : Integer)
         }
 
         package items{
@@ -114,16 +122,19 @@ package bataille_navale{
 
                 class Bomb extends Weapon{
                     + <<create>> bombe()
+                    + getCanBeThrown() : Boolean
                     + useBomb (x : Integer, y : Integer, g : Grille)
                 }
 
                 class Sonar extends Weapon{
-                    + <<create>> sonar(size : Integer)
-                    + useWeapon (target: Coordinates)
                     - submarineIsAlive : boolean
                     - canBeUsed : boolean
+                    + <<create>> sonar(size : Integer)
+                    + useSonar (x : Integer, y : Integer, g : Grid)
                     + getSubmarineIsAlive() : boolean
                     + setSubmarineIsAlive( submarineIsAlive : boolean)
+                    + getCanBeUsed() : Boolean
+                    + setCanBeUsed( canBeUsed : boolean)
 
                 }
             }
