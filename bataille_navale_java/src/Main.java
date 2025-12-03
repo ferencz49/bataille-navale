@@ -29,7 +29,7 @@ public class Main {
             System.out.println();
         }
 
-        Bomb bomb = new Bomb(1, 1);
+        Bomb bomb = new Bomb(1);
         bomb.useBomb(5,5, g);
         System.out.println(b.getHits());
 

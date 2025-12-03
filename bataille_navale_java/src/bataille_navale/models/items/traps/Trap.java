@@ -4,8 +4,8 @@ import bataille_navale.models.items.Item;
 
 public abstract class Trap extends Item {
 
-    public Trap(int size, int capacity){
-        super(size, capacity);
+    public Trap(int capacity){
+        super(capacity);
     }
 
 }

@@ -72,6 +72,10 @@ public class Grid {
         }
     }
 
+    public void modifyCoordinates(){
+
+    }
+
     public void setBoats1(Grid g){
         Boat porte_avion = new Boat(5, Types.PorteAvion, BoatDirection.Horizontal);
         Boat croiseur = new Boat(4,Types.PorteAvion, BoatDirection.Vertical);

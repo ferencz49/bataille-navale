@@ -6,8 +6,8 @@ public class Sonar extends Weapon{
     private boolean canBeUsed = true;
     private boolean submarineIsAlive = true;
 
-    public Sonar(int size, int capacity){
-        super(size, capacity);
+    public Sonar(int capacity){
+        super(capacity);
     }
 
     public boolean getCanBeUsed() {

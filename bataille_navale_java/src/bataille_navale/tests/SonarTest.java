@@ -17,7 +17,7 @@ class SonarTest {
         Boat b  = new Boat(3, Types.Croiseur, BoatDirection.Horizontal);
         g.setBoat(5,5, b );
 
-        Sonar s = new Sonar(1, 1);
+        Sonar s = new Sonar(1);
         int result = s.useSonar(7,5, g);
         assertEquals(2,result);
     }

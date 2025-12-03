@@ -3,7 +3,6 @@ skinparam classAttributeIconSize 0
 skinparam classFontStyle Bold
 hide enum methods
 
-/' nous avons  une classe coordonnées dans l'uml, mais pas encore eu le temsp de l'implémenter, pareil pour la classe game, le package controller et les vues '/
 /' les classes de test ne sont pas représentées sur l'uml'/
 package bataille_navale{
 
@@ -92,6 +91,7 @@ package bataille_navale{
                 + getGrille() : Object[][]
                 + getCase() : Object
                 + setBoat(x : Integer, y : Integer, Boat boat) : boolean
+                + setTrap(x : Integer, y : Integer, trap : Trap) : boolean
                 + removeObject(x : Integer, y : Integer,  Boat boat)
                 + setBoats1(g : Grid)
             }
@@ -182,7 +182,6 @@ Bomb .> Map : <<uses>>
 
 Boat "1" *--> "1\n-typeBateau" BoatType: est \n >
 Boat "1" *--> "1\n-orientation" BoatDirection: s'oriente \n >
-Object "1..*" *--> "1..*\n #listCoordinates" Coordinates: est placé selon \n >
 
 
 Map "1..*" *--> "1..*\n-listObject" Object: contient \n >

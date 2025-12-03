@@ -5,8 +5,8 @@ import bataille_navale.Object;
 
 public class Item extends Object {
     private int capacity;
-    public Item(int size, int capacity){
-        super(size);
+    public Item(int capacity){
+        super(1);
         this.capacity = capacity;
     }
 
