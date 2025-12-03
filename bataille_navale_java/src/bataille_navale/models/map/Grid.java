@@ -8,7 +8,11 @@ import bataille_navale.models.boat.BoatDirection;
 import bataille_navale.models.boat.Types;
 import bataille_navale.models.items.traps.Trap;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Grid implements Observable {
+    private List<Observer> observers = new ArrayList<>();
     private int height;
     private int width;
     private Object[][] grille;
@@ -46,6 +50,7 @@ public class Grid implements Observable {
                 this.grille[x+i][y] = boat; // si false, on place de gauche à droite
             }
         }
+        notifyObservers();
         return true;
     }
 
@@ -60,6 +65,7 @@ public class Grid implements Observable {
                 return false;
             }
             this.grille[x][y] = trap;
+            notifyObservers();
             return true;
         }
 
@@ -72,6 +78,7 @@ public class Grid implements Observable {
                 this.grille[x][y+i] = null;
             }
         }
+        notifyObservers();
     }
 
     public void modifyCoordinates(){
@@ -97,16 +104,16 @@ public class Grid implements Observable {
 
     @Override
     public void addObserver(Observer observer) {
-
+        observers.add(observer);
     }
 
     @Override
     public void removeObserver(Observer observer) {
-
+        observers.add(observer);
     }
 
     @Override
     public void notifyObservers() {
-
+        for (Observer o : observers) o.update();
     }
 }

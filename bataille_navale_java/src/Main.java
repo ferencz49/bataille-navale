@@ -12,43 +12,15 @@ import bataille_navale.views.afficherGrille;
 
 public class Main {
     public static void main(String[] args) {
-        //GameSettings a = new GameSettings();
 
-        /*Grid g = new Grid();
+        Grid g = new Grid();
 
-        Boat b = new Boat(2, Types.Croiseur, BoatDirection.Vertical);
+        afficherGrille a = new afficherGrille(g);
 
+        Boat b = Boat.createContreTorpilleur(BoatDirection.Vertical);
         g.setBoat(5, 5, b);
 
-        for (int i = 0; i < g.getGrille()[0].length; i++) {
-            for (int j = 0; j < g.getGrille()[1].length; j++) {
-                if (g.getGrille()[i][j] != null) {
-                    System.out.print("x\t");
-                } else {
-                    System.out.print(g.getGrille()[i][j] + "  ");
-                }
-            }
-            System.out.println();
-        }
-
-        Bomb bomb = new Bomb(1);
-        bomb.useBomb(5,5, g);
-        System.out.println(b.getHits());
-
-        System.out.println(b.isSunk());
-
-        g.removeObject(5,5, BoatDirection.Vertical, 2, b);
-
-        for (int i = 0; i < g.getGrille()[0].length; i++) {
-            for (int j = 0; j < g.getGrille()[1].length; j++) {
-                if (g.getGrille()[i][j] != null) {
-                    System.out.print("x\t");
-                } else {
-                    System.out.print(g.getGrille()[i][j] + "  ");
-                }
-            }
-            System.out.println();
-        }*/
-        afficherGrille a = new afficherGrille();
+        Boat b2 = Boat.createPorteAvion(BoatDirection.Horizontal);
+        g.setBoat(2, 2, b2);
     }
 }
