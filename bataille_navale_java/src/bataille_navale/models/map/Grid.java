@@ -1,12 +1,14 @@
 package bataille_navale.models.map;
 
 import bataille_navale.Object;
+import bataille_navale.models.Observable;
+import bataille_navale.models.Observer;
 import bataille_navale.models.boat.Boat;
 import bataille_navale.models.boat.BoatDirection;
 import bataille_navale.models.boat.Types;
 import bataille_navale.models.items.traps.Trap;
 
-public class Grid {
+public class Grid implements Observable {
     private int height;
     private int width;
     private Object[][] grille;
@@ -89,5 +91,22 @@ public class Grid {
         g.setObject(5,6, BoatDirection.Horizontal, 3,contre_torpilleur);
         g.setObject(8,1, BoatDirection.Vertical, 3,sous_marin);
         g.setObject(1,9, BoatDirection.Horizontal, 2,torpilleur);*/
+    }
+
+    //PARTIE OBSERVER
+
+    @Override
+    public void addObserver(Observer observer) {
+
+    }
+
+    @Override
+    public void removeObserver(Observer observer) {
+
+    }
+
+    @Override
+    public void notifyObservers() {
+
     }
 }

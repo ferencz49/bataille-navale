@@ -7,12 +7,14 @@ import bataille_navale.models.boat.BoatDirection;
 import bataille_navale.models.boat.Types;
 import bataille_navale.models.map.Grid;
 import bataille_navale.models.items.weapons.Bomb;
+import bataille_navale.views.GameSettings;
+import bataille_navale.views.afficherGrille;
 
 public class Main {
     public static void main(String[] args) {
         //GameSettings a = new GameSettings();
 
-        Grid g = new Grid();
+        /*Grid g = new Grid();
 
         Boat b = new Boat(2, Types.Croiseur, BoatDirection.Vertical);
 
@@ -46,6 +48,7 @@ public class Main {
                 }
             }
             System.out.println();
-        }
+        }*/
+        afficherGrille a = new afficherGrille();
     }
 }
