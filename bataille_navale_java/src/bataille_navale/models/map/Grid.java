@@ -1,18 +1,17 @@
 package bataille_navale.models.map;
 
 import bataille_navale.Object;
-import bataille_navale.models.Observable;
-import bataille_navale.models.Observer;
+import bataille_navale.models.GridObservable;
+import bataille_navale.models.GridObserver;
 import bataille_navale.models.boat.Boat;
 import bataille_navale.models.boat.BoatDirection;
-import bataille_navale.models.boat.Types;
 import bataille_navale.models.items.traps.Trap;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Grid implements Observable {
-    private List<Observer> observers = new ArrayList<>();
+public class Grid implements GridObservable {
+    private List<GridObserver> observers = new ArrayList<>();
     private int height;
     private int width;
     private Object[][] grille;
@@ -86,34 +85,34 @@ public class Grid implements Observable {
     }
 
     public void setBoats1(Grid g){
-        Boat porte_avion = new Boat(5, Types.PorteAvion, BoatDirection.Horizontal);
-        Boat croiseur = new Boat(4,Types.PorteAvion, BoatDirection.Vertical);
-        Boat contre_torpilleur = new Boat(3,Types.PorteAvion, BoatDirection.Horizontal);
-        Boat sous_marin = new Boat(3,Types.PorteAvion,BoatDirection.Vertical);
-        Boat torpilleur = new Boat(2,Types.PorteAvion, BoatDirection.Horizontal);
+        Boat porte_avion = Boat.createPorteAvion(BoatDirection.Horizontal);
+        Boat croiseur = Boat.createCroiseur(BoatDirection.Vertical);
+        Boat contre_torpilleur = Boat.createContreTorpilleur(BoatDirection.Horizontal);
+        Boat sous_marin = Boat.createSousMarin(BoatDirection.Vertical);
+        Boat torpilleur = Boat.createTorpilleur(BoatDirection.Horizontal);
 
 
-        /*g.setObject(0,0, BoatDirection.Horizontal, 5,porte_avion);
-        g.setObject(2,2, BoatDirection.Vertical, 4,croiseur);
-        g.setObject(5,6, BoatDirection.Horizontal, 3,contre_torpilleur);
-        g.setObject(8,1, BoatDirection.Vertical, 3,sous_marin);
-        g.setObject(1,9, BoatDirection.Horizontal, 2,torpilleur);*/
+        g.setBoat(0,0, porte_avion);
+        g.setBoat(2,2, croiseur);
+        g.setBoat(5,6,contre_torpilleur);
+        g.setBoat(8,1, sous_marin);
+        g.setBoat(1,9, torpilleur);
     }
 
     //PARTIE OBSERVER
 
     @Override
-    public void addObserver(Observer observer) {
+    public void addObserver(GridObserver observer) {
         observers.add(observer);
     }
 
     @Override
-    public void removeObserver(Observer observer) {
+    public void removeObserver(GridObserver observer) {
         observers.add(observer);
     }
 
     @Override
     public void notifyObservers() {
-        for (Observer o : observers) o.update();
+        for (GridObserver o : observers) o.update(this);
     }
 }

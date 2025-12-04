@@ -1,6 +1,6 @@
 package bataille_navale.views;
 
-import bataille_navale.models.Observer;
+import bataille_navale.models.GridObserver;
 import bataille_navale.models.boat.Boat;
 import bataille_navale.models.items.traps.Trap;
 import bataille_navale.models.map.Grid;
@@ -8,37 +8,35 @@ import bataille_navale.models.map.Grid;
 import javax.swing.*;
 import java.awt.*;
 
-public class afficherGrille extends JFrame implements Observer {
+public class afficherGrille extends JFrame implements GridObserver {
 
     private JLabel batailleNavale;
     private JButton[][] afficheGrille;
+    private JButton[][] afficheGrille2;
     private Grid grid;
+    private Grid grid2;
 
-    public afficherGrille(Grid grid) {
+    public afficherGrille(Grid g1 ,Grid g2) {
+
+        this.grid = g1;
+        this.grid2 = g2;
+
         grid.addObserver(this);
-        this.grid = grid;
+        grid2.addObserver(this);
 
-        Object[][] grille = grid.getGrille();
-        int rows = grille.length;
-        int cols = grille[0].length;
+        // Boutons
+        afficheGrille = createButtonGrid(g1);
+        afficheGrille2 = createButtonGrid(g2);
 
-        JPanel gridPanel = new JPanel();
-        gridPanel.setLayout(new GridLayout(rows, cols));
+        // Panels
+        JPanel panel1 = createGridPanel(afficheGrille);
+        JPanel panel2 = createGridPanel(afficheGrille2);
 
-        afficheGrille = new JButton[rows][cols];
+        // Layout final
+        setLayout(new GridLayout(1, 2));  // deux grilles côte à côte
 
-        for (int y = 0; y < rows; y++) {
-            for (int x = 0; x < cols; x++) {
-
-                JButton btn = new JButton();
-                btn.setPreferredSize(new Dimension(40, 40));
-
-                afficheGrille[y][x] = btn;
-                gridPanel.add(btn);
-            }
-        }
-
-        add(gridPanel);
+        add(panel1);
+        add(panel2);
 
         pack();
         setLocationRelativeTo(null);
@@ -46,19 +44,65 @@ public class afficherGrille extends JFrame implements Observer {
         setSize(1280, 720);
         setVisible(true);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
+        update(grid);
+        update(grid2);
     }
 
     @Override
-    public void update() {
-        for (int y = 0; y < grid.getGrille().length; y++) {
-            for (int x = 0; x < grid.getGrille()[0].length; x++) {
+    public void update(Grid grille) {
+        if(grille == this.grid){
+            updateGrid(this.grid,this.afficheGrille);
+        }
+        else{
+            updateGrid(this.grid2,this.afficheGrille2);
+        }
 
-                Object obj = grid.getCase(x, y);
+    }
 
-                if (obj == null) afficheGrille[y][x].setBackground(Color.BLUE);
-                else if (obj instanceof Boat) afficheGrille[y][x].setBackground(Color.GRAY);
-                else if (obj instanceof Trap) afficheGrille[y][x].setBackground(Color.ORANGE);
+    public void updateGrid(Grid grille, JButton[][]boutons){
+        for (int y = 0; y < grille.getGrille().length; y++) {
+            for (int x = 0; x < grille.getGrille()[0].length; x++) {
+
+                Object obj = grille.getCase(x, y);
+
+                if (obj == null) boutons[y][x].setBackground(Color.BLUE);
+                else if (obj instanceof Boat) boutons[y][x].setBackground(Color.GRAY);
+                else if (obj instanceof Trap) boutons[y][x].setBackground(Color.ORANGE);
             }
         }
+    }
+
+
+    private JButton[][] createButtonGrid(Grid grid) {
+        int rows = grid.getGrille().length;
+        int cols = grid.getGrille()[0].length;
+
+        JButton[][] buttons = new JButton[rows][cols];
+
+        for (int y = 0; y < rows; y++) {
+            for (int x = 0; x < cols; x++) {
+                JButton btn = new JButton();
+                btn.setPreferredSize(new Dimension(40, 40));
+                buttons[y][x] = btn;
+            }
+        }
+
+        return buttons;
+    }
+
+    private JPanel createGridPanel(JButton[][] buttons) {
+        int rows = buttons.length;
+        int cols = buttons[0].length;
+
+        JPanel panel = new JPanel();
+        panel.setLayout(new GridLayout(rows, cols));
+
+        for (int y = 0; y < rows; y++) {
+            for (int x = 0; x < cols; x++) {
+                panel.add(buttons[y][x]);
+            }
+        }
+
+        return panel;
     }
 }

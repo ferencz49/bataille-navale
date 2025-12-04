@@ -14,13 +14,15 @@ public class Main {
     public static void main(String[] args) {
 
         Grid g = new Grid();
+        Grid g2 = new Grid();
 
-        afficherGrille a = new afficherGrille(g);
+
+        afficherGrille a = new afficherGrille(g,g2);
 
         Boat b = Boat.createContreTorpilleur(BoatDirection.Vertical);
         g.setBoat(5, 5, b);
 
         Boat b2 = Boat.createPorteAvion(BoatDirection.Horizontal);
-        g.setBoat(2, 2, b2);
+        g2.setBoat(2, 2, b2);
     }
 }
