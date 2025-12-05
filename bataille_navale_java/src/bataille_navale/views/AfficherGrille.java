@@ -130,7 +130,7 @@ public class AfficherGrille extends JFrame implements GridObserver {
         for (int y = 0; y < rows; y++) {
             JLabel label = new JLabel(chiffres_indice[y], SwingConstants.CENTER);
             panel.add(label);
-            for (int x = 1; x < cols; x++) {
+            for (int x = 0; x < cols; x++) {
                 panel.add(buttons[y][x]);
             }
         }
@@ -142,6 +142,7 @@ public class AfficherGrille extends JFrame implements GridObserver {
         JPanel jpanel= new JPanel();
         jpanel.setLayout(new BoxLayout(jpanel,BoxLayout.Y_AXIS));
 
+        utiliserAttaque.setPreferredSize(new Dimension(40,20));
 
         jpanel.add(utiliserAttaque);
         jpanel.add(utiliserBombe);

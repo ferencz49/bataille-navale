@@ -7,11 +7,12 @@ import bataille_navale.models.boat.BoatDirection;
 import bataille_navale.models.items.traps.Tornado;
 import bataille_navale.models.map.Grid;
 import bataille_navale.views.AfficherGrille;
+import bataille_navale.views.GameSettings;
 
 public class Main {
     public static void main(String[] args) {
 
-        Grid g = new Grid();
+        /*Grid g = new Grid();
         Grid g2 = new Grid();
 
 
@@ -24,6 +25,7 @@ public class Main {
         g.setTrap(8,8,t);
 
         Boat b2 = Boat.createPorteAvion(BoatDirection.Horizontal);
-        g2.setBoat(2, 2, b2);
+        g2.setBoat(2, 2, b2);*/
+        GameSettings g = new GameSettings();
     }
 }
