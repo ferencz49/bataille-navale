@@ -4,12 +4,9 @@
 
 import bataille_navale.models.boat.Boat;
 import bataille_navale.models.boat.BoatDirection;
-import bataille_navale.models.boat.Types;
 import bataille_navale.models.items.traps.Tornado;
 import bataille_navale.models.map.Grid;
-import bataille_navale.models.items.weapons.Bomb;
-import bataille_navale.views.GameSettings;
-import bataille_navale.views.afficherGrille;
+import bataille_navale.views.AfficherGrille;
 
 public class Main {
     public static void main(String[] args) {
@@ -18,7 +15,7 @@ public class Main {
         Grid g2 = new Grid();
 
 
-        afficherGrille a = new afficherGrille(g,g2);
+        AfficherGrille a = new AfficherGrille(g,g2);
 
         Boat b = Boat.createContreTorpilleur(BoatDirection.Vertical);
         g.setBoat(5, 5, b);

@@ -9,16 +9,18 @@ import bataille_navale.models.map.Grid;
 import javax.swing.*;
 import java.awt.*;
 
-public class afficherGrille extends JFrame implements GridObserver {
+public class AfficherGrille extends JFrame implements GridObserver {
 
     private JLabel grilleJoueur = new JLabel("Votre grille");
     private JLabel grilleOrdinateur = new JLabel("Grille de l'ordinateur");
     private JButton[][] afficheGrille;
     private JButton[][] afficheGrille2;
+    private JButton utiliserBombe = new JButton("utiliser votre bombe");
+    private JButton utiliserAttaque = new JButton("utiliser votre attaque de base");
     private Grid grid;
     private Grid grid2;
 
-    public afficherGrille(Grid g1 ,Grid g2) {
+    public AfficherGrille(Grid g1 , Grid g2) {
 
         this.grid = g1;
         this.grid2 = g2;
@@ -30,13 +32,17 @@ public class afficherGrille extends JFrame implements GridObserver {
         afficheGrille = createButtonGrid(g1);
         afficheGrille2 = createButtonGrid(g2);
 
-        // Panels
+        // Grille joueur
         JPanel panel1 = new JPanel();
         panel1.setLayout(new BorderLayout());
         grilleJoueur.setHorizontalAlignment(SwingConstants.CENTER);
         panel1.add(grilleJoueur,BorderLayout.NORTH);
         panel1.add(createGridPanel(afficheGrille), BorderLayout.CENTER);
+        panel1.add(createActionButtons(), BorderLayout.WEST );
 
+
+
+        //grille ordinateur
         JPanel panel2 = new JPanel();
         panel2.setLayout(new BorderLayout());
         grilleOrdinateur.setHorizontalAlignment(SwingConstants.CENTER);
@@ -130,5 +136,16 @@ public class afficherGrille extends JFrame implements GridObserver {
         }
 
         return panel;
+    }
+
+    private JPanel createActionButtons(){
+        JPanel jpanel= new JPanel();
+        jpanel.setLayout(new BoxLayout(jpanel,BoxLayout.Y_AXIS));
+
+
+        jpanel.add(utiliserAttaque);
+        jpanel.add(utiliserBombe);
+
+        return jpanel;
     }
 }
