@@ -12,7 +12,7 @@ package bataille_navale{
 
         class EcranDePlacement{}
 
-        class EcranPrincipal{}
+        class EcranPrincipal implements bataille_navale.models.GridObserver
 
         class EcranDeFin{}
     }
@@ -83,7 +83,7 @@ package bataille_navale{
 
         package map{
 
-            class Map{
+            class Map implements bataille_navale.models.GridObservable{
                 - height : Integer
                 - width : Integer
                 + <<create>> Map()
@@ -160,7 +160,15 @@ package bataille_navale{
 
             }
         }
+        interface GridObservable{
+            + addObserver(observer : GridObserver)
+            + removeObserver(observer : GridObserver)
+            + notifyObservers()
+        }
 
+        interface GridObserver{
+            + update(grid : Grid)
+        }
 
         class Game{
             + creerPartie()

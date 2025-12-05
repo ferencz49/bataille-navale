@@ -3,6 +3,7 @@ package bataille_navale.views;
 import bataille_navale.models.GridObserver;
 import bataille_navale.models.boat.Boat;
 import bataille_navale.models.items.traps.Trap;
+import bataille_navale.models.items.weapons.Weapon;
 import bataille_navale.models.map.Grid;
 
 import javax.swing.*;
@@ -10,7 +11,8 @@ import java.awt.*;
 
 public class afficherGrille extends JFrame implements GridObserver {
 
-    private JLabel batailleNavale;
+    private JLabel grilleJoueur = new JLabel("Votre grille");
+    private JLabel grilleOrdinateur = new JLabel("Grille de l'ordinateur");
     private JButton[][] afficheGrille;
     private JButton[][] afficheGrille2;
     private Grid grid;
@@ -29,11 +31,23 @@ public class afficherGrille extends JFrame implements GridObserver {
         afficheGrille2 = createButtonGrid(g2);
 
         // Panels
-        JPanel panel1 = createGridPanel(afficheGrille);
-        JPanel panel2 = createGridPanel(afficheGrille2);
+        JPanel panel1 = new JPanel();
+        panel1.setLayout(new BorderLayout());
+        grilleJoueur.setHorizontalAlignment(SwingConstants.CENTER);
+        panel1.add(grilleJoueur,BorderLayout.NORTH);
+        panel1.add(createGridPanel(afficheGrille), BorderLayout.CENTER);
+
+        JPanel panel2 = new JPanel();
+        panel2.setLayout(new BorderLayout());
+        grilleOrdinateur.setHorizontalAlignment(SwingConstants.CENTER);
+        panel2.add(grilleOrdinateur, BorderLayout.NORTH);
+        panel2.add(createGridPanel(afficheGrille2),BorderLayout.CENTER);
+
+
+
 
         // Layout final
-        setLayout(new GridLayout(1, 2));  // deux grilles côte à côte
+        setLayout(new GridLayout(1, 2));
 
         add(panel1);
         add(panel2);
@@ -68,6 +82,7 @@ public class afficherGrille extends JFrame implements GridObserver {
                 if (obj == null) boutons[y][x].setBackground(Color.BLUE);
                 else if (obj instanceof Boat) boutons[y][x].setBackground(Color.GRAY);
                 else if (obj instanceof Trap) boutons[y][x].setBackground(Color.ORANGE);
+                else if (obj instanceof Weapon) boutons[y][x].setBackground(Color.BLACK);
             }
         }
     }
@@ -94,11 +109,22 @@ public class afficherGrille extends JFrame implements GridObserver {
         int rows = buttons.length;
         int cols = buttons[0].length;
 
+        String[] chiffres_indice = {"0","1","2","3","4","5","6","7","8","9"};
+        String[] lettres_indice = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J"};
+
+
         JPanel panel = new JPanel();
-        panel.setLayout(new GridLayout(rows, cols));
+        panel.setLayout(new GridLayout(rows+1, cols+1));
+
+        for(int i = 0; i < cols; i++){
+            JLabel label= new JLabel(lettres_indice[i], SwingConstants.CENTER);
+            panel.add(label);
+        }
 
         for (int y = 0; y < rows; y++) {
-            for (int x = 0; x < cols; x++) {
+            JLabel label = new JLabel(chiffres_indice[y], SwingConstants.CENTER);
+            panel.add(label);
+            for (int x = 1; x < cols; x++) {
                 panel.add(buttons[y][x]);
             }
         }
