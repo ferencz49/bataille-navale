@@ -8,12 +8,13 @@ import bataille_navale.models.items.traps.Tornado;
 import bataille_navale.models.map.Grid;
 import bataille_navale.views.AfficherGrille;
 import bataille_navale.views.GameSettings;
+import bataille_navale.views.ObjectsPlacement;
 
 public class Main {
     public static void main(String[] args) {
 
-        /*Grid g = new Grid();
-        Grid g2 = new Grid();
+        Grid g = new Grid();
+        /*Grid g2 = new Grid();
 
 
         AfficherGrille a = new AfficherGrille(g,g2);
@@ -26,6 +27,7 @@ public class Main {
 
         Boat b2 = Boat.createPorteAvion(BoatDirection.Horizontal);
         g2.setBoat(2, 2, b2);*/
-        GameSettings g = new GameSettings();
+        //GameSettings g = new GameSettings();
+        ObjectsPlacement o = new ObjectsPlacement(g);
     }
 }
