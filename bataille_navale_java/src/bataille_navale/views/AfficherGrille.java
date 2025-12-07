@@ -149,4 +149,12 @@ public class AfficherGrille extends JFrame implements GridObserver {
 
         return jpanel;
     }
+
+    public JButton getUtiliserBombe(){
+        return this.utiliserBombe;
+    }
+
+    public JButton getUtiliserAttaque(){
+        return this.utiliserAttaque;
+    }
 }

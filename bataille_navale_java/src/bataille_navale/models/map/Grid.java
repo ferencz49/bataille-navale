@@ -53,7 +53,7 @@ public class Grid implements GridObservable {
         return true;
     }
 
-        public boolean setTrap(int x, int y, Trap trap ){
+    public boolean setTrap(int x, int y, Trap trap ){
             if(x >= grille.length || y >= grille[0].length){
                 return false;
             }
@@ -80,11 +80,18 @@ public class Grid implements GridObservable {
         notifyObservers();
     }
 
+    public void basicAttack(int x, int y){
+        if(this.grille[x][y] != null){
+            Object o = grille[x][y];
+            o.onHit(this, x, y);
+        }
+    }
+
     public void modifyCoordinates(){
 
     }
 
-    public void setBoats1(Grid g){
+    public void setBoats1(){
         Boat porte_avion = Boat.createPorteAvion(BoatDirection.Horizontal);
         Boat croiseur = Boat.createCroiseur(BoatDirection.Vertical);
         Boat contre_torpilleur = Boat.createContreTorpilleur(BoatDirection.Horizontal);
@@ -92,11 +99,11 @@ public class Grid implements GridObservable {
         Boat torpilleur = Boat.createTorpilleur(BoatDirection.Horizontal);
 
 
-        g.setBoat(0,0, porte_avion);
-        g.setBoat(2,2, croiseur);
-        g.setBoat(5,6,contre_torpilleur);
-        g.setBoat(8,1, sous_marin);
-        g.setBoat(1,9, torpilleur);
+        this.setBoat(0,0, porte_avion);
+        this.setBoat(2,2, croiseur);
+        this.setBoat(5,6,contre_torpilleur);
+        this.setBoat(8,1, sous_marin);
+        this.setBoat(1,9, torpilleur);
     }
 
     //PARTIE OBSERVER

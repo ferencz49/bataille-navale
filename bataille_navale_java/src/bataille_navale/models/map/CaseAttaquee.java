@@ -1,4 +1,4 @@
 package bataille_navale.models.map;
 
-public class CaseAttaquee {
+public class CaseAttaquee extends Object {
 }
