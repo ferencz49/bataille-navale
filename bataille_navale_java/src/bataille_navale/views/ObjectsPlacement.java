@@ -8,18 +8,25 @@ import java.awt.*;
 public class ObjectsPlacement extends JFrame {
     private JLabel grilleJoueur;
     private JButton[][] afficheGrille;
+    private JButton lancerPartie;
     private Grid grid;
 
 
 
-    public ObjectsPlacement(Grid g){
-        this.grid = g;
+    public ObjectsPlacement(Grid playerGrid, Grid computerGrid){
+        this.grid = playerGrid;
 
         grilleJoueur = new JLabel("Placez vos bateaux sur votre grille");
         JPanel layout_principal = new JPanel(new BorderLayout());
         layout_principal.add(grilleJoueur, BorderLayout.NORTH);
         afficheGrille = createButtonGrid();
         layout_principal.add(createGridPanel(afficheGrille), BorderLayout.CENTER);
+        lancerPartie = new JButton("Lancer la partie");
+        lancerPartie.addActionListener(e-> {
+            new AfficherGrille(playerGrid,computerGrid);
+            this.dispose();
+        });
+        layout_principal.add(lancerPartie, BorderLayout.SOUTH);
 
         add(layout_principal);
         setTitle("Placement des objets");

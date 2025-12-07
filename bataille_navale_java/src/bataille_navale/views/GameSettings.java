@@ -1,6 +1,8 @@
 package bataille_navale.views;
 
 
+import bataille_navale.models.map.Grid;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -8,8 +10,13 @@ public class GameSettings extends JFrame {
 
 
 
-    public GameSettings(){
+    public GameSettings(Grid playerGrid, Grid computerGrid){
         JButton btn_fin_config = new JButton("Passer au placement des objets");
+        btn_fin_config.addActionListener(e -> {
+            new ObjectsPlacement(playerGrid, computerGrid);
+            this.dispose();
+        });
+
         JCheckBox ckb_mode_ile = new JCheckBox("mode ile");
         JLabel lbl_nb_porte_avions = new JLabel("Nombre de porte avions:");
         JSpinner spn_nb_porte_avions = new JSpinner();

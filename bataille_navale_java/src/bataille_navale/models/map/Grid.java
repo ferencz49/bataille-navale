@@ -34,6 +34,14 @@ public class Grid implements GridObservable {
 
     public Object getCase(int x, int y){return this.grille[x][y];}
 
+    public int getHeight(){
+        return this.height;
+    }
+
+    public int getWidth(){
+        return this.width;
+    }
+
     public boolean setBoat(int x, int y, Boat boat){
         if(x > grille.length - boat.getSize()){
             return false;
@@ -71,10 +79,10 @@ public class Grid implements GridObservable {
     public void removeObject(int x, int y, BoatDirection orientation, int size, Object o){
         for(int i = 0; i < size; i++){
             if(orientation == BoatDirection.Vertical){
-                this.grille[x-i][y] = null;
+                this.grille[x][y-i] = null;
             }
             else{
-                this.grille[x][y+i] = null;
+                this.grille[x+i][y] = null;
             }
         }
         notifyObservers();
@@ -115,7 +123,7 @@ public class Grid implements GridObservable {
 
     @Override
     public void removeObserver(GridObserver observer) {
-        observers.add(observer);
+        observers.remove(observer);
     }
 
     @Override

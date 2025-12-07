@@ -49,13 +49,10 @@ public class Boat extends Object {
 
     @Override
     public void onHit(Grid grid, int x, int y){
-        if(this.getHits() != this.getSize()){
-            this.increaseHits();
-        }
-        else{
+        this.increaseHits();
+        if(this.getHits() == this.getSize()){
             grid.removeObject(x,y,this.boatDirection,this.getSize(),this);
         }
-
     }
 
     public int getHits(){

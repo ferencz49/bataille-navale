@@ -118,18 +118,25 @@ public class AfficherGrille extends JFrame implements GridObserver {
         String[] chiffres_indice = {"0","1","2","3","4","5","6","7","8","9"};
         String[] lettres_indice = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J"};
 
-
         JPanel panel = new JPanel();
-        panel.setLayout(new GridLayout(rows+1, cols+1));
+        panel.setLayout(new GridLayout(rows + 1, cols + 1));
 
-        for(int i = 0; i < cols; i++){
-            JLabel label= new JLabel(lettres_indice[i], SwingConstants.CENTER);
+        // Case vide en haut à gauche
+        panel.add(new JLabel(""));
+
+        // Ajouter A B C D ...
+        for (int i = 0; i < cols; i++) {
+            JLabel label = new JLabel(lettres_indice[i], SwingConstants.CENTER);
             panel.add(label);
         }
 
+        // Ajouter les lignes
         for (int y = 0; y < rows; y++) {
+            // Numéro de ligne
             JLabel label = new JLabel(chiffres_indice[y], SwingConstants.CENTER);
             panel.add(label);
+
+            // Boutons
             for (int x = 0; x < cols; x++) {
                 panel.add(buttons[y][x]);
             }
@@ -157,4 +164,6 @@ public class AfficherGrille extends JFrame implements GridObserver {
     public JButton getUtiliserAttaque(){
         return this.utiliserAttaque;
     }
+
+    public JButton[][] getAfficheGrilleEnnemi() { return afficheGrille2; }
 }
