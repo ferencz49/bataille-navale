@@ -2,6 +2,7 @@ package bataille_navale.tests;
 
 import bataille_navale.models.boat.Boat;
 import bataille_navale.models.boat.BoatDirection;
+import bataille_navale.models.boat.BoatFactory;
 import bataille_navale.models.boat.Types;
 import bataille_navale.models.map.Grid;
 import org.junit.jupiter.api.Test;
@@ -16,7 +17,7 @@ class GrilleTest {
 
     @Test
     void setBoat() {
-        Boat b = Boat.createCroiseur(BoatDirection.Vertical);
+        Boat b = BoatFactory.createCroiseur(BoatDirection.Vertical);
         Grid g = new Grid();
 
         boolean result = g.setBoat(5, 6, b);

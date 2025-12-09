@@ -2,6 +2,7 @@ package bataille_navale.tests;
 
 import bataille_navale.models.boat.Boat;
 import bataille_navale.models.boat.BoatDirection;
+import bataille_navale.models.boat.BoatFactory;
 import bataille_navale.models.boat.Types;
 import bataille_navale.models.map.Grid;
 import bataille_navale.models.items.weapons.Bomb;
@@ -32,7 +33,7 @@ class BombTest {
         //Dans ce test le bateau est touché 2 fois par la bombe, sa taille est 3 donc il n'est pas coulé
         Grid g = new Grid();
 
-        Boat bateau = Boat.createContreTorpilleur(BoatDirection.Horizontal);
+        Boat bateau = BoatFactory.createContreTorpilleur(BoatDirection.Horizontal);
 
         Bomb bomb = new Bomb(1);
 

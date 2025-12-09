@@ -5,6 +5,7 @@ import bataille_navale.models.GridObservable;
 import bataille_navale.models.GridObserver;
 import bataille_navale.models.boat.Boat;
 import bataille_navale.models.boat.BoatDirection;
+import bataille_navale.models.boat.BoatFactory;
 import bataille_navale.models.items.traps.Trap;
 
 import java.util.ArrayList;
@@ -100,11 +101,11 @@ public class Grid implements GridObservable {
     }
 
     public void setBoats1(){
-        Boat porte_avion = Boat.createPorteAvion(BoatDirection.Horizontal);
-        Boat croiseur = Boat.createCroiseur(BoatDirection.Vertical);
-        Boat contre_torpilleur = Boat.createContreTorpilleur(BoatDirection.Horizontal);
-        Boat sous_marin = Boat.createSousMarin(BoatDirection.Vertical);
-        Boat torpilleur = Boat.createTorpilleur(BoatDirection.Horizontal);
+        Boat porte_avion = BoatFactory.createPorteAvion(BoatDirection.Horizontal);
+        Boat croiseur = BoatFactory.createCroiseur(BoatDirection.Vertical);
+        Boat contre_torpilleur = BoatFactory.createContreTorpilleur(BoatDirection.Horizontal);
+        Boat sous_marin = BoatFactory.createSousMarin(BoatDirection.Vertical);
+        Boat torpilleur = BoatFactory.createTorpilleur(BoatDirection.Horizontal);
 
 
         this.setBoat(0,0, porte_avion);

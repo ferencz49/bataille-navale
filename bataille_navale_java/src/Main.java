@@ -6,6 +6,7 @@ import bataille_navale.controllers.gameController.GameController;
 import bataille_navale.controllers.players.HumanPlayer;
 import bataille_navale.models.boat.Boat;
 import bataille_navale.models.boat.BoatDirection;
+import bataille_navale.models.boat.BoatFactory;
 import bataille_navale.models.items.traps.Tornado;
 import bataille_navale.models.map.Grid;
 import bataille_navale.views.AfficherGrille;
@@ -19,10 +20,11 @@ public class Main {
         Grid playerGrid = new Grid(10, 10);
         Grid enemyGrid = new Grid(10, 10);
 
-        Boat b = Boat.createContreTorpilleur(BoatDirection.Vertical);
+
+        Boat b = BoatFactory.createContreTorpilleur(BoatDirection.Vertical);
         enemyGrid.setBoat(1,1,b);
 
-        Boat b2 = Boat.createSousMarin(BoatDirection.Horizontal);
+        Boat b2 = BoatFactory.createSousMarin(BoatDirection.Horizontal);
         enemyGrid.setBoat(5,5,b2);
 
         // Créer un HumanPlayer avec sa grille + grille ennemie
