@@ -202,6 +202,8 @@ Bomb .> Map : <<uses>>
 Boat "1" *--> "1\n-typeBateau" BoatType: est \n >
 Boat "1" *--> "1\n-orientation" BoatDirection: s'oriente \n >
 
+BoatFactory ..> Boat : <<uses>>
+
 
 Map "1..*" *--> "1..*\n-listObject" Object: contient \n >
 

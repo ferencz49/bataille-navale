@@ -52,10 +52,12 @@ public class Grid implements GridObservable {
         }
         for(int i = 0; i < boat.getSize(); i++){
             if(boat.getBoatDirection() == BoatDirection.Vertical){
-                this.grille[x][y+i] = boat; // si true alors le bateau est placé verticalement, on place de haut en bas
+                this.grille[x][y+i] = boat;// si true alors le bateau est placé verticalement, on place de haut en bas
+                boat.setBoatCoordinates(x,y+i);
             }
             else{
                 this.grille[x+i][y] = boat; // si false, on place de gauche à droite
+                boat.setBoatCoordinates(x+i,y);
             }
         }
         notifyObservers();
@@ -77,14 +79,12 @@ public class Grid implements GridObservable {
             return true;
         }
 
-    public void removeObject(int x, int y, BoatDirection orientation, int size, Object o){
-        for(int i = 0; i < size; i++){
-            if(orientation == BoatDirection.Vertical){
-                this.grille[x][y-i] = null;
-            }
-            else{
-                this.grille[x+i][y] = null;
-            }
+    public void removeBoat(Boat boat){
+        for(int i = 0; i < boat.getBoatSize();i++){
+            int x = boat.getBoatCoordinates().get(i).getX();
+            int y = boat.getBoatCoordinates().get(i).getY();
+            this.grille[x][y] = null;
+
         }
         notifyObservers();
     }

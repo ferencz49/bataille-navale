@@ -15,6 +15,7 @@ public class Boat extends Object {
         super(size);
         this.type = type;
         this.boatDirection = direction;
+        this.coordinates = new ArrayList<>();
     }
 
     public int getBoatSize()
@@ -34,7 +35,7 @@ public class Boat extends Object {
     public void onHit(Grid grid, int x, int y){
         this.increaseHits();
         if(this.getHits() == this.getSize()){
-            grid.removeObject(x,y,this.boatDirection,this.getSize(),this);
+            grid.removeBoat(this);
         }
     }
 
@@ -44,5 +45,13 @@ public class Boat extends Object {
 
     public BoatDirection getBoatDirection(){
         return this.boatDirection;
+    }
+
+    public ArrayList<BoatCoordinates> getBoatCoordinates(){
+        return this.coordinates;
+    }
+
+    public void setBoatCoordinates(int x, int y){
+        this.coordinates.add(new BoatCoordinates(x,y));
     }
 }
