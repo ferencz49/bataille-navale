@@ -38,6 +38,5 @@ public class Main {
 
         while(1 == 1 )
             System.out.println(b2.getHits());
-
     }
 }
