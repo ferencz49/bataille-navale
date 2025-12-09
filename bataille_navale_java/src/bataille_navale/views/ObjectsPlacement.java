@@ -24,6 +24,7 @@ public class ObjectsPlacement extends JFrame {
         lancerPartie = new JButton("Lancer la partie");
         lancerPartie.addActionListener(e-> {
             new AfficherGrille(playerGrid,computerGrid);
+            computerGrid.setBoats1();
             this.dispose();
         });
         layout_principal.add(lancerPartie, BorderLayout.SOUTH);
