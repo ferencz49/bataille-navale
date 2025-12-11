@@ -1,5 +1,6 @@
 package bataille_navale.tests;
 
+import bataille_navale.controllers.players.HumanPlayer;
 import bataille_navale.models.boat.Boat;
 import bataille_navale.models.boat.BoatDirection;
 import bataille_navale.models.boat.BoatFactory;
@@ -31,15 +32,17 @@ class BombTest {
     void useBomb() {
 
         //Dans ce test le bateau est touché 2 fois par la bombe, sa taille est 3 donc il n'est pas coulé
-        Grid g = new Grid();
+        Grid grid_player1 = new Grid();
+        Grid grid_player2 = new Grid();
+        HumanPlayer playerTest = new HumanPlayer(grid_player1, grid_player2);
 
         Boat bateau = BoatFactory.createContreTorpilleur(BoatDirection.Horizontal);
 
         Bomb bomb = new Bomb(1);
 
-        g.setBoat(5,5, bateau);
+        grid_player1.setBoat(5,5, bateau);
 
-        bomb.useBomb(5,5, g);
+        bomb.useWeapon(playerTest, 5,5);
 
         boolean result = bateau.isSunk();
         System.out.println(bateau.getHits());
