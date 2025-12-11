@@ -1,6 +1,8 @@
 package bataille_navale.controllers.players;
 
 import bataille_navale.models.map.Grid;
+import java.util.Random;
+
 
 public class Computer extends Player{
 
@@ -10,5 +12,13 @@ public class Computer extends Player{
 
     public void playerTurn(){
     }
+
+    public void basicAttack(Player player){
+        Random rand = new Random();
+        int x = rand.nextInt(9);
+        int y = rand.nextInt(9);
+        this.enemyGrid.basicAttack(player, x, y);
+    }
+
 
 }

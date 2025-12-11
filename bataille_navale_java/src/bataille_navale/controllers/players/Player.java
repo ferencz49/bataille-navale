@@ -5,11 +5,14 @@ import bataille_navale.models.map.Grid;
 
 public  abstract class Player {
     private int nbBoats;
+    private int nbBoatsSunk;
+
     protected Grid playerGrid;
     protected Grid enemyGrid;
 
     public Player(Grid playerGrid, Grid ennemyGrid){
-        this.nbBoats = 5;
+        this.nbBoats = 0;
+        this.nbBoatsSunk = 0;
         this.playerGrid = playerGrid;
         this.enemyGrid = ennemyGrid;
     }
@@ -32,6 +35,8 @@ public  abstract class Player {
 
     abstract public void playerTurn();
 
-    public void removeBoat(Boat boat) {
+    public boolean allBoatsSunk(){
+        return this.nbBoats == this.nbBoatsSunk;
     }
+
 }
