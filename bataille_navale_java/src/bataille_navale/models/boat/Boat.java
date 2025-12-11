@@ -36,7 +36,7 @@ public class Boat extends Object {
     public void onHit(Player player, int x, int y){
         this.increaseHits();
         if(this.getHits() == this.getSize()){
-            player.getGrid().removeBoat(this);
+            player.getEnemyGrid().removeBoat(this);
         }
     }
 
