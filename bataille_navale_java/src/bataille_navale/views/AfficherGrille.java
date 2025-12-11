@@ -4,6 +4,7 @@ import bataille_navale.models.GridObserver;
 import bataille_navale.models.boat.Boat;
 import bataille_navale.models.items.traps.Trap;
 import bataille_navale.models.items.weapons.Weapon;
+import bataille_navale.models.map.BateauCoule;
 import bataille_navale.models.map.Grid;
 
 import javax.swing.*;
@@ -71,22 +72,38 @@ public class AfficherGrille extends JFrame implements GridObserver {
     @Override
     public void update(Grid grille) {
         if(grille == this.grid){
-            updateGrid(this.grid,this.afficheGrille);
+            updatePlayerGrid(this.grid,this.afficheGrille);
         }
         else{
-            updateGrid(this.grid2,this.afficheGrille2);
+            updateComputerGrid(this.grid2,this.afficheGrille2);
         }
 
     }
 
-    public void updateGrid(Grid grille, JButton[][]boutons){
+    public void updatePlayerGrid(Grid grille, JButton[][]boutons){
         for (int y = 0; y < grille.getGrille().length; y++) {
             for (int x = 0; x < grille.getGrille()[0].length; x++) {
 
                 Object obj = grille.getCase(x, y);
 
                 if (obj == null) boutons[y][x].setBackground(Color.BLUE);
+                else if (obj instanceof BateauCoule) boutons[y][x].setBackground(Color.red);
                 else if (obj instanceof Boat) boutons[y][x].setBackground(Color.GRAY);
+                else if (obj instanceof Trap) boutons[y][x].setBackground(Color.ORANGE);
+                else if (obj instanceof Weapon) boutons[y][x].setBackground(Color.BLACK);
+            }
+        }
+    }
+
+    public void updateComputerGrid(Grid grille, JButton[][]boutons){
+        for (int y = 0; y < grille.getGrille().length; y++) {
+            for (int x = 0; x < grille.getGrille()[0].length; x++) {
+
+                Object obj = grille.getCase(x, y);
+
+                if (obj == null) boutons[y][x].setBackground(Color.BLUE);
+                else if (obj instanceof BateauCoule) boutons[y][x].setBackground(Color.red);
+                else if (obj instanceof Boat) boutons[y][x].setBackground(Color.BLUE);
                 else if (obj instanceof Trap) boutons[y][x].setBackground(Color.ORANGE);
                 else if (obj instanceof Weapon) boutons[y][x].setBackground(Color.BLACK);
             }
