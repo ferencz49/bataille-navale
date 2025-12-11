@@ -1,5 +1,6 @@
 package bataille_navale;
 
+import bataille_navale.controllers.players.Player;
 import bataille_navale.models.map.Grid;
 
 public abstract class Object {
@@ -13,5 +14,5 @@ public abstract class Object {
         return this.size;
     }
 
-    public void onHit(Grid grid, int x, int y){}
+    abstract public void onHit(Player player, int x, int y);
 }

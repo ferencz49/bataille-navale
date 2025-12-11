@@ -3,7 +3,7 @@ package bataille_navale.models.items;
 
 import bataille_navale.Object;
 
-public class Item extends Object {
+abstract public class Item extends Object {
     private int capacity;
     public Item(int capacity){
         super(1);

@@ -1,6 +1,7 @@
 package bataille_navale.models.map;
 
 import bataille_navale.Object;
+import bataille_navale.controllers.players.Player;
 import bataille_navale.models.GridObservable;
 import bataille_navale.models.GridObserver;
 import bataille_navale.models.boat.Boat;
@@ -89,10 +90,10 @@ public class Grid implements GridObservable {
         notifyObservers();
     }
 
-    public void basicAttack(int x, int y){
+    public void basicAttack(Player player, int x, int y){
         if(this.grille[x][y] != null){
             Object o = grille[x][y];
-            o.onHit(this, x, y);
+            o.onHit(player, x, y);
         }
     }
 

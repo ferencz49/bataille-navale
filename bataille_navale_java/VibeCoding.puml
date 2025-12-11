@@ -21,11 +21,13 @@ package models
             + isOnIsland(coordinates : Coordinates) : boolean
         }
 
+        /'
         class Case {
             - m_indexSegment : Integer
             + <<create>> Case(object : PlacedObject, index : Integer)
             + receiveShoot(target : Coordinates) : ShootResult
         }
+        '/
 
         /'
         class Coordinates{
@@ -54,7 +56,6 @@ package models
 
         class Boat extends PlacedObject
         {
-            -m_hit : Boolean[*]
             + <<create>> Boat(size: Integer, hit : Boolean[*], type : BoatType)
             + receiveShoot(index : Integer) : ShootResult
             + isSunk() : boolean
@@ -161,11 +162,13 @@ package view {
     class EcranDeFin {}
 }
 
-Case "1" *--> "1\n-m_object" PlacedObject: contains \n >
+/'Case "1" *--> "1\n-m_object" PlacedObject: contains \n >'/
+
 Boat "1" *--> "1\n-m_type" BoatType: is \n >
 PlacedObject .> ShootResult : <<use>>
 Weapon .> Map : <<use>>
 Map .> BoatDirection : <<use>>
+Map "1..*" *--> "1..*\n-m_grid" PlacedObject: has \n >
 Player "1" *--> "1\n-m_grid" Map: has \n >
 Player "1..*" *--> "1..*\n-m_listWeapons" Weapon: has \n >
 Island "1" *--> "1\n-m_reward" Reward : contains \n >

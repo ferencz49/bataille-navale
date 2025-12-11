@@ -26,7 +26,7 @@ public class Sonar extends Weapon{
         this.submarineIsAlive = submarineIsAlive;
     }
 
-    public int useSonar(int x, int y, Grid g){
+    public int useWeapons(int x, int y, Grid g){
         int nbBoats = 0;
         for(int j = y-1; j < y+2; j++){
             for(int i = x-1; i < x+2;i++){

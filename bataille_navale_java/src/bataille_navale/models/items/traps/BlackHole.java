@@ -1,5 +1,6 @@
 package bataille_navale.models.items.traps;
 
+import bataille_navale.controllers.players.Player;
 import bataille_navale.models.items.weapons.Bomb;
 import bataille_navale.models.map.Grid;
 
@@ -19,8 +20,8 @@ public class BlackHole extends Trap{
     }
 
     @Override
-    public void onHit(Grid grid,  int x, int y){
+    public void onHit(Player player, int x, int y){
         Bomb bomb = new Bomb(1);
-        bomb.useBomb(x, y , grid);
+        bomb.useWeapon(player, x, y);
     }
 }

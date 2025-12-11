@@ -20,7 +20,7 @@ public class GameController {
             for (int x = 0; x < humanPlayer.getEnemyGrid().getWidth(); x++) {
                 int finalX = x;
                 int finalY = y;
-                view.getAfficheGrilleEnnemi()[y][x].addActionListener(e -> handleCellClick(finalX, finalY));
+                view.getAfficheGrilleEnnemi()[y][x].addActionListener(e -> handleCellClick(humanPlayer, finalX, finalY));
             }
 
         }
@@ -32,9 +32,9 @@ public class GameController {
     public void onBombAttackClicked(){
     }
 
-    private void handleCellClick(int x, int y) {
+    private void handleCellClick(Player player, int x, int y) {
         switch (selectedAction) {
-            case BASIC_ATTACK -> humanPlayer.basicAttack(x, y);
+            case BASIC_ATTACK -> humanPlayer.basicAttack(player, x, y);
             case BOMB -> humanPlayer.useBomb(x, y);
         }
         // mise à jour automatique de la vue

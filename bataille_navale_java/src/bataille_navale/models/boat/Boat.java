@@ -1,6 +1,7 @@
 package bataille_navale.models.boat;
 
 import bataille_navale.Object;
+import bataille_navale.controllers.players.Player;
 import bataille_navale.models.map.Grid;
 
 import java.util.ArrayList;
@@ -32,10 +33,10 @@ public class Boat extends Object {
     }
 
     @Override
-    public void onHit(Grid grid, int x, int y){
+    public void onHit(Player player, int x, int y){
         this.increaseHits();
         if(this.getHits() == this.getSize()){
-            grid.removeBoat(this);
+            player.getGrid().removeBoat(this);
         }
     }
 

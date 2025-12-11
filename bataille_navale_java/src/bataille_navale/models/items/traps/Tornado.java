@@ -1,5 +1,8 @@
 package bataille_navale.models.items.traps;
 
+import bataille_navale.controllers.players.Player;
+import bataille_navale.models.items.weapons.Bomb;
+
 public class Tornado extends Trap {
     private boolean canBePlaced = true;
 
@@ -13,5 +16,10 @@ public class Tornado extends Trap {
 
     public void setCanBePlaced(boolean canBePlaced) {
         this.canBePlaced = canBePlaced;
+    }
+
+    public void onHit(Player player, int x, int y){
+        Bomb bomb = new Bomb(1);
+        bomb.useWeapon(player, x, y);
     }
 }
