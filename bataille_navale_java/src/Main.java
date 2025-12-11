@@ -19,24 +19,8 @@ public class Main {
         // Grille du joueur + grille ennemie
         Grid playerGrid = new Grid(10, 10);
         Grid enemyGrid = new Grid(10, 10);
+        HumanPlayer player = new HumanPlayer(playerGrid, enemyGrid);
 
-
-        Boat b = BoatFactory.createContreTorpilleur(BoatDirection.Vertical);
-        enemyGrid.setBoat(1,1,b);
-
-        Boat b2 = BoatFactory.createSousMarin(BoatDirection.Horizontal);
-        enemyGrid.setBoat(5,5,b2);
-
-        // Créer un HumanPlayer avec sa grille + grille ennemie
-        HumanPlayer human = new HumanPlayer(playerGrid, enemyGrid);
-
-        // --- Création de la vue principale ---
-        AfficherGrille view = new AfficherGrille(playerGrid, enemyGrid);
-
-        // --- Lier le contrôleur ---
-        GameController controller = new GameController(view, human);
-
-        while(1 == 1 )
-            System.out.println(b2.getHits());
+        GameSettings g = new GameSettings(playerGrid,enemyGrid, player);
     }
 }

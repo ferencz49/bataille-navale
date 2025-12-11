@@ -1,6 +1,7 @@
 package bataille_navale.views;
 
 
+import bataille_navale.controllers.players.HumanPlayer;
 import bataille_navale.models.map.Grid;
 
 import javax.swing.*;
@@ -10,10 +11,10 @@ public class GameSettings extends JFrame {
 
 
 
-    public GameSettings(Grid playerGrid, Grid computerGrid){
+    public GameSettings(Grid playerGrid, Grid computerGrid, HumanPlayer humanPlayer){
         JButton btn_fin_config = new JButton("Passer au placement des objets");
         btn_fin_config.addActionListener(e -> {
-            new ObjectsPlacement(playerGrid, computerGrid);
+            new ObjectsPlacement(playerGrid, computerGrid, humanPlayer);
             this.dispose();
         });
 

@@ -34,7 +34,9 @@ public class Grid implements GridObservable {
         return this.grille;
     }
 
-    public Object getCase(int x, int y){return this.grille[x][y];}
+    public Object getCase(int x, int y){
+        return this.grille[x][y];
+    }
 
     public int getHeight(){
         return this.height;
