@@ -83,7 +83,7 @@ public class Grid implements GridObservable {
         for(int i = 0; i < boat.getBoatSize();i++){
             int x = boat.getBoatCoordinates().get(i).getX();
             int y = boat.getBoatCoordinates().get(i).getY();
-            this.grille[x][y] = null;
+            this.grille[x][y] = new BateauCoule(1);
 
         }
         notifyObservers();
