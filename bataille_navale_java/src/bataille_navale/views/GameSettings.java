@@ -12,10 +12,10 @@ public class GameSettings extends JFrame {
 
 
 
-    public GameSettings(Grid playerGrid, Grid computerGrid, HumanPlayer humanPlayer, Computer computerPlyayer){
+    public GameSettings(Grid playerGrid, Grid computerGrid, HumanPlayer humanPlayer, Computer computerPlayer){
         JButton btn_fin_config = new JButton("Passer au placement des objets");
         btn_fin_config.addActionListener(e -> {
-            new ObjectsPlacement(playerGrid, computerGrid, humanPlayer, computerPlyayer);
+            new ObjectsPlacement(playerGrid, computerGrid, humanPlayer, computerPlayer);
             this.dispose();
         });
 

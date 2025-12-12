@@ -11,6 +11,7 @@ public class GameController {
     private HumanPlayer humanPlayer;
     private Computer computerPlayer;
     private ActionType selectedAction = ActionType.BASIC_ATTACK;
+    private Player winner;
 
     public GameController(AfficherGrille view, HumanPlayer humanPlayer, Computer computerPlayer){
         this.view = view;
@@ -42,14 +43,16 @@ public class GameController {
 
         if(computerPlayer.allBoatsSunk()){
             view.dispose();
-            GameEnd e = new GameEnd();
+            this.winner = humanPlayer;
+            GameEnd e = new GameEnd(this.humanPlayer, this.computerPlayer, this.winner);
         }
 
         computerPlayer.playerTurn(this.computerPlayer);
         computerPlayer.getEnemyGrid().notifyObservers();
         if(humanPlayer.allBoatsSunk()){
             view.dispose();
-            GameEnd e = new GameEnd();
+            this.winner = computerPlayer;
+            GameEnd e = new GameEnd(this.humanPlayer, this.computerPlayer, this.winner);
         }
     }
 

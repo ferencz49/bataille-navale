@@ -1,19 +1,33 @@
 package bataille_navale.views;
 
+import bataille_navale.controllers.players.Computer;
+import bataille_navale.controllers.players.HumanPlayer;
+import bataille_navale.controllers.players.Player;
+import bataille_navale.models.map.Grid;
+
 import javax.swing.*;
 import java.awt.*;
 
 public class GameEnd extends JFrame {
     JButton playAgain;
     JLabel gameResult;
-    public GameEnd(){
+
+    public GameEnd(HumanPlayer humanPlayer, Computer computerPlayer, Player winner){
 
         JPanel layout_principal = new JPanel(new BorderLayout());
 
         this.playAgain = new JButton("Lancer une nouvelle partie");
+        playAgain.addActionListener(e->{
+            this.dispose();
+            GameSettings gameSettings = new GameSettings(new Grid(), new Grid() ,humanPlayer, computerPlayer);
+        });
         layout_principal.add(playAgain,BorderLayout.SOUTH);
 
-        this.gameResult = new JLabel("ici y'aura le gagnant");
+        switch(winner.getType()){
+            case HUMAN: this.gameResult = new JLabel("Vous avez gagné");
+            case COMPUTER: this.gameResult = new JLabel("Vous avez perdu");
+        }
+
         layout_principal.add(gameResult,BorderLayout.CENTER);
 
 

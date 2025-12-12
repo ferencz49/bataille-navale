@@ -4,10 +4,11 @@ import bataille_navale.models.map.Grid;
 import java.util.Random;
 
 
+
 public class Computer extends Player{
 
     public Computer(Grid computerGrid, Grid ennemyGrid){
-        super(computerGrid, ennemyGrid);
+        super(computerGrid, ennemyGrid, PlayerType.COMPUTER);
     }
 
     public void playerTurn(Player player){

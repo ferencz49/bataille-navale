@@ -19,10 +19,12 @@ public class ObjectsPlacement extends JFrame {
 
 
     public ObjectsPlacement(Grid playerGrid, Grid computerGrid, HumanPlayer humanPlayer, Computer computerPlayer){
+        //on initialise les attributs
         this.grid = playerGrid;
         this.humanPlayer = humanPlayer;
         this.computerPlayer = computerPlayer;
 
+        //Panels, boutons etc.
         grilleJoueur = new JLabel("Placez vos bateaux sur votre grille");
         JPanel layout_principal = new JPanel(new BorderLayout());
         layout_principal.add(grilleJoueur, BorderLayout.NORTH);
@@ -37,6 +39,7 @@ public class ObjectsPlacement extends JFrame {
         });
         layout_principal.add(lancerPartie, BorderLayout.SOUTH);
 
+        //trucs communs à toutes les vues
         add(layout_principal);
         setTitle("Placement des objets");
         setSize(1280, 720);

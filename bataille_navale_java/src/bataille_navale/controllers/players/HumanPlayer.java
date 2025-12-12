@@ -6,7 +6,7 @@ import bataille_navale.models.map.Grid;
 public class HumanPlayer extends Player {
 
     public HumanPlayer(Grid playerGrid, Grid ennemyGrid){
-        super(playerGrid, ennemyGrid);
+        super(playerGrid, ennemyGrid, PlayerType.HUMAN);
     }
 
     public Grid getEnemyGrid(){
