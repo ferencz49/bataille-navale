@@ -29,11 +29,16 @@ public  abstract class Player {
         return this.enemyGrid;
     }
 
-    public void placeBoats(){
-        playerGrid.setBoats1();
+    public void addNbBoatsSunk(int nb){
+        this.nbBoatsSunk+= nb;
     }
 
-    abstract public void playerTurn();
+    public void placeBoats(){
+        playerGrid.setBoats1();
+        this.nbBoats+=3;
+    }
+
+   public void playerTurn(){}
 
     public boolean allBoatsSunk(){
         return this.nbBoats == this.nbBoatsSunk;

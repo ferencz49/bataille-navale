@@ -1,6 +1,7 @@
 package bataille_navale.views;
 
 import bataille_navale.controllers.gameController.GameController;
+import bataille_navale.controllers.players.Computer;
 import bataille_navale.controllers.players.HumanPlayer;
 import bataille_navale.models.map.Grid;
 
@@ -9,6 +10,7 @@ import java.awt.*;
 
 public class ObjectsPlacement extends JFrame {
     private HumanPlayer humanPlayer;
+    private Computer computerPlayer;
     private JLabel grilleJoueur;
     private JButton[][] afficheGrille;
     private JButton lancerPartie;
@@ -16,9 +18,10 @@ public class ObjectsPlacement extends JFrame {
 
 
 
-    public ObjectsPlacement(Grid playerGrid, Grid computerGrid, HumanPlayer humanPlayer){
+    public ObjectsPlacement(Grid playerGrid, Grid computerGrid, HumanPlayer humanPlayer, Computer computerPlayer){
         this.grid = playerGrid;
         this.humanPlayer = humanPlayer;
+        this.computerPlayer = computerPlayer;
 
         grilleJoueur = new JLabel("Placez vos bateaux sur votre grille");
         JPanel layout_principal = new JPanel(new BorderLayout());
@@ -27,8 +30,9 @@ public class ObjectsPlacement extends JFrame {
         layout_principal.add(createGridPanel(afficheGrille), BorderLayout.CENTER);
         lancerPartie = new JButton("Lancer la partie");
         lancerPartie.addActionListener(e-> {
-            GameController controller = new GameController( new AfficherGrille(playerGrid,computerGrid), humanPlayer);
-            computerGrid.setBoats1();
+            GameController controller = new GameController( new AfficherGrille(playerGrid,computerGrid), humanPlayer, computerPlayer);
+            computerPlayer.placeBoats();
+            humanPlayer.placeBoats();
             this.dispose();
         });
         layout_principal.add(lancerPartie, BorderLayout.SOUTH);

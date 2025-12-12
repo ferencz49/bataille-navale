@@ -12,9 +12,10 @@ public class Game {
     }
 
     public void playGame(){
-        while(!isGameEnded()){
+        if(!humanPlayer.allBoatsSunk() || !computerPlayer.allBoatsSunk()){
             humanPlayer.playerTurn();
             computerPlayer.playerTurn();
+            playGame();
         }
     }
 

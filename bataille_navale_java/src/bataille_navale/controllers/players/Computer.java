@@ -10,7 +10,8 @@ public class Computer extends Player{
         super(computerGrid, ennemyGrid);
     }
 
-    public void playerTurn(){
+    public void playerTurn(Player player){
+        this.basicAttack(player);
     }
 
     public void basicAttack(Player player){
@@ -18,6 +19,7 @@ public class Computer extends Player{
         int x = rand.nextInt(9);
         int y = rand.nextInt(9);
         this.enemyGrid.basicAttack(player, x, y);
+        System.out.println("le pc a attaqué");
     }
 
 

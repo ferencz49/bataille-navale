@@ -37,6 +37,7 @@ public class Boat extends Object {
         this.increaseHits();
         if(this.getHits() == this.getSize()){
             player.getEnemyGrid().removeBoat(this);
+            player.addNbBoatsSunk(1);
         }
     }
 

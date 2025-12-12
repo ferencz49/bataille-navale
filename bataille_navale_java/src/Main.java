@@ -23,6 +23,6 @@ public class Main {
         HumanPlayer player = new HumanPlayer(playerGrid, computerGrid);
         Computer computerPlayer = new Computer(computerGrid, playerGrid);
 
-        GameSettings g = new GameSettings(playerGrid,computerGrid, player);
+        GameSettings g = new GameSettings(playerGrid,computerGrid, player, computerPlayer);
     }
 }
