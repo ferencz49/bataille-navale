@@ -3,33 +3,44 @@ package bataille_navale.views;
 
 import bataille_navale.controllers.players.Computer;
 import bataille_navale.controllers.players.HumanPlayer;
+import bataille_navale.models.boat.BoatDirection;
+import bataille_navale.models.boat.BoatFactory;
 import bataille_navale.models.map.Grid;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class GameSettings extends JFrame {
+    JButton btn_fin_config;
+
+    JCheckBox ckb_mode_ile;
+    JLabel lbl_nb_porte_avions;
+    JSpinner spn_nb_porte_avions;
+    JLabel lbl_nb_croiseurs;
+    JSpinner spn_nb_croiseurs;
+    JLabel lbl_nb_contre_torpilleurs;
+    JSpinner spn_nb_contre_torpilleurs;
+    JLabel lbl_nb_sous_marins;
+    JSpinner spn_nb_sous_marins;
+    JLabel lbl_nb_torpilleurs;
+    JSpinner spn_nb_torpilleurs;
 
 
 
     public GameSettings(Grid playerGrid, Grid computerGrid, HumanPlayer humanPlayer, Computer computerPlayer){
-        JButton btn_fin_config = new JButton("Passer au placement des objets");
-        btn_fin_config.addActionListener(e -> {
-            new ObjectsPlacement(playerGrid, computerGrid, humanPlayer, computerPlayer);
-            this.dispose();
-        });
+        btn_fin_config = new JButton("Passer au placement des objets");
 
-        JCheckBox ckb_mode_ile = new JCheckBox("mode ile");
-        JLabel lbl_nb_porte_avions = new JLabel("Nombre de porte avions:");
-        JSpinner spn_nb_porte_avions = new JSpinner();
-        JLabel lbl_nb_croiseurs = new JLabel("Nombre de croiseurs:");
-        JSpinner spn_nb_croiseurs = new JSpinner();
-        JLabel lbl_nb_contre_torpilleurs = new JLabel("Nombre de contre torpilleurs:");
-        JSpinner spn_nb_contre_torpilleurs = new JSpinner();
-        JLabel lbl_nb_sous_marins = new JLabel("Nombre de sous-marins:");
-        JSpinner spn_nb_sous_marins = new JSpinner();
-        JLabel lbl_nb_torpilleurs = new JLabel("Nombre de torpilleurs:");
-        JSpinner spn_nb_torpilleurs = new JSpinner();
+        ckb_mode_ile = new JCheckBox("mode ile");
+        lbl_nb_porte_avions = new JLabel("Nombre de porte avions:");
+        spn_nb_porte_avions = new JSpinner();
+        lbl_nb_croiseurs = new JLabel("Nombre de croiseurs:");
+        spn_nb_croiseurs = new JSpinner();
+        lbl_nb_contre_torpilleurs = new JLabel("Nombre de contre torpilleurs:");
+        spn_nb_contre_torpilleurs = new JSpinner();
+        lbl_nb_sous_marins = new JLabel("Nombre de sous-marins:");
+        spn_nb_sous_marins = new JSpinner();
+        lbl_nb_torpilleurs = new JLabel("Nombre de torpilleurs:");
+        spn_nb_torpilleurs = new JSpinner();
 
         JPanel layout_principal = new JPanel(new BorderLayout());
         layout_principal.add(btn_fin_config, BorderLayout.SOUTH);
@@ -52,6 +63,17 @@ public class GameSettings extends JFrame {
         //on ajoute le layout qui contient les boutons permettant de setup la game au centre du layout principal
         layout_principal.add(layout_secondaire_centre, BorderLayout.CENTER);
 
+        btn_fin_config.addActionListener(e -> {
+            addBoatsToPlayer(spn_nb_porte_avions,humanPlayer);
+            addBoatsToPlayer(spn_nb_croiseurs,humanPlayer);
+            addBoatsToPlayer(spn_nb_contre_torpilleurs,humanPlayer);
+            addBoatsToPlayer(spn_nb_sous_marins,humanPlayer);
+            addBoatsToPlayer(spn_nb_torpilleurs,humanPlayer);
+
+            new ObjectsPlacement(playerGrid, computerGrid, humanPlayer, computerPlayer);
+            this.dispose();
+        });
+
 
 
         add(layout_principal);
@@ -61,5 +83,16 @@ public class GameSettings extends JFrame {
         setVisible(true);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
+    }
+
+    public void addBoatsToPlayer(JSpinner spinner, HumanPlayer player){
+        for(int i = 0; i < (int) spinner.getValue();i++){
+            if(spinner == spn_nb_porte_avions) player.addBoatToPlace(BoatFactory.createPorteAvion(BoatDirection.Vertical));
+            if(spinner == spn_nb_croiseurs) player.addBoatToPlace(BoatFactory.createCroiseur(BoatDirection.Horizontal));
+            if(spinner == spn_nb_contre_torpilleurs) player.addBoatToPlace(BoatFactory.createPorteAvion(BoatDirection.Vertical));
+            if(spinner == spn_nb_sous_marins) player.addBoatToPlace(BoatFactory.createSousMarin(BoatDirection.Horizontal));
+            if(spinner == spn_nb_torpilleurs) player.addBoatToPlace(BoatFactory.createTorpilleur(BoatDirection.Horizontal));
+
+        }
     }
 }
