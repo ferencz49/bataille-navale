@@ -12,7 +12,7 @@ public class Game {
     }
 
     public void playGame(){
-        if(!humanPlayer.allBoatsSunk() || !computerPlayer.allBoatsSunk()){
+        if(!humanPlayer.getGrid().allBoatsSunk() || !computerPlayer.getGrid().allBoatsSunk()){
             humanPlayer.playerTurn();
             computerPlayer.playerTurn();
             playGame();
@@ -20,7 +20,7 @@ public class Game {
     }
 
     public boolean isGameEnded(){
-        if (computerPlayer.getNbBoats() == 0 || humanPlayer.getNbBoats() == 0) {
+        if (computerPlayer.getGrid().getNbBoats() == 0 || humanPlayer.getGrid().getNbBoats() == 0) {
             return true;
         }
         return false;

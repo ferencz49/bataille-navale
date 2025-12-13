@@ -3,6 +3,7 @@ package bataille_navale.views;
 import bataille_navale.controllers.players.Computer;
 import bataille_navale.controllers.players.HumanPlayer;
 import bataille_navale.controllers.players.Player;
+import bataille_navale.controllers.players.PlayerType;
 import bataille_navale.models.map.Grid;
 
 import javax.swing.*;
@@ -22,11 +23,9 @@ public class GameEnd extends JFrame {
             GameSettings gameSettings = new GameSettings(new Grid(), new Grid() ,humanPlayer, computerPlayer);
         });
         layout_principal.add(playAgain,BorderLayout.SOUTH);
-
-        switch(winner.getType()){
-            case HUMAN: this.gameResult = new JLabel("Vous avez gagné");
-            case COMPUTER: this.gameResult = new JLabel("Vous avez perdu");
-        }
+        System.out.println("ezhfzef"+winner.getType());
+        if(winner.getType() == PlayerType.HUMAN){ this.gameResult = new JLabel("Vous avez gagné");}
+        else{this.gameResult = new JLabel("avez perdu");}
 
         layout_principal.add(gameResult,BorderLayout.CENTER);
 

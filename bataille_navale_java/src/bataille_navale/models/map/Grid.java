@@ -17,14 +17,20 @@ public class Grid implements GridObservable {
     private int height;
     private int width;
     private Object[][] grille;
+    private int nbBoats;
+    private int nbBoatsSunk;
 
     public Grid(){
+        this.nbBoats = 0;
+        this.nbBoatsSunk = 0;
         this.height = 10;
         this.width = 10;
         grille = new Object[10][10];
     }
 
     public Grid(int heigth, int width){
+        this.nbBoats = 0;
+        this.nbBoatsSunk = 0;
         this.height = heigth;
         this.width = width;
         grille = new Object[10][10];
@@ -46,11 +52,17 @@ public class Grid implements GridObservable {
         return this.width;
     }
 
+    public int getNbBoats(){ return this.nbBoats;}
+
+    public int getNbBoatsSunk(){return this.nbBoatsSunk;}
+
     public boolean setBoat(int x, int y, Boat boat){
-        if(x > grille.length - boat.getSize()){
+        if(x > getWidth() - boat.getSize()){
+            System.out.println("trop loin");
             return false;
         }
-        if(y > grille[0].length - boat.getSize()) {
+        if(y > getHeight() - boat.getSize()) {
+            System.out.println("trop long");
             return false;
         }
         for(int i = 0; i < boat.getSize(); i++){
@@ -110,12 +122,21 @@ public class Grid implements GridObservable {
         Boat sous_marin = BoatFactory.createSousMarin(BoatDirection.Vertical);
         Boat torpilleur = BoatFactory.createTorpilleur(BoatDirection.Horizontal);
 
-
         this.setBoat(0,0, porte_avion);
         this.setBoat(2,2, croiseur);
         this.setBoat(5,6,contre_torpilleur);
-        this.setBoat(8,1, sous_marin);
-        this.setBoat(1,9, torpilleur);
+        this.setBoat(7,1, sous_marin);
+        this.setBoat(1,8, torpilleur);
+
+        this.nbBoats+=5;
+    }
+
+    public boolean allBoatsSunk(){
+        return this.nbBoats == this.nbBoatsSunk;
+    }
+
+    public void addNbBoatsSunk(int nb){
+        this.nbBoatsSunk+= nb;
     }
 
     //PARTIE OBSERVER

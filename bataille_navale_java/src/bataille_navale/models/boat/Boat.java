@@ -37,7 +37,9 @@ public class Boat extends Object {
         this.increaseHits();
         if(this.getHits() == this.getSize()){
             player.getEnemyGrid().removeBoat(this);
-            player.addNbBoatsSunk(1);
+            player.getEnemyGrid().addNbBoatsSunk(1);
+            System.out.println("nb bateaux du joueur:"+player.getType()+" : "+player.getEnemyGrid().getNbBoats());
+            System.out.println("nb bateaux coulés de l'adversaire de ::"+player.getType()+" : "+player.getEnemyGrid().getNbBoatsSunk());
         }
     }
 

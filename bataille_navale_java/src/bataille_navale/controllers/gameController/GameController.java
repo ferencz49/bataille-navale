@@ -41,17 +41,19 @@ public class GameController {
         // mise à jour automatique de la vue
         humanPlayer.getEnemyGrid().notifyObservers();
 
-        if(computerPlayer.allBoatsSunk()){
+        if(humanPlayer.getEnemyGrid().allBoatsSunk()){
             view.dispose();
             this.winner = humanPlayer;
+            System.out.println("le gagnant est : "+this.winner.getType());
             GameEnd e = new GameEnd(this.humanPlayer, this.computerPlayer, this.winner);
         }
 
         computerPlayer.playerTurn(this.computerPlayer);
         computerPlayer.getEnemyGrid().notifyObservers();
-        if(humanPlayer.allBoatsSunk()){
+        if(computerPlayer.getEnemyGrid().allBoatsSunk()){
             view.dispose();
             this.winner = computerPlayer;
+            System.out.println("le gagnant est " +this.winner.getType());
             GameEnd e = new GameEnd(this.humanPlayer, this.computerPlayer, this.winner);
         }
     }
