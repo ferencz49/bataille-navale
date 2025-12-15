@@ -1,4 +1,4 @@
-package bataille_navale.models.boat;
+package bataille_navale.models.Objects.items.boat;
 
 public class BoatFactory {
 

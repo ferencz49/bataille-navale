@@ -3,8 +3,8 @@ package bataille_navale.views;
 
 import bataille_navale.controllers.players.Computer;
 import bataille_navale.controllers.players.HumanPlayer;
-import bataille_navale.models.boat.BoatDirection;
-import bataille_navale.models.boat.BoatFactory;
+import bataille_navale.models.Objects.items.boat.BoatDirection;
+import bataille_navale.models.Objects.items.boat.BoatFactory;
 import bataille_navale.models.map.Grid;
 
 import javax.swing.*;

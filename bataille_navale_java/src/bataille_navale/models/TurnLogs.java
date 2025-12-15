@@ -10,3 +10,6 @@ public class TurnLogs {
         System.out.println("\u001B[31mLe bot a utilisé : " + actionType + " aux coordonnées x: "+ x + " et y:" + y);
     }
 }
+
+/*            System.out.println("nb bateaux du joueur:"+player.getType()+" : "+player.getEnemyGrid().getNbBoats());
+            System.out.println("nb bateaux coulés de l'adversaire de ::"+player.getType()+" : "+player.getEnemyGrid().getNbBoatsSunk());*/

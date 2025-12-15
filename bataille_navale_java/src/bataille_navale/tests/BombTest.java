@@ -1,12 +1,11 @@
 package bataille_navale.tests;
 
 import bataille_navale.controllers.players.HumanPlayer;
-import bataille_navale.models.boat.Boat;
-import bataille_navale.models.boat.BoatDirection;
-import bataille_navale.models.boat.BoatFactory;
-import bataille_navale.models.boat.Types;
+import bataille_navale.models.Objects.items.boat.Boat;
+import bataille_navale.models.Objects.items.boat.BoatDirection;
+import bataille_navale.models.Objects.items.boat.BoatFactory;
 import bataille_navale.models.map.Grid;
-import bataille_navale.models.items.weapons.Bomb;
+import bataille_navale.models.Objects.weapons.Bomb;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -42,7 +41,7 @@ class BombTest {
 
         grid_player1.setBoat(5,5, bateau);
 
-        bomb.useWeapon(playerTest, 5,5);
+        playerTest.useBomb(5,5);
 
         boolean result = bateau.isSunk();
         System.out.println(bateau.getHits());

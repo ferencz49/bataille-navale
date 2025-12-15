@@ -1,7 +1,8 @@
 package bataille_navale.controllers.players;
 
-import bataille_navale.models.boat.Boat;
-import bataille_navale.models.items.weapons.Bomb;
+import bataille_navale.models.Objects.items.Item;
+import bataille_navale.models.Objects.items.boat.Boat;
+import bataille_navale.models.Objects.weapons.Bomb;
 import bataille_navale.models.map.Grid;
 
 import java.util.ArrayList;
@@ -9,10 +10,12 @@ import java.util.ArrayList;
 public class HumanPlayer extends Player {
 
     private ArrayList<Boat> boatsToPlace;
+    private ArrayList<Item> usableItems;
 
     public HumanPlayer(Grid playerGrid, Grid ennemyGrid){
         super(playerGrid, ennemyGrid, PlayerType.HUMAN);
         this.boatsToPlace = new ArrayList<>();
+        this.usableItems = new ArrayList<>();
     }
 
     public Grid getEnemyGrid(){
@@ -25,7 +28,7 @@ public class HumanPlayer extends Player {
 
     public void useBomb(int x, int y){
         Bomb bomb = new Bomb(1);
-        bomb.useWeapon(this ,x,y);
+        this.playerGrid.bombAttack(bomb, this, x, y);
     }
 
     public void playerTurn(){
@@ -44,5 +47,9 @@ public class HumanPlayer extends Player {
             }
         }
         return true;
+    }
+
+    public void addItem(Item item){
+        this.usableItems.add(item);
     }
 }

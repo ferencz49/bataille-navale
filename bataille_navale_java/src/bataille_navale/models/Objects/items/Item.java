@@ -1,4 +1,4 @@
-package bataille_navale.models.items;
+package bataille_navale.models.Objects.items;
 
 
 import bataille_navale.Object;

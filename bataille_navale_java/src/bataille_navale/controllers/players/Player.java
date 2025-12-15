@@ -1,6 +1,6 @@
 package bataille_navale.controllers.players;
 
-import bataille_navale.models.boat.Boat;
+import bataille_navale.models.Objects.items.Item;
 import bataille_navale.models.map.Grid;
 
 public  abstract class Player {
@@ -34,6 +34,8 @@ public  abstract class Player {
     }
 
    public void playerTurn(){}
+
+    public void addItem(Item item){}
 
 
 }

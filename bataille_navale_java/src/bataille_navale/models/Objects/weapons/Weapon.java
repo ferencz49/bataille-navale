@@ -1,7 +1,7 @@
-package bataille_navale.models.items.weapons;
+package bataille_navale.models.Objects.weapons;
 
 import bataille_navale.controllers.players.Player;
-import bataille_navale.models.items.Item;
+import bataille_navale.models.Objects.items.Item;
 
 public abstract class Weapon extends Item {
 

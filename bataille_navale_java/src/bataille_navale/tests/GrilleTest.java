@@ -1,9 +1,8 @@
 package bataille_navale.tests;
 
-import bataille_navale.models.boat.Boat;
-import bataille_navale.models.boat.BoatDirection;
-import bataille_navale.models.boat.BoatFactory;
-import bataille_navale.models.boat.Types;
+import bataille_navale.models.Objects.items.boat.Boat;
+import bataille_navale.models.Objects.items.boat.BoatDirection;
+import bataille_navale.models.Objects.items.boat.BoatFactory;
 import bataille_navale.models.map.Grid;
 import org.junit.jupiter.api.Test;
 

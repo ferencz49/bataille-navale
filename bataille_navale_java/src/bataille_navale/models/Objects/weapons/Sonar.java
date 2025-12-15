@@ -1,4 +1,4 @@
-package bataille_navale.models.items.weapons;
+package bataille_navale.models.Objects.weapons;
 
 import bataille_navale.models.map.Grid;
 

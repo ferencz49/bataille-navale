@@ -1,8 +1,7 @@
-package bataille_navale.models.boat;
+package bataille_navale.models.Objects.items.boat;
 
 import bataille_navale.Object;
 import bataille_navale.controllers.players.Player;
-import bataille_navale.models.map.Grid;
 
 import java.util.ArrayList;
 
@@ -38,8 +37,6 @@ public class Boat extends Object {
         if(this.getHits() == this.getSize()){
             player.getEnemyGrid().removeBoat(this);
             player.getEnemyGrid().addNbBoatsSunk(1);
-            System.out.println("nb bateaux du joueur:"+player.getType()+" : "+player.getEnemyGrid().getNbBoats());
-            System.out.println("nb bateaux coulés de l'adversaire de ::"+player.getType()+" : "+player.getEnemyGrid().getNbBoatsSunk());
         }
     }
 

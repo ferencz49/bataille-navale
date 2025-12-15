@@ -1,9 +1,9 @@
 package bataille_navale.views;
 
 import bataille_navale.models.GridObserver;
-import bataille_navale.models.boat.Boat;
-import bataille_navale.models.items.traps.Trap;
-import bataille_navale.models.items.weapons.Weapon;
+import bataille_navale.models.Objects.items.boat.Boat;
+import bataille_navale.models.Objects.items.traps.Trap;
+import bataille_navale.models.Objects.weapons.Weapon;
 import bataille_navale.models.map.BateauCoule;
 import bataille_navale.models.map.CaseAttaquee;
 import bataille_navale.models.map.Grid;
@@ -92,7 +92,7 @@ public class AfficherGrille extends JFrame implements GridObserver {
                 else if (obj instanceof Boat) boutons[y][x].setBackground(Color.GRAY);
                 else if (obj instanceof Trap) boutons[y][x].setBackground(Color.ORANGE);
                 else if (obj instanceof Weapon) boutons[y][x].setBackground(Color.BLACK);
-                else if (obj instanceof CaseAttaquee) boutons[y][x].setBackground(Color.PINK);
+                else if (obj instanceof CaseAttaquee) boutons[y][x].setBackground(Color.MAGENTA);
             }
         }
     }
@@ -108,7 +108,7 @@ public class AfficherGrille extends JFrame implements GridObserver {
                 else if (obj instanceof Boat) boutons[y][x].setBackground(Color.BLUE);
                 else if (obj instanceof Trap) boutons[y][x].setBackground(Color.ORANGE);
                 else if (obj instanceof Weapon) boutons[y][x].setBackground(Color.BLACK);
-                else if (obj instanceof CaseAttaquee) boutons[y][x].setBackground(Color.PINK);
+                else if (obj instanceof CaseAttaquee) boutons[y][x].setBackground(Color.MAGENTA);
             }
         }
     }

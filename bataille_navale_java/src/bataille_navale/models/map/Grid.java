@@ -4,10 +4,11 @@ import bataille_navale.Object;
 import bataille_navale.controllers.players.Player;
 import bataille_navale.models.GridObservable;
 import bataille_navale.models.GridObserver;
-import bataille_navale.models.boat.Boat;
-import bataille_navale.models.boat.BoatDirection;
-import bataille_navale.models.boat.BoatFactory;
-import bataille_navale.models.items.traps.Trap;
+import bataille_navale.models.Objects.items.boat.Boat;
+import bataille_navale.models.Objects.items.boat.BoatDirection;
+import bataille_navale.models.Objects.items.boat.BoatFactory;
+import bataille_navale.models.Objects.items.traps.Trap;
+import bataille_navale.models.Objects.weapons.Bomb;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -113,6 +114,10 @@ public class Grid implements GridObservable {
         }
     }
 
+    public void bombAttack(Bomb bomb, Player player, int x, int y){
+        bomb.useWeapon(player, x, y);
+        notifyObservers();
+    }
     public void modifyCoordinates(){
 
     }

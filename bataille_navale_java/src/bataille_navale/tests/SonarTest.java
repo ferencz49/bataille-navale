@@ -1,14 +1,12 @@
 package bataille_navale.tests;
 
 import bataille_navale.controllers.players.HumanPlayer;
-import bataille_navale.models.boat.Boat;
-import bataille_navale.models.boat.BoatDirection;
-import bataille_navale.models.boat.Types;
-import bataille_navale.models.items.weapons.Sonar;
+import bataille_navale.models.Objects.items.boat.Boat;
+import bataille_navale.models.Objects.items.boat.BoatDirection;
+import bataille_navale.models.Objects.items.boat.Types;
+import bataille_navale.models.Objects.weapons.Sonar;
 import bataille_navale.models.map.Grid;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class SonarTest {
 

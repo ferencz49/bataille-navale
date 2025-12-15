@@ -1,12 +1,12 @@
-package bataille_navale.models.items.traps;
+package bataille_navale.models.Objects.items.traps;
 
 import bataille_navale.controllers.players.Player;
-import bataille_navale.models.items.weapons.Bomb;
+import bataille_navale.models.Objects.weapons.Bomb;
 
-public class Tornado extends Trap {
+public class BlackHole extends Trap{
     private boolean canBePlaced = true;
 
-    public Tornado(int capacity){
+    public BlackHole(int capacity){
         super(capacity);
     }
 
@@ -18,6 +18,7 @@ public class Tornado extends Trap {
         this.canBePlaced = canBePlaced;
     }
 
+    @Override
     public void onHit(Player player, int x, int y){
         Bomb bomb = new Bomb(1);
         bomb.useWeapon(player, x, y);

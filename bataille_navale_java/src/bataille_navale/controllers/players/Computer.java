@@ -22,7 +22,6 @@ public class Computer extends Player{
         int x = rand.nextInt(9);
         int y = rand.nextInt(9);
         this.enemyGrid.basicAttack(player, x, y);
-        System.out.println("le pc a attaqué");
         int[] res = {x,y};
         return res;
     }

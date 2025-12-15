@@ -1,12 +1,11 @@
 package bataille_navale.tests;
 
 import bataille_navale.controllers.players.HumanPlayer;
-import bataille_navale.controllers.players.Player;
-import bataille_navale.models.boat.Boat;
-import bataille_navale.models.boat.BoatDirection;
-import bataille_navale.models.boat.BoatFactory;
-import bataille_navale.models.items.traps.BlackHole;
-import bataille_navale.models.items.weapons.Bomb;
+import bataille_navale.models.Objects.items.boat.Boat;
+import bataille_navale.models.Objects.items.boat.BoatDirection;
+import bataille_navale.models.Objects.items.boat.BoatFactory;
+import bataille_navale.models.Objects.items.traps.BlackHole;
+import bataille_navale.models.Objects.weapons.Bomb;
 import bataille_navale.models.map.Grid;
 import org.junit.jupiter.api.Test;
 
