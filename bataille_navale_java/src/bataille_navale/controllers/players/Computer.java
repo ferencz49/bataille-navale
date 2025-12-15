@@ -1,5 +1,8 @@
 package bataille_navale.controllers.players;
 
+import bataille_navale.Object;
+import bataille_navale.models.Objects.ObjectType;
+import bataille_navale.models.Objects.items.boat.Boat;
 import bataille_navale.models.map.Grid;
 
 import java.util.ArrayList;
@@ -18,12 +21,24 @@ public class Computer extends Player{
     }
 
     public int[] basicAttack(Player player){
-        Random rand = new Random();
-        int x = rand.nextInt(9);
-        int y = rand.nextInt(9);
-        this.enemyGrid.basicAttack(player, x, y);
-        int[] res = {x,y};
-        return res;
+            Random rand = new Random();
+            int x = rand.nextInt(enemyGrid.getWidth());
+            int y = rand.nextInt(enemyGrid.getHeight());
+            if(enemyGrid.getCase(x,y) == null){
+                enemyGrid.basicAttack(player, x, y);
+                return new int[]{x,y};
+            }
+
+            Object obj = enemyGrid.getCase(x, y);
+
+            // ❌ case déjà jouée → on recommence
+            if (obj.getType() == ObjectType.HIT_BOAT || obj.getType() == ObjectType.SUNK_BOAT || obj.getType() == ObjectType.WATER) {
+                return basicAttack(player);
+            }
+
+            // ✅ case attaquable (null ou bateau)
+            enemyGrid.basicAttack(player, x, y);
+            return new int[]{x, y};
     }
 
 
