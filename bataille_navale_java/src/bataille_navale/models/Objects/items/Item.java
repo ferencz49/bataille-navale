@@ -2,11 +2,12 @@ package bataille_navale.models.Objects.items;
 
 
 import bataille_navale.Object;
+import bataille_navale.models.Objects.ObjectType;
 
 abstract public class Item extends Object {
     private int capacity;
-    public Item(int capacity){
-        super(1);
+    public Item(int capacity, ObjectType objectType){
+        super(1,objectType);
         this.capacity = capacity;
     }
 

@@ -2,6 +2,7 @@ package bataille_navale.models.Objects.items.boat;
 
 import bataille_navale.Object;
 import bataille_navale.controllers.players.Player;
+import bataille_navale.models.Objects.ObjectType;
 
 import java.util.ArrayList;
 
@@ -12,7 +13,7 @@ public class Boat extends Object {
     private ArrayList<BoatCoordinates> coordinates;
 
     public Boat(int size, Types type, BoatDirection direction){
-        super(size);
+        super(size, ObjectType.BOAT);
         this.type = type;
         this.boatDirection = direction;
         this.coordinates = new ArrayList<>();

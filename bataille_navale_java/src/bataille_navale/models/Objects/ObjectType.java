@@ -7,4 +7,5 @@ public enum ObjectType {
     TRAP,
     WEAPON,
     WATER,
+    ISLAND;
 }

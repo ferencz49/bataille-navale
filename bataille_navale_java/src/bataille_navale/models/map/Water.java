@@ -4,11 +4,15 @@ import bataille_navale.Object;
 import bataille_navale.controllers.players.Player;
 import bataille_navale.models.Objects.ObjectType;
 
-public class CaseAttaquee extends Object {
-    public CaseAttaquee(int size) {
-        super(size, ObjectType.HIT_BOAT);
+public class Water extends Object {
+    public Water(int size){
+        super(size, ObjectType.WATER);
     }
 
-    public void onHit(Player player, int x, int y){};
+    @Override
+    public void onHit(Player player, int x, int y) {
+
+    }
+
 
 }

@@ -10,6 +10,7 @@ import bataille_navale.models.Objects.items.boat.BoatFactory;
 import bataille_navale.models.Objects.items.traps.Trap;
 import bataille_navale.models.Objects.weapons.Bomb;
 
+import java.awt.event.WindowStateListener;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -108,13 +109,25 @@ public class Grid implements GridObservable {
     public void basicAttack(Player player, int x, int y){
         if(this.grille[x][y] != null){
             Object o = grille[x][y];
-            this.grille[x][y] = new CaseAttaquee(1);
-            o.onHit(player, x, y);
+            if(o instanceof Boat){
+                this.grille[x][y] = new CaseAttaquee(1);
+                o.onHit(player, x, y);
+                notifyObservers();
+            }
+            if(o instanceof Water){
+                o.onHit(player, x, y);
+            }
+        }
+        else if(this.grille[x][y] == null){
+            this.grille[x][y] = new Water(1);
             notifyObservers();
         }
     }
 
     public void bombAttack(Bomb bomb, Player player, int x, int y){
+        Object o = grille[x][y];
+        this.grille[x][y] = new CaseAttaquee(1);
+        o.onHit(player, x, y);
         bomb.useWeapon(player, x, y);
         notifyObservers();
     }

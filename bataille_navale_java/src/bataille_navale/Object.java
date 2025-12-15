@@ -1,13 +1,16 @@
 package bataille_navale;
 
 import bataille_navale.controllers.players.Player;
+import bataille_navale.models.Objects.ObjectType;
 import bataille_navale.models.map.Grid;
 
 public abstract class Object {
+    private ObjectType objectType;
     private int size;
     private int[][] squaresOccupied;
-    public Object(int size){
+    public Object(int size, ObjectType objectType){
         this.size = size;
+        this.objectType = objectType;
     }
 
     public int getSize(){
@@ -15,4 +18,8 @@ public abstract class Object {
     }
 
     abstract public void onHit(Player player, int x, int y);
+
+    public ObjectType getType(){
+        return this.objectType;
+    }
 }

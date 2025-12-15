@@ -1,12 +1,14 @@
 package bataille_navale.views;
 
 import bataille_navale.models.GridObserver;
+import bataille_navale.models.Objects.ObjectType;
 import bataille_navale.models.Objects.items.boat.Boat;
 import bataille_navale.models.Objects.items.traps.Trap;
 import bataille_navale.models.Objects.weapons.Weapon;
 import bataille_navale.models.map.BateauCoule;
 import bataille_navale.models.map.CaseAttaquee;
 import bataille_navale.models.map.Grid;
+import bataille_navale.models.map.Water;
 
 import javax.swing.*;
 import java.awt.*;
@@ -85,14 +87,15 @@ public class AfficherGrille extends JFrame implements GridObserver {
         for (int y = 0; y < grille.getGrille().length; y++) {
             for (int x = 0; x < grille.getGrille()[0].length; x++) {
 
-                Object obj = grille.getCase(x, y);
+                bataille_navale.Object obj = grille.getCase(x, y);
 
                 if (obj == null) boutons[y][x].setBackground(Color.BLUE);
-                else if (obj instanceof BateauCoule) boutons[y][x].setBackground(Color.red);
-                else if (obj instanceof Boat) boutons[y][x].setBackground(Color.GRAY);
-                else if (obj instanceof Trap) boutons[y][x].setBackground(Color.ORANGE);
-                else if (obj instanceof Weapon) boutons[y][x].setBackground(Color.BLACK);
-                else if (obj instanceof CaseAttaquee) boutons[y][x].setBackground(Color.MAGENTA);
+                else if (obj.getType() == ObjectType.SUNK_BOAT) boutons[y][x].setBackground(Color.red);
+                else if (obj.getType() == ObjectType.BOAT) boutons[y][x].setBackground(Color.GRAY);
+                else if (obj.getType() == ObjectType.TRAP) boutons[y][x].setBackground(Color.ORANGE);
+                else if (obj.getType() == ObjectType.WEAPON) boutons[y][x].setBackground(Color.BLACK);
+                else if (obj.getType() == ObjectType.HIT_BOAT) boutons[y][x].setBackground(Color.MAGENTA);
+                else if (obj.getType() == ObjectType.WATER) boutons[y][x].setBackground(Color.CYAN);
             }
         }
     }
@@ -101,14 +104,15 @@ public class AfficherGrille extends JFrame implements GridObserver {
         for (int y = 0; y < grille.getGrille().length; y++) {
             for (int x = 0; x < grille.getGrille()[0].length; x++) {
 
-                Object obj = grille.getCase(x, y);
+                bataille_navale.Object obj = grille.getCase(x, y);
 
                 if (obj == null) boutons[y][x].setBackground(Color.BLUE);
-                else if (obj instanceof BateauCoule) boutons[y][x].setBackground(Color.red);
-                else if (obj instanceof Boat) boutons[y][x].setBackground(Color.BLUE);
-                else if (obj instanceof Trap) boutons[y][x].setBackground(Color.ORANGE);
-                else if (obj instanceof Weapon) boutons[y][x].setBackground(Color.BLACK);
-                else if (obj instanceof CaseAttaquee) boutons[y][x].setBackground(Color.MAGENTA);
+                else if (obj.getType() == ObjectType.SUNK_BOAT) boutons[y][x].setBackground(Color.red);
+                else if (obj.getType() == ObjectType.BOAT) boutons[y][x].setBackground(Color.BLUE);
+                else if (obj.getType() == ObjectType.TRAP) boutons[y][x].setBackground(Color.ORANGE);
+                else if (obj.getType() == ObjectType.WEAPON) boutons[y][x].setBackground(Color.BLACK);
+                else if (obj.getType() == ObjectType.HIT_BOAT) boutons[y][x].setBackground(Color.MAGENTA);
+                else if (obj.getType() == ObjectType.WATER) boutons[y][x].setBackground(Color.CYAN);
             }
         }
     }

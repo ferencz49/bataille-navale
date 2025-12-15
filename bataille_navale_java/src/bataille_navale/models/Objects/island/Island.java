@@ -2,18 +2,19 @@ package bataille_navale.models.Objects.island;
 
 import bataille_navale.Object;
 import bataille_navale.controllers.players.Player;
+import bataille_navale.models.Objects.ObjectType;
 import bataille_navale.models.Objects.items.Item;
 
 public class Island extends Object {
     private Item item;
 
     public Island(int size, Item item){
-        super(size);
+        super(size, ObjectType.ISLAND);
         this.item = item;
     }
 
     public Island(int size){
-        super(size);
+        super(size,ObjectType.ISLAND);
     }
 
     @Override
