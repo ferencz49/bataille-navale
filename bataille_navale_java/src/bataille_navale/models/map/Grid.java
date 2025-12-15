@@ -107,7 +107,9 @@ public class Grid implements GridObservable {
     public void basicAttack(Player player, int x, int y){
         if(this.grille[x][y] != null){
             Object o = grille[x][y];
+            this.grille[x][y] = new CaseAttaquee(1);
             o.onHit(player, x, y);
+            notifyObservers();
         }
     }
 

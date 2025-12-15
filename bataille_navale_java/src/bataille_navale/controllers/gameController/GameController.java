@@ -43,7 +43,6 @@ public class GameController {
         }
         turnLogs.showPlayerAttack(selectedAction, x, y);
         // mise à jour automatique de la vue
-        humanPlayer.getEnemyGrid().notifyObservers();
 
         if(humanPlayer.getEnemyGrid().allBoatsSunk()){
             view.dispose();
@@ -53,7 +52,7 @@ public class GameController {
 
         int[] res = computerPlayer.playerTurn(this.computerPlayer);
         turnLogs.showComputerAttack(ActionType.BASIC_ATTACK, res[0],res[1]);
-        computerPlayer.getEnemyGrid().notifyObservers();
+
         if(computerPlayer.getEnemyGrid().allBoatsSunk()){
             view.dispose();
             this.winner = computerPlayer;
