@@ -2,7 +2,6 @@ package bataille_navale.models.map;
 
 import bataille_navale.Object;
 import bataille_navale.controllers.players.Player;
-import bataille_navale.models.GridObservable;
 import bataille_navale.models.GridObserver;
 import bataille_navale.models.Objects.items.boat.Boat;
 import bataille_navale.models.Objects.items.boat.BoatDirection;
@@ -10,11 +9,10 @@ import bataille_navale.models.Objects.items.boat.BoatFactory;
 import bataille_navale.models.Objects.items.traps.Trap;
 import bataille_navale.models.Objects.weapons.Bomb;
 
-import java.awt.event.WindowStateListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Grid implements GridObservable {
+public class Grid{
     private List<GridObserver> observers = new ArrayList<>();
     private int height;
     private int width;
@@ -161,17 +159,14 @@ public class Grid implements GridObservable {
 
     //PARTIE OBSERVER
 
-    @Override
     public void addObserver(GridObserver observer) {
         observers.add(observer);
     }
 
-    @Override
     public void removeObserver(GridObserver observer) {
         observers.remove(observer);
     }
 
-    @Override
     public void notifyObservers() {
         for (GridObserver o : observers) o.update(this);
     }
