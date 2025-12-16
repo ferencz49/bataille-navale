@@ -75,7 +75,7 @@ public class Grid{
                 boat.setBoatCoordinates(x+i,y);
             }
         }
-        notifyObservers();
+        notifyObserversGrid();
         return true;
     }
 
@@ -90,7 +90,7 @@ public class Grid{
                 return false;
             }
             this.grille[x][y] = trap;
-            notifyObservers();
+            notifyObserversGrid();
             return true;
         }
 
@@ -101,7 +101,7 @@ public class Grid{
             this.grille[x][y] = new BateauCoule(1);
 
         }
-        notifyObservers();
+        notifyObserversGrid();
     }
 
     public void basicAttack(Player player, int x, int y){
@@ -110,7 +110,7 @@ public class Grid{
             if(o instanceof Boat){
                 this.grille[x][y] = new CaseAttaquee(1);
                 o.onHit(player, x, y);
-                notifyObservers();
+                notifyObserversCell(x,y);
             }
             if(o instanceof Water){
                 o.onHit(player, x, y);
@@ -118,7 +118,7 @@ public class Grid{
         }
         else if(this.grille[x][y] == null){
             this.grille[x][y] = new Water(1);
-            notifyObservers();
+            notifyObserversCell(x,y);
         }
     }
 
@@ -127,7 +127,7 @@ public class Grid{
         this.grille[x][y] = new CaseAttaquee(1);
         o.onHit(player, x, y);
         bomb.useWeapon(player, x, y);
-        notifyObservers();
+        notifyObserversGrid();
     }
     public void modifyCoordinates(){
 
@@ -167,7 +167,11 @@ public class Grid{
         observers.remove(observer);
     }
 
-    public void notifyObservers() {
+    public void notifyObserversGrid() {
         for (GridObserver o : observers) o.update(this);
+    }
+
+    public void notifyObserversCell(int x, int y){
+        for (GridObserver o : observers) o.updateCell(this, x, y);
     }
 }

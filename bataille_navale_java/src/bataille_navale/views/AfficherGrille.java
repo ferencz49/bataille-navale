@@ -83,6 +83,39 @@ public class AfficherGrille extends JFrame implements GridObserver {
 
     }
 
+    @Override
+    public void updateCell(Grid g, int x, int y) {
+        if( g == this.grid){
+            updatePlayerCell(this.grid,this.afficheGrille, x, y);
+        }
+        else{
+            updateComputerCell(this.grid2,this.afficheGrille2, x, y);
+        }
+    }
+
+    public void updatePlayerCell(Grid grille, JButton[][]boutons, int x, int y){
+        bataille_navale.Object obj = grille.getCase(x, y);
+
+        if (obj == null) boutons[y][x].setBackground(Color.BLUE);
+        else if (obj.getType() == ObjectType.SUNK_BOAT) boutons[y][x].setBackground(Color.red);
+        else if (obj.getType() == ObjectType.BOAT) boutons[y][x].setBackground(Color.GRAY);
+        else if (obj.getType() == ObjectType.TRAP) boutons[y][x].setBackground(Color.ORANGE);
+        else if (obj.getType() == ObjectType.WEAPON) boutons[y][x].setBackground(Color.BLACK);
+        else if (obj.getType() == ObjectType.HIT_BOAT) boutons[y][x].setBackground(Color.MAGENTA);
+        else if (obj.getType() == ObjectType.WATER) boutons[y][x].setBackground(Color.CYAN);
+    }
+
+    public void updateComputerCell(Grid grille, JButton[][]boutons,int x, int y){
+        bataille_navale.Object obj = grille.getCase(x, y);
+
+        if (obj == null) boutons[y][x].setBackground(Color.BLUE);
+        else if (obj.getType() == ObjectType.SUNK_BOAT) boutons[y][x].setBackground(Color.red);
+        else if (obj.getType() == ObjectType.BOAT) boutons[y][x].setBackground(Color.BLUE);
+        else if (obj.getType() == ObjectType.TRAP) boutons[y][x].setBackground(Color.ORANGE);
+        else if (obj.getType() == ObjectType.WEAPON) boutons[y][x].setBackground(Color.BLACK);
+        else if (obj.getType() == ObjectType.HIT_BOAT) boutons[y][x].setBackground(Color.MAGENTA);
+        else if (obj.getType() == ObjectType.WATER) boutons[y][x].setBackground(Color.CYAN);
+    }
     public void updatePlayerGrid(Grid grille, JButton[][]boutons){
         for (int y = 0; y < grille.getGrille().length; y++) {
             for (int x = 0; x < grille.getGrille()[0].length; x++) {
