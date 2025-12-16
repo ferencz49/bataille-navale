@@ -1,11 +1,16 @@
 package bataille_navale.controllers.players;
 
 import bataille_navale.models.Objects.items.Item;
+import bataille_navale.models.Objects.weapons.Bomb;
 import bataille_navale.models.map.Grid;
+
+import java.util.ArrayList;
 
 public  abstract class Player {
 
     private final PlayerType type;
+    private ArrayList<Item> usableItems;
+
 
     protected Grid playerGrid;
     protected Grid enemyGrid;
@@ -14,6 +19,9 @@ public  abstract class Player {
         this.playerGrid = playerGrid;
         this.enemyGrid = ennemyGrid;
         this.type = playerType;
+
+        this.usableItems = new ArrayList<>();
+        this.usableItems.add(new Bomb(1));
     }
 
     public Grid getGrid(){
@@ -28,6 +36,10 @@ public  abstract class Player {
         return this.type;
     }
 
+    public ArrayList<Item> getUsableItems(){
+        return this.usableItems;
+    }
+
 
     public void placeBoats(){
         playerGrid.setBoats1();
@@ -35,7 +47,9 @@ public  abstract class Player {
 
    public void playerTurn(){}
 
-    public void addItem(Item item){}
+    public void addItem(Item item){
+        this.usableItems.add(item);
+    }
 
 
 }

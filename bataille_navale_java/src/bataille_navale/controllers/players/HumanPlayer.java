@@ -1,5 +1,6 @@
 package bataille_navale.controllers.players;
 
+import bataille_navale.models.Objects.ObjectType;
 import bataille_navale.models.Objects.items.Item;
 import bataille_navale.models.Objects.items.boat.Boat;
 import bataille_navale.models.Objects.weapons.Bomb;
@@ -10,12 +11,11 @@ import java.util.ArrayList;
 public class HumanPlayer extends Player {
 
     private ArrayList<Boat> boatsToPlace;
-    private ArrayList<Item> usableItems;
 
     public HumanPlayer(Grid playerGrid, Grid ennemyGrid){
         super(playerGrid, ennemyGrid, PlayerType.HUMAN);
         this.boatsToPlace = new ArrayList<>();
-        this.usableItems = new ArrayList<>();
+
     }
 
     public Grid getEnemyGrid(){
@@ -27,8 +27,16 @@ public class HumanPlayer extends Player {
     }
 
     public void useBomb(int x, int y){
-        Bomb bomb = new Bomb(1);
-        this.enemyGrid.bombAttack(bomb, this, x, y);
+        if(this.getUsableItems().isEmpty()){
+            return;
+        }
+        for(int i = 0; i < this.getUsableItems().size();i++){
+            if(this.getUsableItems().get(i).getType() == ObjectType.WEAPON){
+                this.enemyGrid.bombAttack((Bomb)this.getUsableItems().get(i), this, x, y);
+                this.getUsableItems().remove(i);
+                return;
+            }
+        }
     }
 
     public void playerTurn(){
@@ -47,9 +55,5 @@ public class HumanPlayer extends Player {
             }
         }
         return true;
-    }
-
-    public void addItem(Item item){
-        this.usableItems.add(item);
     }
 }

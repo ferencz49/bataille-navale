@@ -48,7 +48,13 @@ public class GameController {
         }
         switch (selectedAction) {
             case BASIC_ATTACK -> humanPlayer.basicAttack(player, x, y);
-            case BOMB -> humanPlayer.useBomb(x, y);
+            case BOMB -> {
+                if(player.getUsableItems().isEmpty()){
+                    return;
+
+                }
+                humanPlayer.useBomb(x, y);
+            }
         }
         turnLogs.showPlayerAttack(selectedAction, x, y);
         // mise à jour automatique de la vue
