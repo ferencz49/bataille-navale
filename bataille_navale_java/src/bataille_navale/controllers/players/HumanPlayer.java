@@ -28,7 +28,7 @@ public class HumanPlayer extends Player {
 
     public void useBomb(int x, int y){
         Bomb bomb = new Bomb(1);
-        this.playerGrid.bombAttack(bomb, this, x, y);
+        this.enemyGrid.bombAttack(bomb, this, x, y);
     }
 
     public void playerTurn(){

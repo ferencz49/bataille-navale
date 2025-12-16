@@ -123,14 +123,32 @@ public class Grid{
     }
 
     public void bombAttack(Bomb bomb, Player player, int x, int y){
-        Object o = grille[x][y];
-        this.grille[x][y] = new CaseAttaquee(1);
-        o.onHit(player, x, y);
-        bomb.useWeapon(player, x, y);
         notifyObserversGrid();
-    }
-    public void modifyCoordinates(){
+        basicAttack(player, x, y);
+        if(this.cellExists(x, y-1)){
+            basicAttack(player, x, y-1);
+        }
+        if(this.cellExists(x, y+1)){
+            basicAttack(player, x, y+1);
+        }
+        if(this.cellExists(x+1, y)){
+            basicAttack(player, x+1, y);
+        }
+        if(this.cellExists(x-1, y)){
+            basicAttack(player, x-1, y);
+        }
+        notifyObserversGrid();
 
+    }
+
+    public boolean cellExists(int x, int y){
+        if(this.width-1 < x || x < 0){
+            return false;
+        }
+        if(this.height-1 < y || y < 0){
+            return false;
+        }
+        return true;
     }
 
     public void setBoats1(){
