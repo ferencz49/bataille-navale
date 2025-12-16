@@ -31,12 +31,10 @@ public class Computer extends Player{
 
             Object obj = enemyGrid.getCase(x, y);
 
-            // ❌ case déjà jouée → on recommence
             if (obj.getType() == ObjectType.HIT_BOAT || obj.getType() == ObjectType.SUNK_BOAT || obj.getType() == ObjectType.WATER) {
                 return basicAttack(player);
             }
 
-            // ✅ case attaquable (null ou bateau)
             enemyGrid.basicAttack(player, x, y);
             return new int[]{x, y};
     }

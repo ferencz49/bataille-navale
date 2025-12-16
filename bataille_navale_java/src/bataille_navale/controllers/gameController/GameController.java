@@ -1,8 +1,10 @@
 package bataille_navale.controllers.gameController;
 
+import bataille_navale.Object;
 import bataille_navale.controllers.players.Computer;
 import bataille_navale.controllers.players.HumanPlayer;
 import bataille_navale.controllers.players.Player;
+import bataille_navale.models.Objects.ObjectType;
 import bataille_navale.models.TurnLogs;
 import bataille_navale.views.AfficherGrille;
 import bataille_navale.views.GameEnd;
@@ -37,6 +39,13 @@ public class GameController {
 
     // toute la logique de la partie est ici mdr
     private void handleCellClick(Player player, int x, int y) {
+        Object obj = null;
+        if(humanPlayer.getEnemyGrid().getCase(x,y) != null){
+            obj = humanPlayer.getEnemyGrid().getCase(x,y);
+        }
+        if((obj != null) && (obj.getType() == ObjectType.HIT_BOAT || obj.getType() == ObjectType.SUNK_BOAT || obj.getType() == ObjectType.WATER)){
+            return;
+        }
         switch (selectedAction) {
             case BASIC_ATTACK -> humanPlayer.basicAttack(player, x, y);
             case BOMB -> humanPlayer.useBomb(x, y);
