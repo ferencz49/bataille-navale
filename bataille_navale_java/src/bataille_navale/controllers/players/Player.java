@@ -54,5 +54,23 @@ public  abstract class Player {
         this.usableItems.add(item);
     }
 
+    public boolean usableItemsContainsSonar(){
+        for(int i = 0; i < usableItems.size(); i++){
+            if(usableItems.get(i).getType() == ObjectType.SONAR){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean usableItemsContainsBomb(){
+        for(int i = 0; i < usableItems.size(); i++){
+            if(usableItems.get(i).getType() == ObjectType.WEAPON){
+                return true;
+            }
+        }
+        return false;
+    }
+
 
 }

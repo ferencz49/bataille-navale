@@ -52,14 +52,14 @@ public class GameController {
         switch (selectedAction) {
             case BASIC_ATTACK -> humanPlayer.basicAttack(player, x, y);
             case BOMB -> {
-                if(player.getUsableItems().isEmpty()){
+                if(!player.usableItemsContainsBomb()){
                     return;
 
                 }
                 humanPlayer.useBomb(x, y);
             }
             case SONAR -> {
-                if(player.getUsableItems().isEmpty()){
+                if(!player.usableItemsContainsSonar()){
                     return;
                 }
                 int result = humanPlayer.useSonar(x, y);
