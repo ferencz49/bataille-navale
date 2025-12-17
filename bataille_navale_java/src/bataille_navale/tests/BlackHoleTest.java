@@ -1,6 +1,7 @@
 package bataille_navale.tests;
 
 import bataille_navale.controllers.players.HumanPlayer;
+import bataille_navale.models.Objects.ObjectType;
 import bataille_navale.models.Objects.items.boat.Boat;
 import bataille_navale.models.Objects.items.boat.BoatDirection;
 import bataille_navale.models.Objects.items.boat.BoatFactory;
@@ -18,7 +19,7 @@ class BlackHoleTest {
         Grid grid_player1 = new Grid();
         Grid grid_player2 = new Grid();
         HumanPlayer playerTest = new HumanPlayer(grid_player1, grid_player2);
-        Bomb bomb = new Bomb(1);
+        Bomb bomb = new Bomb(1, ObjectType.WEAPON);
         BlackHole blackHole = new BlackHole(1);
         Boat boat = BoatFactory.createTorpilleur(BoatDirection.Horizontal);
 

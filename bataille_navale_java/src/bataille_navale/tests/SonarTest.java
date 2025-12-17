@@ -1,6 +1,7 @@
 package bataille_navale.tests;
 
 import bataille_navale.controllers.players.HumanPlayer;
+import bataille_navale.models.Objects.ObjectType;
 import bataille_navale.models.Objects.items.boat.Boat;
 import bataille_navale.models.Objects.items.boat.BoatDirection;
 import bataille_navale.models.Objects.items.boat.Types;
@@ -19,7 +20,7 @@ class SonarTest {
         Boat b  = new Boat(3, Types.Croiseur, BoatDirection.Horizontal);
         g.setBoat(5,5, b );
 
-        Sonar s = new Sonar(1);
+        Sonar s = new Sonar(1, ObjectType.SONAR);
         s.useWeapon(playerTest, 7,5);
         //assertEquals(2,result);
     }

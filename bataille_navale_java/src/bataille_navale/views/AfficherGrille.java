@@ -21,6 +21,8 @@ public class AfficherGrille extends JFrame implements GridObserver {
     private JButton[][] afficheGrille2;
     private JButton utiliserBombe = new JButton("utiliser votre bombe");
     private JButton utiliserAttaque = new JButton("utiliser votre attaque de base");
+    private JButton utiliserSonar = new JButton("utiliser votre sonar");
+
     private Grid grid;
     private Grid grid2;
 
@@ -210,6 +212,7 @@ public class AfficherGrille extends JFrame implements GridObserver {
 
         jpanel.add(utiliserAttaque);
         jpanel.add(utiliserBombe);
+        jpanel.add(utiliserSonar);
 
         return jpanel;
     }
@@ -221,6 +224,8 @@ public class AfficherGrille extends JFrame implements GridObserver {
     public JButton getUtiliserAttaque(){
         return this.utiliserAttaque;
     }
+
+    public JButton getUtiliserSonar(){return this.utiliserSonar;}
 
     public JButton[][] getAfficheGrilleEnnemi() { return afficheGrille2; }
 }

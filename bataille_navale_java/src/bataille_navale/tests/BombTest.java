@@ -1,6 +1,7 @@
 package bataille_navale.tests;
 
 import bataille_navale.controllers.players.HumanPlayer;
+import bataille_navale.models.Objects.ObjectType;
 import bataille_navale.models.Objects.items.boat.Boat;
 import bataille_navale.models.Objects.items.boat.BoatDirection;
 import bataille_navale.models.Objects.items.boat.BoatFactory;
@@ -14,12 +15,12 @@ class BombTest {
 
     @Test
     void getCanBeThrown() {
-        Bomb b = new Bomb(3);
+        Bomb b = new Bomb(3, ObjectType.WEAPON);
 
         boolean result = b.getCanBeThrown();
         assertTrue(result);
 
-        Bomb b2 = new Bomb(0);
+        Bomb b2 = new Bomb(0, ObjectType.WEAPON);
 
         boolean result2 = b2.getCanBeThrown();
         assertFalse(result2);
@@ -37,7 +38,7 @@ class BombTest {
 
         Boat bateau = BoatFactory.createContreTorpilleur(BoatDirection.Horizontal);
 
-        Bomb bomb = new Bomb(1);
+        Bomb bomb = new Bomb(1, ObjectType.WEAPON);
 
         grid_player1.setBoat(5,5, bateau);
 

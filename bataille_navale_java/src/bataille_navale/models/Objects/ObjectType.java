@@ -6,6 +6,7 @@ public enum ObjectType {
     HIT_BOAT,
     TRAP,
     WEAPON,
+    SONAR,
     WATER,
     ISLAND;
 }

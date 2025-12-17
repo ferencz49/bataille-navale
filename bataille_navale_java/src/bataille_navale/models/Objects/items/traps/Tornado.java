@@ -1,6 +1,7 @@
 package bataille_navale.models.Objects.items.traps;
 
 import bataille_navale.controllers.players.Player;
+import bataille_navale.models.Objects.ObjectType;
 import bataille_navale.models.Objects.weapons.Bomb;
 
 public class Tornado extends Trap {
@@ -19,7 +20,7 @@ public class Tornado extends Trap {
     }
 
     public void onHit(Player player, int x, int y){
-        Bomb bomb = new Bomb(1);
+        Bomb bomb = new Bomb(1, ObjectType.WEAPON);
         bomb.useWeapon(player, x, y);
     }
 }

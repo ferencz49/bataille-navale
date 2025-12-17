@@ -9,6 +9,8 @@ import bataille_navale.models.TurnLogs;
 import bataille_navale.views.AfficherGrille;
 import bataille_navale.views.GameEnd;
 
+import javax.swing.*;
+
 public class GameController {
     private AfficherGrille view;
     private HumanPlayer humanPlayer;
@@ -25,6 +27,7 @@ public class GameController {
 
         view.getUtiliserAttaque().addActionListener(e -> selectedAction = ActionType.BASIC_ATTACK);
         view.getUtiliserBombe().addActionListener(e -> selectedAction = ActionType.BOMB);
+        view.getUtiliserSonar().addActionListener(e -> selectedAction = ActionType.SONAR);
 
         for (int y = 0; y < humanPlayer.getEnemyGrid().getHeight(); y++) {
             for (int x = 0; x < humanPlayer.getEnemyGrid().getWidth(); x++) {
@@ -54,6 +57,13 @@ public class GameController {
 
                 }
                 humanPlayer.useBomb(x, y);
+            }
+            case SONAR -> {
+                if(player.getUsableItems().isEmpty()){
+                    return;
+                }
+                int result = humanPlayer.useSonar(x, y);
+                JOptionPane.showMessageDialog(view, result, "résultat du sonar",0 );
             }
         }
         turnLogs.showPlayerAttack(selectedAction, x, y);

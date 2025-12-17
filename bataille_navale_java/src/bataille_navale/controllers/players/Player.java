@@ -1,7 +1,9 @@
 package bataille_navale.controllers.players;
 
+import bataille_navale.models.Objects.ObjectType;
 import bataille_navale.models.Objects.items.Item;
 import bataille_navale.models.Objects.weapons.Bomb;
+import bataille_navale.models.Objects.weapons.Sonar;
 import bataille_navale.models.map.Grid;
 
 import java.util.ArrayList;
@@ -21,7 +23,8 @@ public  abstract class Player {
         this.type = playerType;
 
         this.usableItems = new ArrayList<>();
-        this.usableItems.add(new Bomb(1));
+        this.usableItems.add(new Bomb(1, ObjectType.WEAPON));
+        this.usableItems.add(new Sonar(1, ObjectType.SONAR));
     }
 
     public Grid getGrid(){

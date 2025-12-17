@@ -4,6 +4,7 @@ import bataille_navale.models.Objects.ObjectType;
 import bataille_navale.models.Objects.items.Item;
 import bataille_navale.models.Objects.items.boat.Boat;
 import bataille_navale.models.Objects.weapons.Bomb;
+import bataille_navale.models.Objects.weapons.Sonar;
 import bataille_navale.models.map.Grid;
 
 import java.util.ArrayList;
@@ -37,6 +38,21 @@ public class HumanPlayer extends Player {
                 return;
             }
         }
+    }
+
+    public int useSonar(int x, int y){
+        if(this.getUsableItems().isEmpty()){
+            return -1;
+        }
+        int result = 0;
+        for(int i = 0; i < this.getUsableItems().size();i++){
+            if(this.getUsableItems().get(i).getType() == ObjectType.SONAR){
+                result = this.enemyGrid.sonarAttack((Sonar) this.getUsableItems().get(i), this, x, y);
+                this.getUsableItems().remove(i);
+                return result;
+            }
+        }
+        return -1;
     }
 
     public void playerTurn(){

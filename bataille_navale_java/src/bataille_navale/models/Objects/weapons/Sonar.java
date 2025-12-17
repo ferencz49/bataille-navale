@@ -1,13 +1,14 @@
 package bataille_navale.models.Objects.weapons;
 
+import bataille_navale.models.Objects.ObjectType;
 import bataille_navale.models.map.Grid;
 
 public class Sonar extends Weapon{
     private boolean canBeUsed = true;
     private boolean submarineIsAlive = true;
 
-    public Sonar(int capacity){
-        super(capacity);
+    public Sonar(int capacity, ObjectType objectType){
+        super(capacity, objectType);
     }
 
     public boolean getCanBeUsed() {

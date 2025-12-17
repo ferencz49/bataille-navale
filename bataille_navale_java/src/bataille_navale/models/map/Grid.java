@@ -3,11 +3,13 @@ package bataille_navale.models.map;
 import bataille_navale.Object;
 import bataille_navale.controllers.players.Player;
 import bataille_navale.models.GridObserver;
+import bataille_navale.models.Objects.ObjectType;
 import bataille_navale.models.Objects.items.boat.Boat;
 import bataille_navale.models.Objects.items.boat.BoatDirection;
 import bataille_navale.models.Objects.items.boat.BoatFactory;
 import bataille_navale.models.Objects.items.traps.Trap;
 import bataille_navale.models.Objects.weapons.Bomb;
+import bataille_navale.models.Objects.weapons.Sonar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -122,8 +124,42 @@ public class Grid{
         }
     }
 
+    public int sonarAttack(Sonar sonar, Player player, int x, int y){
+        int count = 0;
+        if (this.grille[x][y].getType() == ObjectType.BOAT) {
+            count++;
+        }
+        //cases au dessus de la case touchée
+        if(cellExists(x-1,y-1) && this.grille[x-1][y-1] != null && this.grille[x-1][y-1].getType() == ObjectType.BOAT){
+            count++;
+        }
+        if(cellExists(x,y-1) && this.grille[x][y-1] != null && this.grille[x][y-1].getType() == ObjectType.BOAT){
+            count++;
+        }
+        if(cellExists(x+1,y-1) && this.grille[x+1][y-1] != null && this.grille[x+1][y-1].getType() == ObjectType.BOAT){
+            count++;
+        }
+        // cases sur la ligne de la case touchée
+        if(cellExists(x-1,y) && this.grille[x-1][y] != null && this.grille[x-1][y].getType() == ObjectType.BOAT){
+            count++;
+        }
+        if(cellExists(x+1,y) && this.grille[x+1][y] != null && this.grille[x+1][y].getType() == ObjectType.BOAT){
+            count++;
+        }
+        //cases du dessous
+        if(cellExists(x-1,y+1) &&this.grille[x-1][y+1] != null &&  this.grille[x-1][y+1].getType() == ObjectType.BOAT){
+            count++;
+        }
+        if(cellExists(x,y+1) && this.grille[x][y+1] != null && this.grille[x][y+1].getType() == ObjectType.BOAT){
+            count++;
+        }
+        if(cellExists(x+1,y+1) && this.grille[x+1][y+1] != null && this.grille[x+1][y+1].getType() == ObjectType.BOAT){
+            count++;
+        }
+        return count;
+    }
+
     public void bombAttack(Bomb bomb, Player player, int x, int y){
-        notifyObserversGrid();
         basicAttack(player, x, y);
         if(this.cellExists(x, y-1)){
             basicAttack(player, x, y-1);
