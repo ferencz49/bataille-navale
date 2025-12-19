@@ -20,7 +20,11 @@ public class GameEnd extends JFrame {
         this.playAgain = new JButton("Lancer une nouvelle partie");
         playAgain.addActionListener(e->{
             this.dispose();
-            GameSettings gameSettings = new GameSettings(new Grid(), new Grid() ,humanPlayer, computerPlayer);
+            Grid a = new Grid();
+            Grid b = new Grid();
+            humanPlayer.setGrid(a,b);
+            computerPlayer.setGrid(b,a);
+            GameSettings gameSettings = new GameSettings(a, b ,humanPlayer, computerPlayer);
         });
         layout_principal.add(playAgain,BorderLayout.SOUTH);
         System.out.println("ezhfzef"+winner.getType());

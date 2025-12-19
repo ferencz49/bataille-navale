@@ -73,4 +73,11 @@ public  abstract class Player {
     }
 
 
+    public void setGrid(Grid playerGrid, Grid enemyGrid){
+        this.playerGrid = playerGrid;
+        this.enemyGrid = enemyGrid;
+
+    }
+
+
 }
