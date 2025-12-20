@@ -21,20 +21,36 @@ package bataille_navale{
 
             package players{
                 abstract class Player{ /' C'EST UNE CLASSE ABSTRAITE, CAR ON VA IMPLEMENTER LES METHODES DE LA MEME MANIERE '/
-                    + placerBateauxFixe()
-                    + placerBateauxAleatoire()
+                    - type : PlayerType
+                    - usableItems : ArrayList<Item>
+                    - playerGrid : Grid
+                    - enemyGrid : Grid
+                    + getGrid() : Grid
+                    + getEnemyGrid(): Grid
+                    + getType(): PlayerType
+                    + getUsableItems(): ArrayList<Item>
+                    + placeBoats()
+                    + playerTurn()
+                    + addItem(item : Item)
+                    + usableItemsContainsSonar() : boolean
+                    + usableItemsContainsBomb() : boolean
+                    + setGrid(playerGrid : Grid, enemyGrid : Grid)
                 }
 
-                class HumanController extends Player{
-                    + tir()
-                    + placerTornade(x : integer, y : integer)
-                    + placerTrouNoir(x : integer, y : integer)
+                class HumanPlayer extends Player{
+                    + getEnemyGrid() : Grid
+                    + basicAttack(player : Player, x : Integer, y : Integer)
+                    + useBomb(x : integer, y : integer)
+                    + useSonar(x : Integer, y : Integer) :Integer
+                    + playerTurn()
+                    + addBoatToPlace(boat : Boat)
+                    + isGridEmpty() : boolean
                 }
 
-                class ComputerController extends Player{
-                    + tirAleatoire()
-                    + placerTornade() : boolean
-                    + placerTrouNoir() : boolean
+                class Computer extends Player{
+                    + playerTurn(): Integer[]
+                    + basicAttack() : Integer[]
+                    + optimizedAttack() : Integer[]
                 }
             }
 
