@@ -141,36 +141,20 @@ public class Grid{
 
     public int sonarAttack(Sonar sonar, Player player, int x, int y){
         int count = 0;
-        if (this.grille[x][y].getType() == ObjectType.BOAT) {
-            count++;
+
+        for (int dx = -1; dx <= 1; dx++) {
+            for (int dy = -1; dy <= 1; dy++) {
+                int nx = x + dx;
+                int ny = y + dy;
+
+                if (cellExists(nx, ny)
+                        && this.grille[nx][ny] != null
+                        && this.grille[nx][ny].getType() == ObjectType.BOAT) {
+                    count++;
+                }
+            }
         }
-        //cases au dessus de la case touchée
-        if(cellExists(x-1,y-1) && this.grille[x-1][y-1] != null && this.grille[x-1][y-1].getType() == ObjectType.BOAT){
-            count++;
-        }
-        if(cellExists(x,y-1) && this.grille[x][y-1] != null && this.grille[x][y-1].getType() == ObjectType.BOAT){
-            count++;
-        }
-        if(cellExists(x+1,y-1) && this.grille[x+1][y-1] != null && this.grille[x+1][y-1].getType() == ObjectType.BOAT){
-            count++;
-        }
-        // cases sur la ligne de la case touchée
-        if(cellExists(x-1,y) && this.grille[x-1][y] != null && this.grille[x-1][y].getType() == ObjectType.BOAT){
-            count++;
-        }
-        if(cellExists(x+1,y) && this.grille[x+1][y] != null && this.grille[x+1][y].getType() == ObjectType.BOAT){
-            count++;
-        }
-        //cases du dessous
-        if(cellExists(x-1,y+1) &&this.grille[x-1][y+1] != null &&  this.grille[x-1][y+1].getType() == ObjectType.BOAT){
-            count++;
-        }
-        if(cellExists(x,y+1) && this.grille[x][y+1] != null && this.grille[x][y+1].getType() == ObjectType.BOAT){
-            count++;
-        }
-        if(cellExists(x+1,y+1) && this.grille[x+1][y+1] != null && this.grille[x+1][y+1].getType() == ObjectType.BOAT){
-            count++;
-        }
+
         return count;
     }
 
