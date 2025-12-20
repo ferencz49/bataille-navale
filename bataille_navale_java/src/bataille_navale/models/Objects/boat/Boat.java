@@ -56,4 +56,8 @@ public class Boat extends Object {
     public void setBoatCoordinates(int x, int y){
         this.coordinates.add(new BoatCoordinates(x,y));
     }
+
+    public void setBoatDirection(BoatDirection boatDirection){
+        this.boatDirection = boatDirection;
+    }
 }

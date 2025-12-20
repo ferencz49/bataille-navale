@@ -34,10 +34,11 @@ public class ObjectsPlacement extends JFrame {
         lancerPartie.addActionListener(e-> {
             GameController controller = new GameController( new AfficherGrille(playerGrid,computerGrid), humanPlayer, computerPlayer);
             if(humanPlayer.isGridEmpty()){
-                computerPlayer.placeBoats();
-                humanPlayer.placeBoats();
                 computerPlayer.placeIsland();
                 humanPlayer.placeIsland();
+                computerPlayer.placeBoats();
+                humanPlayer.placeBoats();
+
             }
             this.dispose();
         });

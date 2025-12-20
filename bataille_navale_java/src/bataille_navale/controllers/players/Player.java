@@ -45,7 +45,7 @@ public  abstract class Player {
 
 
     public void placeBoats(){
-        playerGrid.setBoats1();
+        playerGrid.placeBoatsRandom();
     }
 
     public void placeIsland(){

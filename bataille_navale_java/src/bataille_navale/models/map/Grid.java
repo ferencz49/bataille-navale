@@ -210,6 +210,63 @@ public class Grid{
         this.nbBoatsSunk+= nb;
     }
 
+    private boolean canPlaceBoat(int x, int y, Boat boat) {
+        for (int i = 0; i < boat.getSize(); i++) {
+            int nx = x;
+            int ny = y;
+
+            if (boat.getBoatDirection() == BoatDirection.Vertical) {
+                ny += i;
+            } else {
+                nx += i;
+            }
+
+            if (!cellExists(nx, ny)) {
+                return false;
+            }
+
+            if (grille[nx][ny] != null) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private void placeBoatRandomly(Boat boat) {
+        boolean placed = false;
+
+        while (!placed) {
+            int x = (int) (Math.random() * width);
+            int y = (int) (Math.random() * height);
+
+            BoatDirection direction = Math.random() < 0.5
+                    ? BoatDirection.Horizontal
+                    : BoatDirection.Vertical;
+
+            boat.setBoatDirection(direction);
+
+            if (canPlaceBoat(x, y, boat)) {
+                boolean success = setBoat(x, y, boat);
+                placed = success;
+            }
+        }
+    }
+
+    public void placeBoatsRandom() {
+        List<Boat> boats = new ArrayList<>();
+
+        boats.add(BoatFactory.createPorteAvion(BoatDirection.Horizontal));
+        boats.add(BoatFactory.createCroiseur(BoatDirection.Horizontal));
+        boats.add(BoatFactory.createContreTorpilleur(BoatDirection.Horizontal));
+        boats.add(BoatFactory.createSousMarin(BoatDirection.Horizontal));
+        boats.add(BoatFactory.createTorpilleur(BoatDirection.Horizontal));
+
+        for (Boat boat : boats) {
+            placeBoatRandomly(boat);
+        }
+
+        this.nbBoats += boats.size();
+    }
     //PARTIE OBSERVER
 
     public void addObserver(GridObserver observer) {
