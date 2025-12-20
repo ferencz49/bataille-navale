@@ -19,6 +19,19 @@ package bataille_navale{
 
     package controller{
 
+            package gameController(){
+                class GameController(){
+                    + <<create>> GameController(view : AfficherGrille, humanPlayer : HumanPlayer, computerPlayer : Computer)
+                    + handleCellClick(player : Player, x : Integer, y : Integer)
+                }
+
+                enum ActionType{
+                    BASIC_ATTACK
+                    BOMB
+                    SONAR
+                }
+            }
+
             package players{
                 abstract class Player{ /' C'EST UNE CLASSE ABSTRAITE, CAR ON VA IMPLEMENTER LES METHODES DE LA MEME MANIERE '/
                     - type : PlayerType
@@ -80,14 +93,27 @@ package bataille_navale{
 
                 class Boat extends bataille_navale.models.Objects.Object {
                   - hits : Integer
+                  - type : Types
+                  - boatDirection : BoatDirection
+                  - coordinates : ArrayList<BoatCoordinates>
                   + <<create>> Boat(type : BoatType, direction : BoatDirection, size : Integer)
 
                   + getBoatSize() : Integer
                   + isSunk() : boolean
                   + increaseHits()
-                  + onHit(grid : Grid, x : Integer, y : Integer)
+                  + onHit(player : Player, x : Integer, y : Integer)
                   + getHits() : Integer
                   + getBoatDirection() : BoatDirection
+                  + getBoatCoordinates(): ArrayList<BoatCoordinates>
+                  + setBoatCoordinates(x : Integer, y : Integer)
+                }
+
+                class BoatCoordinates{
+                    - x : Integer
+                    - y : Integer
+                    + <<create>> BoatCoordinates(x : Integer, y : Integer)
+                    + getX() : Integer
+                    + getY() : Integer
                 }
 
                 enum BoatType <<enumerate>> {
@@ -112,86 +138,128 @@ package bataille_navale{
 
                 }
             }
-                    package items{
 
-                        abstract class Item <<abstract>> extends bataille_navale.models.Objects.Object{
-                            + <<create>> Item()
-                            - capacity : Integer
-                            + canBeUsed() : boolean
-                            + addCapacity()
-                        }
+            package island{
+                class Island() extends Object{
+                    - item : Item
 
-                        package weapons{
-                            abstract class Weapon <<abstract>> extends bataille_navale.models.Objects.items.Item{
-                                + <<create>> Weapon(size : Integer, capacity : Integer)
-                            }
+                    + <<create>> Island(size : Integer, item : Item)
+                    + <<create>> Island(size : Integer)
+                    + onHit(player : Player, x : Integer, y : Integer)
+                }
+            }
 
-                            class Bomb extends Weapon{
-                                + <<create>> bombe()
-                                + getCanBeThrown() : Boolean
-                                + useBomb (x : Integer, y : Integer, g : Grille)
-                            }
 
-                            class Sonar extends Weapon{
-                                - submarineIsAlive : boolean
-                                - canBeUsed : boolean
-                                + <<create>> sonar(size : Integer)
-                                + useSonar (x : Integer, y : Integer, g : Grid)
-                                + getSubmarineIsAlive() : boolean
-                                + setSubmarineIsAlive( submarineIsAlive : boolean)
-                                + getCanBeUsed() : Boolean
-                                + setCanBeUsed( canBeUsed : boolean)
+            package items{
 
-                            }
-                        }
+                abstract class Item <<abstract>> extends bataille_navale.models.Objects.Object{
+                    + <<create>> Item(capacity : Integer, objectType : ObjectType)
+                    - capacity : Integer
+                    + canBeUsed() : boolean
+                    + addCapacity()
+                }
 
-                        package traps {
-
-                            abstract class Trap <<abstract>> extends bataille_navale.models.Objects.items.Item{
-                                + <<create>> Trap(size : Integer, capacity : Integer)
-                            }
-
-                            class BlackHole extends Trap{
-                                + <<create>> BlackHole(size : Integer)
-                                + getCanBePlaced() : boolean
-                                + setCanBePlaced( setCanBePlaced : boolean)
-
-                            }
-
-                            class Tornado extends Trap{
-                                + <<create>> Tornado(size : Integer)
-                                + getCanBePlaced() : boolean
-                                + setCanBePlaced( setCanBePlaced : boolean)
-                            }
-
-                        }
+                package weapons{
+                    abstract class Weapon <<abstract>> extends bataille_navale.models.Objects.items.Item{
+                        + <<create>> Weapon(size : Integer, capacity : Integer)
+                        + useWeapon(player : Player, x : Integer, y : Integer)
+                        + onHit(player : Player, x : Integer, y : Integer)
                     }
+
+                    class Bomb extends Weapon{
+                        + <<create>> Bomb(capacity : Integer, objectType : ObjectType)
+                        + getCanBeThrown() : Boolean
+                        + useWeapon (x : Integer, y : Integer, player : Player)
+                    }
+
+                    class Sonar extends Weapon{
+                        - submarineIsAlive : boolean
+                        - canBeUsed : boolean
+                        + <<create>> sonar(capacity : Integer, objectType : ObjectType)
+                        + useSonar (x : Integer, y : Integer, g : Grid)
+                        + getSubmarineIsAlive() : boolean
+                        + setSubmarineIsAlive( submarineIsAlive : boolean)
+                        + getCanBeUsed() : Boolean
+                        + setCanBeUsed( canBeUsed : boolean)
+
+                    }
+                }
+
+                package traps {
+
+                    abstract class Trap <<abstract>> extends bataille_navale.models.Objects.items.Item{
+                        + <<create>> Trap(capacity : Integer)
+                    }
+
+                    class BlackHole extends Trap{
+                        + <<create>> BlackHole(size : Integer)
+                        + getCanBePlaced() : boolean
+                        + setCanBePlaced( setCanBePlaced : boolean)
+                        + onHit(player : Player, x : Integer, y : Integer)
+
+                    }
+
+                    class Tornado extends Trap{
+                        + <<create>> Tornado(size : Integer)
+                        + getCanBePlaced() : boolean
+                        + setCanBePlaced( setCanBePlaced : boolean)
+                        + onHit(player : Player, x : Integer, y : Integer)
+                    }
+
+                }
+            }
         }
 
         package map{
 
-            class Map implements bataille_navale.models.GridObservable{
+            class Grid{
                 - height : Integer
                 - width : Integer
-                + <<create>> Map()
-                + <<create>> Map(hauteur : Integer, longueur : Integer )
+                + <<create>> Grid()
+                + <<create>> Grid(hauteur : Integer, longueur : Integer )
                 + getGrille() : Object[][]
                 + getCase() : Object
+                + getHeight() : Integer
+                + getWidth(): Integer
+                + getNbBoats() : Integer
+                + setIsland()
                 + setBoat(x : Integer, y : Integer, Boat boat) : boolean
                 + setTrap(x : Integer, y : Integer, trap : Trap) : boolean
-                + removeObject(x : Integer, y : Integer,  Boat boat)
+                + removeBoat(boat : Boat)
+                + basicAttack(player : Player, x : Integer, y : Integer)
+                + sonarAttack(sonar : Sonar, player : Player, x : Integer, y : Integer)
+                + bombAttack(bomb : Bomb, player : Player, x : Integer, y : Integer)
+                + cellExists(x : Integer, y : Integer) : boolean
                 + setBoats1(g : Grid)
+                + allBoatsSunk() : boolean
+                + addNbBoatsSunk()
+                + addObserver(observer : GridObserver)
+                + removeObserver(observer : GridObserver)
+                + notifyObserversGrid()
+                + notifyObserversCell(x : Integer, y : Integer)
             }
         }
 
-
-
-
-        interface GridObservable{
-            + addObserver(observer : GridObserver)
-            + removeObserver(observer : GridObserver)
-            + notifyObservers()
+        enum ObjectType{
+            BOAT
+            SUNK_BOAT
+            HIT_BOAT
+            TRAP
+            WEAPON
+            SONAR
+            WATER
+            ISLAND
+            HIT_ISLAND
         }
+
+        class TurnLogs{
+            + <<create>> TurnLogs()
+            + showPlayerAttack(actionType: ActionType, x : Integer, y : Integer)
+            + showComputerAttack(actionType: ActionType, x : Integer, y : Integer)
+        }
+
+
+
 
         interface GridObserver{
             + update(grid : Grid)
@@ -212,7 +280,7 @@ class Main{
 }
 
 Main .> Game : <<uses>>
-Bomb .> Map : <<uses>>
+Bomb .> Grid : <<uses>>
 
 
 Boat "1" *--> "1\n-typeBateau" BoatType: est \n >
@@ -221,6 +289,6 @@ Boat "1" *--> "1\n-orientation" BoatDirection: s'oriente \n >
 BoatFactory ..> Boat : <<uses>>
 
 
-Map "1..*" *--> "1..*\n-listObject" Object: contient \n >
+Grid "1..*" *--> "1..*\n-listObject" bataille_navale.models.Objects.Object: contient \n >
 
 @enduml
