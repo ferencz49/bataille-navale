@@ -1,4 +1,4 @@
-package bataille_navale.models.Objects.items.boat;
+package bataille_navale.models.Objects.boat;
 
 public enum Types {
     PorteAvion,

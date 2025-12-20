@@ -1,8 +1,7 @@
-package bataille_navale;
+package bataille_navale.models;
 
 import bataille_navale.controllers.players.Player;
 import bataille_navale.models.Objects.ObjectType;
-import bataille_navale.models.map.Grid;
 
 public abstract class Object {
     private ObjectType objectType;

@@ -8,5 +8,6 @@ public enum ObjectType {
     WEAPON,
     SONAR,
     WATER,
-    ISLAND;
+    ISLAND,
+    HIT_ISLAND;
 }

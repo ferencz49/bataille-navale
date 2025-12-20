@@ -1,6 +1,6 @@
 package bataille_navale.controllers.gameController;
 
-import bataille_navale.Object;
+import bataille_navale.models.Object;
 import bataille_navale.controllers.players.Computer;
 import bataille_navale.controllers.players.HumanPlayer;
 import bataille_navale.controllers.players.Player;

@@ -1,11 +1,9 @@
 package bataille_navale.controllers.players;
 
-import bataille_navale.Object;
+import bataille_navale.models.Object;
 import bataille_navale.models.Objects.ObjectType;
-import bataille_navale.models.Objects.items.boat.Boat;
 import bataille_navale.models.map.Grid;
 
-import java.util.ArrayList;
 import java.util.Random;
 
 

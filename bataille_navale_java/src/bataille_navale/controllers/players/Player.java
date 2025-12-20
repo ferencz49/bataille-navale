@@ -48,6 +48,10 @@ public  abstract class Player {
         playerGrid.setBoats1();
     }
 
+    public void placeIsland(){
+        playerGrid.setIsland();
+    }
+
    public void playerTurn(){}
 
     public void addItem(Item item){

@@ -1,7 +1,7 @@
 package bataille_navale.models.Objects.items;
 
 
-import bataille_navale.Object;
+import bataille_navale.models.Object;
 import bataille_navale.models.Objects.ObjectType;
 
 abstract public class Item extends Object {

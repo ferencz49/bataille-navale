@@ -2,9 +2,9 @@ package bataille_navale.tests;
 
 import bataille_navale.controllers.players.HumanPlayer;
 import bataille_navale.models.Objects.ObjectType;
-import bataille_navale.models.Objects.items.boat.Boat;
-import bataille_navale.models.Objects.items.boat.BoatDirection;
-import bataille_navale.models.Objects.items.boat.BoatFactory;
+import bataille_navale.models.Objects.boat.Boat;
+import bataille_navale.models.Objects.boat.BoatDirection;
+import bataille_navale.models.Objects.boat.BoatFactory;
 import bataille_navale.models.Objects.items.traps.BlackHole;
 import bataille_navale.models.Objects.weapons.Bomb;
 import bataille_navale.models.map.Grid;

@@ -2,9 +2,9 @@ package bataille_navale.tests;
 
 import bataille_navale.controllers.players.HumanPlayer;
 import bataille_navale.models.Objects.ObjectType;
-import bataille_navale.models.Objects.items.boat.Boat;
-import bataille_navale.models.Objects.items.boat.BoatDirection;
-import bataille_navale.models.Objects.items.boat.Types;
+import bataille_navale.models.Objects.boat.Boat;
+import bataille_navale.models.Objects.boat.BoatDirection;
+import bataille_navale.models.Objects.boat.Types;
 import bataille_navale.models.Objects.weapons.Sonar;
 import bataille_navale.models.map.Grid;
 import org.junit.jupiter.api.Test;

@@ -1,12 +1,13 @@
 package bataille_navale.models.map;
 
-import bataille_navale.Object;
+import bataille_navale.models.Object;
 import bataille_navale.controllers.players.Player;
 import bataille_navale.models.GridObserver;
 import bataille_navale.models.Objects.ObjectType;
-import bataille_navale.models.Objects.items.boat.Boat;
-import bataille_navale.models.Objects.items.boat.BoatDirection;
-import bataille_navale.models.Objects.items.boat.BoatFactory;
+import bataille_navale.models.Objects.island.Island;
+import bataille_navale.models.Objects.boat.Boat;
+import bataille_navale.models.Objects.boat.BoatDirection;
+import bataille_navale.models.Objects.boat.BoatFactory;
 import bataille_navale.models.Objects.items.traps.Trap;
 import bataille_navale.models.Objects.weapons.Bomb;
 import bataille_navale.models.Objects.weapons.Sonar;
@@ -57,6 +58,15 @@ public class Grid{
     public int getNbBoats(){ return this.nbBoats;}
 
     public int getNbBoatsSunk(){return this.nbBoatsSunk;}
+
+    public void setIsland(){
+        for(int i= 4; i < 6; i++){
+            for(int j = 4; j < 6; j++){
+                this.grille[i][j] = new Island(1, new Sonar(1, ObjectType.SONAR));
+                notifyObserversCell(i,j);
+            }
+        }
+    }
 
     public boolean setBoat(int x, int y, Boat boat){
         if(x > getWidth() - boat.getSize()){
@@ -116,6 +126,11 @@ public class Grid{
             }
             if(o instanceof Water){
                 o.onHit(player, x, y);
+            }
+            if(o instanceof Island){
+                o.onHit(player, x, y);
+                this.grille[x][y] = new IleTouchee(1, ObjectType.HIT_ISLAND);
+                notifyObserversCell(x,y);
             }
         }
         else if(this.grille[x][y] == null){

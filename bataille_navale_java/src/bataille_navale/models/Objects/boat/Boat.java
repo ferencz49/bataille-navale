@@ -1,6 +1,6 @@
-package bataille_navale.models.Objects.items.boat;
+package bataille_navale.models.Objects.boat;
 
-import bataille_navale.Object;
+import bataille_navale.models.Object;
 import bataille_navale.controllers.players.Player;
 import bataille_navale.models.Objects.ObjectType;
 

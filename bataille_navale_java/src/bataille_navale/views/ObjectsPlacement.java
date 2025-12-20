@@ -36,6 +36,8 @@ public class ObjectsPlacement extends JFrame {
             if(humanPlayer.isGridEmpty()){
                 computerPlayer.placeBoats();
                 humanPlayer.placeBoats();
+                computerPlayer.placeIsland();
+                humanPlayer.placeIsland();
             }
             this.dispose();
         });

@@ -1,9 +1,7 @@
 package bataille_navale.models.Objects.weapons;
 
-import bataille_navale.Object;
 import bataille_navale.controllers.players.Player;
 import bataille_navale.models.Objects.ObjectType;
-import bataille_navale.models.map.Grid;
 
 public class Bomb extends Weapon{
 
