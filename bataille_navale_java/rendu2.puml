@@ -8,13 +8,57 @@ package bataille_navale{
 
 
     package view{
-        class GameSettings{}
+        class GameSettings{
+            - btn_fin_config: JButton
+            - ckb_mode_ile: JCheckBox
+            - lbl_nb_porte_avions: JLabel
+            - spn_nb_porte_avions: JSpinner
+            - lbl_nb_croiseurs: JLabel
+            - spn_nb_croiseurs: JSpinner
+            - lbl_nb_contre_torpilleurs: JLabel
+            - spn_nb_contre_torpilleurs: JSpinner
+            - lbl_nb_sous_marins: JLabel
+            - spn_nb_sous_marins: JSpinner
+            - lbl_nb_torpilleurs: JLabel
+            - spn_nb_torpilleurs: JSpinner
+            + GameSettings(playerGrid: Grid, computerGrid: Grid, humanPlayer: HumanPlayer, computerPlayer: Computer)
+            + addBoatsToPlayer(spinner: JSpinner, player: HumanPlayer)
+        }
 
-        class ObjectsPlacement{}
+        class ObjectsPlacement{
+             - humanPlayer: HumanPlayer
+                - computerPlayer: Computer
+                - grilleJoueur: JLabel
+                - afficheGrille: JButton[][]
+                - lancerPartie: JButton
+                - grid: Grid
+                + ObjectsPlacement(playerGrid: Grid, computerGrid: Grid, humanPlayer: HumanPlayer, computerPlayer: Computer)
+        }
 
-        class AfficherGrille implements bataille_navale.models.GridObserver
+        class AfficherGrille implements bataille_navale.models.GridObserver {
+            - grilleJoueur: JLabel
+            - grilleOrdinateur: JLabel
+            - afficheGrille: JButton[][]
+            - afficheGrille2: JButton[][]
+            - utiliserBombe: JButton
+            - utiliserAttaque: JButton
+            - utiliserSonar: JButton
+            - grid: Grid
+            - grid2: Grid
+            + AfficherGrille(g1: Grid, g2: Grid)
+            + update(grille: Grid)
+            + updateCell(g: Grid, x: int, y: int)
+            + getUtiliserBombe(): JButton
+            + getUtiliserAttaque(): JButton
+            + getUtiliserSonar(): JButton
+            + getAfficheGrilleEnnemi(): JButton[][]
+        }
 
-        class GameEnd{}
+        class GameEnd{
+            - playAgain: JButton
+            - gameResult: JLabel
+            + GameEnd(humanPlayer: HumanPlayer, computerPlayer: Computer, winner: Player)
+        }
     }
 
     package controller{
