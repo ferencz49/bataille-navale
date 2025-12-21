@@ -92,6 +92,7 @@ package bataille_navale{
                     + usableItemsContainsSonar() : boolean
                     + usableItemsContainsBomb() : boolean
                     + setGrid(playerGrid : Grid, enemyGrid : Grid)
+                    + resetItems()
                 }
 
                 class HumanPlayer extends Player{
