@@ -119,20 +119,20 @@ public class Grid{
     public void basicAttack(Player player, int x, int y){
         if(this.grille[x][y] != null){
             Object o = grille[x][y];
-            if(o instanceof Boat){
+            if(o.getType() == ObjectType.BOAT){
                 this.grille[x][y] = new CaseAttaquee(1);
                 o.onHit(player, x, y);
                 notifyObserversCell(x,y);
             }
-            if(o instanceof Water){
+            if(o.getType() == ObjectType.WATER){
                 o.onHit(player, x, y);
             }
-            if(o instanceof Island){
+            if(o.getType() == ObjectType.ISLAND){
                 o.onHit(player, x, y);
                 this.grille[x][y] = new IleTouchee(1, ObjectType.HIT_ISLAND);
                 notifyObserversCell(x,y);
             }
-            if(o instanceof Trap){
+            if(o.getType() == ObjectType.TRAP){
                 o.onHit(player, x, y);
                 this.grille[x][y] = new TrapHit(1, ObjectType.HIT_TRAP);
                 notifyObserversCell(x,y);
