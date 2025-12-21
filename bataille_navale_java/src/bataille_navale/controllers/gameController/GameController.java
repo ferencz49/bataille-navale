@@ -46,7 +46,7 @@ public class GameController {
         if(humanPlayer.getEnemyGrid().getCase(x,y) != null){
             obj = humanPlayer.getEnemyGrid().getCase(x,y);
         }
-        if((obj != null) && (obj.getType() == ObjectType.HIT_BOAT || obj.getType() == ObjectType.SUNK_BOAT || obj.getType() == ObjectType.WATER)){
+        if((obj != null) && (obj.getType() == ObjectType.HIT_BOAT || obj.getType() == ObjectType.SUNK_BOAT || obj.getType() == ObjectType.WATER || obj.getType() == ObjectType.HIT_ISLAND)){
             return;
         }
         switch (selectedAction) {

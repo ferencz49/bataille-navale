@@ -3,6 +3,7 @@ package bataille_navale.models.Objects.items.traps;
 import bataille_navale.controllers.players.Player;
 import bataille_navale.models.Objects.ObjectType;
 import bataille_navale.models.Objects.weapons.Bomb;
+import bataille_navale.models.map.Grid;
 
 public class BlackHole extends Trap{
     private boolean canBePlaced = true;
@@ -21,6 +22,11 @@ public class BlackHole extends Trap{
 
     @Override
     public void onHit(Player player, int x, int y){
-        player.getGrid().basicAttack(player, x, y);
+        Grid playerGrid = player.getGrid();
+
+        if (playerGrid.cellExists(x, y)) {
+            playerGrid.basicAttack(player, x, y);
+        }
     }
+
 }
