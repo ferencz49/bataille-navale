@@ -1,8 +1,6 @@
 package bataille_navale.models.Objects.items.traps;
 
 import bataille_navale.controllers.players.Player;
-import bataille_navale.models.Objects.ObjectType;
-import bataille_navale.models.Objects.weapons.Bomb;
 import bataille_navale.models.map.Grid;
 
 public class BlackHole extends Trap{

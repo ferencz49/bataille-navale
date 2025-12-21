@@ -9,8 +9,8 @@ import bataille_navale.models.Objects.boat.Boat;
 import bataille_navale.models.Objects.boat.BoatDirection;
 import bataille_navale.models.Objects.boat.BoatFactory;
 import bataille_navale.models.Objects.items.traps.Trap;
-import bataille_navale.models.Objects.weapons.Bomb;
-import bataille_navale.models.Objects.weapons.Sonar;
+import bataille_navale.models.Objects.items.weapons.Bomb;
+import bataille_navale.models.Objects.items.weapons.Sonar;
 
 import java.util.ArrayList;
 import java.util.List;

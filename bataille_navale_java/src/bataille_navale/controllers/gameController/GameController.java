@@ -1,5 +1,6 @@
 package bataille_navale.controllers.gameController;
 
+import bataille_navale.models.Game;
 import bataille_navale.models.Object;
 import bataille_navale.controllers.players.Computer;
 import bataille_navale.controllers.players.HumanPlayer;
@@ -18,6 +19,7 @@ public class GameController {
     private ActionType selectedAction = ActionType.BASIC_ATTACK;
     private Player winner;
     private TurnLogs turnLogs;
+    private Game game = new Game();
 
     public GameController(AfficherGrille view, HumanPlayer humanPlayer, Computer computerPlayer){
         this.view = view;
@@ -37,39 +39,31 @@ public class GameController {
             }
 
         }
+        game.createGame(humanPlayer,computerPlayer);
     }
 
 
     // toute la logique de la partie est ici mdr
     private void handleCellClick(Player player, int x, int y) {
-        Object obj = null;
-        if(humanPlayer.getEnemyGrid().getCase(x,y) != null){
-            obj = humanPlayer.getEnemyGrid().getCase(x,y);
-        }
-        if((obj != null) && (obj.getType() == ObjectType.HIT_BOAT || obj.getType() == ObjectType.SUNK_BOAT || obj.getType() == ObjectType.WATER || obj.getType() == ObjectType.HIT_ISLAND)){
+        Integer sonarResult = game.playerAttack(player, selectedAction, x, y);
+
+        if (sonarResult == null) {
             return;
         }
-        switch (selectedAction) {
-            case BASIC_ATTACK -> humanPlayer.basicAttack(player, x, y);
-            case BOMB -> {
-                if(!player.usableItemsContainsBomb()){
-                    return;
 
-                }
-                humanPlayer.useBomb(x, y);
-            }
-            case SONAR -> {
-                if(!player.usableItemsContainsSonar()){
-                    return;
-                }
-                int result = humanPlayer.useSonar(x, y);
-                JOptionPane.showMessageDialog(view, result, "résultat du sonar",0 );
-            }
+
+        if (selectedAction == ActionType.SONAR) {
+            JOptionPane.showMessageDialog(
+                    view,
+                    sonarResult,
+                    "Résultat du sonar",
+                    JOptionPane.INFORMATION_MESSAGE
+            );
         }
-        turnLogs.showPlayerAttack(selectedAction, x, y);
+        turnLogs.showPlayerAttack(selectedAction, x,y);
         // mise à jour automatique de la vue
 
-        if(humanPlayer.getEnemyGrid().allBoatsSunk()){
+        if(game.isGameEnded()){
             view.dispose();
             this.winner = humanPlayer;
             GameEnd e = new GameEnd(this.humanPlayer, this.computerPlayer, this.winner);
@@ -78,7 +72,7 @@ public class GameController {
         int[] res = computerPlayer.playerTurn(this.computerPlayer);
         turnLogs.showComputerAttack(ActionType.BASIC_ATTACK, res[0],res[1]);
 
-        if(computerPlayer.getEnemyGrid().allBoatsSunk()){
+        if(game.isGameEnded()){
             view.dispose();
             this.winner = computerPlayer;
             GameEnd e = new GameEnd(this.humanPlayer, this.computerPlayer, this.winner);

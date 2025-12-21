@@ -4,9 +4,8 @@ import bataille_navale.models.Object;
 import bataille_navale.controllers.players.Player;
 import bataille_navale.models.Objects.ObjectType;
 import bataille_navale.models.Objects.items.Item;
-import bataille_navale.models.Objects.weapons.Bomb;
-import bataille_navale.models.Objects.weapons.Sonar;
-import bataille_navale.models.map.IleTouchee;
+import bataille_navale.models.Objects.items.weapons.Bomb;
+import bataille_navale.models.Objects.items.weapons.Sonar;
 
 public class Island extends Object {
     private Item item;
