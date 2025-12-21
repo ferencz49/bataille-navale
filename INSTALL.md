@@ -44,12 +44,9 @@ En ligne de commande :
 
 1. Lancer le jeu:  
 
-> Dans un terminal éxecuter le fichier main.
+> Dans un terminal éxecuter le fichier main.  
+
 > Dans un IDE, vous pouvez directement exécuter la classe `Main`.
-
----
-
-## Étape 4 : Jouer au jeu
 
 ---
 
