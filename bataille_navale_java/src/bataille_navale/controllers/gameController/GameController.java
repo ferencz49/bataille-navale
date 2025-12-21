@@ -76,7 +76,6 @@ public class GameController {
             view.dispose();
             this.winner = computerPlayer;
             GameEnd e = new GameEnd(this.humanPlayer, this.computerPlayer, this.winner);
-            return;
         }
     }
 

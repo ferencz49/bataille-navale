@@ -37,6 +37,7 @@ public class ObjectsPlacement extends JFrame {
             if(humanPlayer.isGridEmpty()){
                 computerPlayer.placeIsland();
                 humanPlayer.placeIsland();
+                humanPlayer.getGrid().setTrap(7,7,new BlackHole(1));
                 computerPlayer.placeBoats();
                 humanPlayer.placeBoats();
 

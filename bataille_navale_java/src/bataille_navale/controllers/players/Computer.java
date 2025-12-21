@@ -29,7 +29,7 @@ public class Computer extends Player{
 
             Object obj = enemyGrid.getCase(x, y);
 
-            if (obj.getType() == ObjectType.HIT_BOAT || obj.getType() == ObjectType.SUNK_BOAT || obj.getType() == ObjectType.WATER) {
+            if (obj.getType() == ObjectType.HIT_BOAT || obj.getType() == ObjectType.SUNK_BOAT || obj.getType() == ObjectType.WATER || obj.getType() == ObjectType.HIT_ISLAND || obj.getType() == ObjectType.HIT_TRAP) {
                 return basicAttack(player);
             }
 
