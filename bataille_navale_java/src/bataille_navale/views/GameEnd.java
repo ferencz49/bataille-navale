@@ -23,7 +23,9 @@ public class GameEnd extends JFrame {
             Grid a = new Grid();
             Grid b = new Grid();
             humanPlayer.setGrid(a,b);
+            humanPlayer.resetItems();
             computerPlayer.setGrid(b,a);
+            computerPlayer.resetItems();
             GameSettings gameSettings = new GameSettings(a, b ,humanPlayer, computerPlayer);
         });
         layout_principal.add(playAgain,BorderLayout.SOUTH);

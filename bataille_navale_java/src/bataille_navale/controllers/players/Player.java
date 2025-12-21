@@ -76,6 +76,11 @@ public  abstract class Player {
         return false;
     }
 
+    public void resetItems() {
+        this.usableItems.clear();
+        this.usableItems.add(new Bomb(1, ObjectType.WEAPON));
+        this.usableItems.add(new Sonar(1, ObjectType.SONAR));
+    }
 
     public void setGrid(Grid playerGrid, Grid enemyGrid){
         this.playerGrid = playerGrid;
