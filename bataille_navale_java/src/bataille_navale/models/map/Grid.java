@@ -132,6 +132,11 @@ public class Grid{
                 this.grille[x][y] = new IleTouchee(1, ObjectType.HIT_ISLAND);
                 notifyObserversCell(x,y);
             }
+            if(o instanceof Trap){
+                o.onHit(player, x, y);
+                this.grille[x][y] = new TrapHit(1, ObjectType.HIT_TRAP);
+                notifyObserversCell(x,y);
+            }
         }
         else if(this.grille[x][y] == null){
             this.grille[x][y] = new Water(1);

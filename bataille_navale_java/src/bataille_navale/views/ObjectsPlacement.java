@@ -3,6 +3,7 @@ package bataille_navale.views;
 import bataille_navale.controllers.gameController.GameController;
 import bataille_navale.controllers.players.Computer;
 import bataille_navale.controllers.players.HumanPlayer;
+import bataille_navale.models.Objects.items.traps.BlackHole;
 import bataille_navale.models.map.Grid;
 
 import javax.swing.*;
@@ -36,6 +37,7 @@ public class ObjectsPlacement extends JFrame {
             if(humanPlayer.isGridEmpty()){
                 computerPlayer.placeIsland();
                 humanPlayer.placeIsland();
+                humanPlayer.getGrid().setTrap(7,7,new BlackHole(1));
                 computerPlayer.placeBoats();
                 humanPlayer.placeBoats();
 

@@ -21,7 +21,6 @@ public class BlackHole extends Trap{
 
     @Override
     public void onHit(Player player, int x, int y){
-        Bomb bomb = new Bomb(1, ObjectType.WEAPON);
-        bomb.useWeapon(player, x, y);
+        player.getGrid().basicAttack(player, x, y);
     }
 }

@@ -111,12 +111,12 @@ public class AfficherGrille extends JFrame implements GridObserver {
         if (obj == null) boutons[y][x].setBackground(Color.BLUE);
         else if (obj.getType() == ObjectType.SUNK_BOAT) boutons[y][x].setBackground(Color.red);
         else if (obj.getType() == ObjectType.BOAT) boutons[y][x].setBackground(Color.BLUE);
-        else if (obj.getType() == ObjectType.TRAP) boutons[y][x].setBackground(Color.ORANGE);
-        else if (obj.getType() == ObjectType.WEAPON) boutons[y][x].setBackground(Color.BLACK);
+        else if (obj.getType() == ObjectType.TRAP) boutons[y][x].setBackground(Color.BLACK);
         else if (obj.getType() == ObjectType.HIT_BOAT) boutons[y][x].setBackground(Color.MAGENTA);
         else if (obj.getType() == ObjectType.WATER) boutons[y][x].setBackground(Color.CYAN);
         else if (obj.getType() == ObjectType.ISLAND) boutons[y][x].setBackground(Color.YELLOW);
         else if (obj.getType() == ObjectType.HIT_ISLAND) boutons[y][x].setBackground(Color.ORANGE);
+        else if (obj.getType() == ObjectType.HIT_TRAP) boutons[y][x].setBackground(Color.WHITE);
 
     }
     public void updatePlayerGrid(Grid grille, JButton[][]boutons){
@@ -128,10 +128,10 @@ public class AfficherGrille extends JFrame implements GridObserver {
                 if (obj == null) boutons[y][x].setBackground(Color.BLUE);
                 else if (obj.getType() == ObjectType.SUNK_BOAT) boutons[y][x].setBackground(Color.red);
                 else if (obj.getType() == ObjectType.BOAT) boutons[y][x].setBackground(Color.GRAY);
-                else if (obj.getType() == ObjectType.TRAP) boutons[y][x].setBackground(Color.ORANGE);
-                else if (obj.getType() == ObjectType.WEAPON) boutons[y][x].setBackground(Color.BLACK);
+                else if (obj.getType() == ObjectType.TRAP) boutons[y][x].setBackground(Color.BLACK);
                 else if (obj.getType() == ObjectType.HIT_BOAT) boutons[y][x].setBackground(Color.MAGENTA);
                 else if (obj.getType() == ObjectType.WATER) boutons[y][x].setBackground(Color.CYAN);
+                else if (obj.getType() == ObjectType.HIT_TRAP) boutons[y][x].setBackground(Color.WHITE);
             }
         }
     }
