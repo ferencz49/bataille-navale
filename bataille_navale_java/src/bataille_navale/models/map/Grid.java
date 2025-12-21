@@ -39,6 +39,7 @@ public class Grid{
         grille = new Object[10][10];
     }
 
+    /* getters */
     public Object[][] getGrille(){
         return this.grille;
     }
@@ -59,6 +60,7 @@ public class Grid{
 
     public int getNbBoatsSunk(){return this.nbBoatsSunk;}
 
+    /* Place une île au centre de la grille et notifier l'observateur */
     public void setIsland(){
         for(int i= 3; i < 7; i++){
             for(int j = 3; j < 7; j++){
@@ -68,6 +70,7 @@ public class Grid{
         }
     }
 
+    /* Place un bateau à une position donnée avec orientation */
     public boolean setBoat(int x, int y, Boat boat){
         if(x > getWidth() - boat.getSize()){
             System.out.println("trop loin");
@@ -91,6 +94,7 @@ public class Grid{
         return true;
     }
 
+    /* Place un piège à une position donnée */
     public boolean setTrap(int x, int y, Trap trap ){
             if(x >= grille.length || y >= grille[0].length){
                 return false;
@@ -106,6 +110,7 @@ public class Grid{
             return true;
         }
 
+    /* enlève un bateau ET met un objet de type BateauCoule à la place */
     public void removeBoat(Boat boat){
         for(int i = 0; i < boat.getBoatSize();i++){
             int x = boat.getBoatCoordinates().get(i).getX();
@@ -116,6 +121,7 @@ public class Grid{
         notifyObserversGrid();
     }
 
+    /*  attaque de base / missile */
     public void basicAttack(Player player, int x, int y){
         if(this.grille[x][y] != null){
             Object o = grille[x][y];
@@ -144,6 +150,7 @@ public class Grid{
         }
     }
 
+    /* attaque avec sonar*/
     public int sonarAttack(Sonar sonar, Player player, int x, int y){
         int count = 0;
 
@@ -163,6 +170,7 @@ public class Grid{
         return count;
     }
 
+    /* attaque avec bombe*/
     public void bombAttack(Bomb bomb, Player player, int x, int y){
         basicAttack(player, x, y);
         if(this.cellExists(x, y-1)){
@@ -181,6 +189,7 @@ public class Grid{
 
     }
 
+    /* verif si une case existe */
     public boolean cellExists(int x, int y){
         if(this.width-1 < x || x < 0){
             return false;
@@ -191,6 +200,7 @@ public class Grid{
         return true;
     }
 
+    /* placement fixe des bateaux (on ne l'utilise plus car on a le placement aléatoire*/
     public void setBoats1(){
         Boat porte_avion = BoatFactory.createPorteAvion(BoatDirection.Horizontal);
         Boat croiseur = BoatFactory.createCroiseur(BoatDirection.Vertical);
@@ -207,14 +217,17 @@ public class Grid{
         this.nbBoats+=5;
     }
 
+    /* verif si tous les bateaux sont coulés*/
     public boolean allBoatsSunk(){
         return this.nbBoats == this.nbBoatsSunk;
     }
 
+    /* incrémente le nb de bateaux coulés*/
     public void addNbBoatsSunk(int nb){
         this.nbBoatsSunk+= nb;
     }
 
+    /* verifie si un bateau peut etre place a des coordonnées x et y comme point de départ*/
     private boolean canPlaceBoat(int x, int y, Boat boat) {
         for (int i = 0; i < boat.getSize(); i++) {
             int nx = x;
@@ -237,6 +250,7 @@ public class Grid{
         return true;
     }
 
+    /* placement aléatoire */
     private void placeBoatRandomly(Boat boat) {
         boolean placed = false;
 
