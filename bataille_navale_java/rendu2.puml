@@ -140,7 +140,7 @@ package bataille_navale{
             }
 
             package island{
-                class Island() extends Object{
+                class Island extends bataille_navale.models.Objects.Object{
                     - item : Item
 
                     + <<create>> Island(size : Integer, item : Item)
@@ -238,6 +238,31 @@ package bataille_navale{
                 + notifyObserversGrid()
                 + notifyObserversCell(x : Integer, y : Integer)
             }
+
+            class BateauCoule extends bataille_navale.models.Objects.Object{
+                + <<create>> BateauCoule(size : Integer, objectType : ObjectType)
+                + onHit(player : Player, x : Integer, y : Integer)
+            }
+
+            class CaseAttaquee extends bataille_navale.models.Objects.Object{
+                + <<create>> BateauCoule(size : Integer, objectType : ObjectType)
+                + onHit(player : Player, x : Integer, y : Integer)
+            }
+
+            class IleTouchee extends bataille_navale.models.Objects.Object{
+                + <<create>> BateauCoule(size : Integer, objectType : ObjectType)
+                + onHit(player : Player, x : Integer, y : Integer)
+            }
+
+            class TrapHit extends bataille_navale.models.Objects.Object{
+                + <<create>> BateauCoule(size : Integer, objectType : ObjectType)
+                + onHit(player : Player, x : Integer, y : Integer)
+            }
+
+            class Water extends bataille_navale.models.Objects.Object{
+                + <<create>> BateauCoule(size : Integer, objectType : ObjectType)
+                + onHit(player : Player, x : Integer, y : Integer)
+            }
         }
 
         enum ObjectType{
@@ -288,7 +313,35 @@ Boat "1" *--> "1\n-orientation" BoatDirection: s'oriente \n >
 
 BoatFactory ..> Boat : <<uses>>
 
+/'relations de Grid '/
+bataille_navale.models.map.Grid ..> Player : <<uses>>
+bataille_navale.models.map.Grid ..> Sonar : <<uses>>
+bataille_navale.models.map.Grid ..> Bomb : <<uses>>
+bataille_navale.models.map.Grid ..> GridObserver : <<uses>>
+bataille_navale.models.map.Grid ..> Boat : <<uses>>
 
+bataille_navale.models.map.Grid *-- GridObserver
 Grid "1..*" *--> "1..*\n-listObject" bataille_navale.models.Objects.Object: contient \n >
+bataille_navale.models.map.Grid *-- Island : instancie
+
+/' relations cases touchées '/
+bataille_navale.models.map.BateauCoule *-- ObjectType : possède
+bataille_navale.models.map.CaseAttaquee *-- ObjectType : possède
+bataille_navale.models.map.IleTouchee *-- ObjectType : possède
+bataille_navale.models.map.TrapHit *-- ObjectType : possède
+bataille_navale.models.map.Water *-- ObjectType : possède
+
+
+
+bataille_navale.models.map.BateauCoule ..> Player : <<uses>>
+bataille_navale.models.map.CaseAttaquee ..> Player : <<uses>>
+bataille_navale.models.map.IleTouchee ..> Player : <<uses>>
+bataille_navale.models.map.TrapHit ..> Player : <<uses>>
+bataille_navale.models.map.Water ..> Player : <<uses>>
+
+
+
+
+
 
 @enduml
