@@ -8,19 +8,19 @@ package bataille_navale{
 
 
     package view{
-        class EcranDeConfiguration{}
+        class GameSettings{}
 
-        class EcranDePlacement{}
+        class ObjectsPlacement{}
 
-        class EcranPrincipal implements bataille_navale.models.GridObserver
+        class AfficherGrille implements bataille_navale.models.GridObserver
 
-        class EcranDeFin{}
+        class GameEnd{}
     }
 
     package controller{
 
-            package gameController(){
-                class GameController(){
+            package gameController{
+                class GameController{
                     + <<create>> GameController(view : AfficherGrille, humanPlayer : HumanPlayer, computerPlayer : Computer)
                     + handleCellClick(player : Player, x : Integer, y : Integer)
                 }
@@ -393,6 +393,49 @@ Object ..> Player : <<uses>>
 
 /' relations TurnLogs '/
 TurnLogs ..> ActionType : <<uses>>
+
+/' relations AfficherGrille '/
+AfficherGrille o-- bataille_navale.models.map.Grid : possède
+AfficherGrille ..> Grid : <<uses>>
+AfficherGrille ..> ObjectType : <<uses>>
+
+
+/' relations GameEnd '/
+GameEnd ..> HumanPlayer : <<uses>>
+GameEnd ..> Computer : <<uses>>
+
+GameEnd *-- Grid : crée
+
+/' relations GameSettings '/
+
+GameSettings ..> HumanPlayer : <<uses>>
+GameSettings ..> Computer : <<uses>>
+GameSettings ..> bataille_navale.models.map.Grid : <<uses>>
+GameSettings ..> BoatFactory : <<uses>>
+GameSettings ..> BoatDirection : <<uses>>
+
+/' relations ObjectsPlacement '/
+ObjectsPlacement o-- bataille_navale.models.map.Grid : possède
+ObjectsPlacement o-- HumanPlayer : possède
+ObjectsPlacement o-- Computer : possède
+ObjectsPlacement ..> GameController : <<uses>>
+ObjectsPlacement ..> BlackHole : <<uses>>
+
+/' relations GameController '/
+
+GameController o-- HumanPlayer : possède
+GameController o-- Computer : possède
+GameController o-- Game : possède
+GameController o-- TurnLogs : possède
+GameController o-- Player : possède
+GameController o-- ActionType : possède
+GameController o-- AfficherGrille : possède
+
+
+
+
+
+
 
 
 
