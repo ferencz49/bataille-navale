@@ -8,9 +8,8 @@ import bataille_navale.models.map.Grid;
 import bataille_navale.views.GameSettings;
 
 public class Main {
-    public static void main(String[] args) throws InterruptedException {
-        // --- Initialisation des données de test ---
-        // Grille du joueur + grille ennemie
+    public static void main(String[] args){
+
         Grid playerGrid = new Grid(10, 10);
         Grid computerGrid = new Grid(10, 10);
         HumanPlayer player = new HumanPlayer(playerGrid, computerGrid);

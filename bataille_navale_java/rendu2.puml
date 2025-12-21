@@ -308,10 +308,8 @@ Main .> Game : <<uses>>
 Bomb .> Grid : <<uses>>
 
 
-Boat "1" *--> "1\n-typeBateau" BoatType: est \n >
-Boat "1" *--> "1\n-orientation" BoatDirection: s'oriente \n >
 
-BoatFactory ..> Boat : <<uses>>
+
 
 /'relations de Grid '/
 bataille_navale.models.map.Grid ..> Player : <<uses>>
@@ -339,6 +337,62 @@ bataille_navale.models.map.IleTouchee ..> Player : <<uses>>
 bataille_navale.models.map.TrapHit ..> Player : <<uses>>
 bataille_navale.models.map.Water ..> Player : <<uses>>
 
+
+/' relations Boat '/
+Boat "1" *--> "1\n-typeBateau" BoatType: est \n >
+Boat "1" *--> "1\n-orientation" BoatDirection: s'oriente \n >
+Boat "1" *--> BoatCoordinates: possède \n >
+
+Boat ..> BoatDirection : <<uses>>
+Boat ..> BoatType : <<uses>>
+Boat ..> Player : <<uses>>
+
+/' relations BoatCoordinates '/
+
+/' relations BoatFactory '/
+BoatFactory ..> Boat : <<uses>>
+BoatFactory ..> BoatDirection : <<uses>>
+
+/' relations Island '/
+Island ..> Player : <<uses>>
+Island *-- Item : possède
+
+/' relations BlackHole '/
+BlackHole ..> Player : <<uses>>
+BlackHole ..> bataille_navale.models.map.Grid : <<uses>>
+
+/' relations Tornado '/
+Tornado ..> Player : <<uses>>
+
+/' relations Trap '/
+
+/' relations Bomb '/
+Trap ..> Player : <<uses>>
+Trap ..> ObjectType : <<uses>>
+
+/' relations Sonar '/
+Sonar ..> bataille_navale.models.map.Grid : <<uses>>
+Sonar ..> ObjectType : <<uses>>
+
+/' relations Weapon '/
+Weapon ..> ObjectType : <<uses>>
+
+/' relations Item '/
+Item ..> ObjectType : <<uses>>
+
+/' relations Game '/
+Game ..> ActionType : <<uses>>
+Game ..> Player : <<uses>>
+
+Game o-- HumanPlayer : possède
+Game o-- Computer : possède
+
+/' relations Object '/
+Object o-- ObjectType : possède
+Object ..> Player : <<uses>>
+
+/' relations TurnLogs '/
+TurnLogs ..> ActionType : <<uses>>
 
 
 

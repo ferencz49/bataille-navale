@@ -20,7 +20,5 @@ public class Tornado extends Trap {
     }
 
     public void onHit(Player player, int x, int y){
-        Bomb bomb = new Bomb(1, ObjectType.WEAPON);
-        bomb.useWeapon(player, x, y);
     }
 }
