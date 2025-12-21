@@ -60,9 +60,9 @@ public class Grid{
     public int getNbBoatsSunk(){return this.nbBoatsSunk;}
 
     public void setIsland(){
-        for(int i= 4; i < 6; i++){
-            for(int j = 4; j < 6; j++){
-                this.grille[i][j] = new Island(1, new Sonar(1, ObjectType.SONAR));
+        for(int i= 3; i < 7; i++){
+            for(int j = 3; j < 7; j++){
+                this.grille[i][j] = new Island(1, Island.chooseItemToPlace());
                 notifyObserversCell(i,j);
             }
         }
@@ -267,6 +267,7 @@ public class Grid{
 
         this.nbBoats += boats.size();
     }
+
     //PARTIE OBSERVER
 
     public void addObserver(GridObserver observer) {
