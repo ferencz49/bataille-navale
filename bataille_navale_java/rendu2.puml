@@ -346,6 +346,11 @@ package bataille_navale{
 }
 
 class Main{
+    - playerGrid : Grid
+    - ComputerGrid : Grid
+    - player : HumanPlayer
+    - computerPlayer : Computer
+    - g : GameSettings
 }
 
 Main .> Game : <<uses>>
@@ -476,6 +481,12 @@ GameController o-- ActionType : possède
 GameController o-- AfficherGrille : possède
 
 
+/' relations main '/
+Main *-- Grid : possède
+Main *-- HumanPlayer : possède
+Main *-- Computer : possède
+Main *-- GameSettings : possède
+Main *-- Grid : possède
 
 
 
