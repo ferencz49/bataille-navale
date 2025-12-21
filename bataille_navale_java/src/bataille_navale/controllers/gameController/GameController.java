@@ -61,21 +61,22 @@ public class GameController {
             );
         }
         turnLogs.showPlayerAttack(selectedAction, x,y);
-        // mise à jour automatique de la vue
 
-        if(game.isGameEnded()){
+        if(computerPlayer.getGrid().allBoatsSunk()){
             view.dispose();
             this.winner = humanPlayer;
             GameEnd e = new GameEnd(this.humanPlayer, this.computerPlayer, this.winner);
+            return;
         }
 
         int[] res = computerPlayer.playerTurn(this.computerPlayer);
         turnLogs.showComputerAttack(ActionType.BASIC_ATTACK, res[0],res[1]);
 
-        if(game.isGameEnded()){
+        if(humanPlayer.getGrid().allBoatsSunk()){
             view.dispose();
             this.winner = computerPlayer;
             GameEnd e = new GameEnd(this.humanPlayer, this.computerPlayer, this.winner);
+            return;
         }
     }
 
